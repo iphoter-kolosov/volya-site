@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VOLYA — Свободный интернет без границ</title>
+<meta name="description" content="VOLYA — защищённое подключение нового поколения. Серфинг без блокировок и слежки в один клик. Без логов, без компромиссов.">
+<link rel="icon" type="image/png" href="favicon.png?v=2">
+<link href="assets/fonts/fonts.css" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:#F4F3F9;color:#221544;font-family:'Manrope',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:rgba(124,58,237,.18);color:#221544}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+img{max-width:100%;display:block}
+@keyframes floatY{0%{transform:translateY(0)}50%{transform:translateY(-16px)}100%{transform:translateY(0)}}
+@keyframes floatY2{0%{transform:translateY(0)}50%{transform:translateY(13px)}100%{transform:translateY(0)}}
+@keyframes meshShift{0%{transform:translate(0,0) rotate(0)}50%{transform:translate(-4%,3%) rotate(8deg)}100%{transform:translate(0,0) rotate(0)}}
+@keyframes shimmer{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+@keyframes pulseDot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.6)}}
+@keyframes orbit{to{transform:rotate(360deg)}}
+@keyframes orbitR{to{transform:rotate(-360deg)}}
+.shdisplay{font-family:'Unbounded',sans-serif}
+.shimmer{background:linear-gradient(100deg,#7C3AED 0%,#C026D3 38%,#2A8FE0 72%,#7C3AED 100%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 7s linear infinite}
+.hov{transition:transform .25s,box-shadow .25s,border-color .25s,background .25s,color .25s}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
+@media(max-width:760px){[style*="blur(42px)"]{animation:none!important}}
+.burger{display:none;align-items:center;justify-content:center;width:42px;height:42px;border-radius:12px;background:#fff;border:1px solid rgba(46,26,102,.12);cursor:pointer;flex-direction:column;gap:4px}
+.burger span{display:block;width:18px;height:2px;border-radius:2px;background:#5E5478}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:60;background:rgba(248,247,252,.98);flex-direction:column;padding:88px 26px 30px;gap:6px}
+.mobile-menu a{font-family:'Unbounded',sans-serif;font-weight:600;font-size:22px;color:#1A0F3D;padding:14px 0;border-bottom:1px solid rgba(46,26,102,.06)}
+.mobile-menu .mm-cta{font-family:'Manrope';font-weight:700;font-size:16px;color:#fff;text-align:center;border:none;border-bottom:none;border-radius:14px;padding:16px;margin-top:16px;background:linear-gradient(100deg,#7C3AED,#5B2BD6)}
+.mm-close{position:absolute;top:20px;right:20px;width:42px;height:42px;border-radius:12px;background:#fff;border:1px solid rgba(46,26,102,.12);cursor:pointer;font-size:20px;color:#5E5478}
+.hov-nav:hover{color:#221544!important}
+.hov-nav-active:hover{color:#5B2BD6!important}
+.hov-btn:hover{transform:translateY(-1px);box-shadow:0 12px 28px -8px rgba(124,58,237,.75)!important}
+.hov-cta:hover{transform:translateY(-2px);box-shadow:0 22px 46px -12px rgba(124,58,237,.75)!important}
+.hov-secondary:hover{border-color:rgba(124,58,237,.4)!important}
+.hov-card:hover{transform:translateY(-5px);box-shadow:0 18px 40px -18px rgba(124,58,237,.5)!important}
+.hov-card-feat:hover{border-color:rgba(124,58,237,.3)!important}
+.hov-lift:hover{transform:translateY(-2px)}
+.hov-tariff:hover{transform:translateY(-5px)}
+.hov-pill:hover{border-color:rgba(124,58,237,.4)!important;color:#221544!important}
+.faq-button:hover{background:rgba(124,58,237,.04)}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+.faq-item.open .faq-answer{max-height:340px}
+.faq-item.open{border-color:rgba(124,58,237,.35)!important}
+.lang-btn{cursor:pointer;letter-spacing:.04em}
+.lang-btn:hover{border-color:rgba(124,58,237,.4)!important}
+@media(max-width:920px){
+  .hero-grid{grid-template-columns:1fr!important;padding-top:120px!important}
+  .hero-visual{min-height:380px!important;max-width:380px!important;margin:0 auto!important}
+  .nav-links{display:none!important}
+  .nav-cta-mobile-hide{display:none!important}
+  .burger{display:flex!important}
+  #siteNav{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(248,247,252,.97)!important}
+  .grid-3,.grid-6{grid-template-columns:1fr 1fr!important}
+  .grid-features{grid-template-columns:1fr!important}
+  .grid-tg{grid-template-columns:1fr!important}
+}
+@media(max-width:560px){
+  .grid-3,.grid-6,.grid-tariffs{grid-template-columns:1fr!important}
+  .nav-cta-mobile-hide{display:none!important}
+  .nav-bar{padding:10px 18px!important;gap:14px!important}
+  .section-pad{padding-left:18px!important;padding-right:18px!important}
+}
+</style>
+</head>
+<body>
+<div style="position:relative;min-height:100vh;background:linear-gradient(180deg,#F8F7FC 0%,#F1EFF8 100%)">
+
+<canvas id="cosmosCanvas" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
+
+<div id="ambient" style="position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden">
+  <div style="position:absolute;top:-10%;right:-6%;width:46vw;height:46vw;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,.16),transparent 65%);filter:blur(20px)"></div>
+  <div style="position:absolute;top:34%;left:-10%;width:42vw;height:42vw;border-radius:50%;background:radial-gradient(circle,rgba(42,143,224,.13),transparent 65%);filter:blur(20px)"></div>
+  <div style="position:absolute;bottom:-12%;right:18%;width:38vw;height:38vw;border-radius:50%;background:radial-gradient(circle,rgba(192,38,211,.10),transparent 65%);filter:blur(24px)"></div>
+</div>
+
+<!-- NAV -->
+<nav id="siteNav" style="position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:rgba(248,247,252,.74);border-bottom:1px solid rgba(46,26,102,.07)">
+  <div class="nav-bar" style="max-width:1200px;margin:0 auto;padding:12px 32px;display:flex;align-items:center;gap:26px">
+    <a href="#top" style="display:flex;align-items:center;margin-right:auto"><img src="assets/logo.png" alt="VOLYA" style="height:34px;width:auto"></a>
+    <div class="nav-links" style="display:flex;gap:28px;align-items:center">
+      <a class="hov hov-nav" href="#services" style="font-size:14.5px;font-weight:600;color:#5E5478" data-i18n="nav.services">Сервисы</a>
+      <a class="hov hov-nav" href="#why" style="font-size:14.5px;font-weight:600;color:#5E5478" data-i18n="nav.features">Возможности</a>
+      <a class="hov hov-nav" href="/privacy.html" style="font-size:14.5px;font-weight:600;color:#5E5478" data-i18n="nav.privacy">Приватность</a>
+      <a class="hov hov-nav" href="#tariffs" style="font-size:14.5px;font-weight:600;color:#5E5478" data-i18n="nav.tariffs">Тарифы</a>
+      <a class="hov hov-nav-active" href="/terms.html" style="font-size:14.5px;font-weight:600;color:#7C3AED" data-i18n="nav.terms">Условия</a>
+      <a class="hov hov-nav" href="#faq" style="font-size:14.5px;font-weight:600;color:#5E5478" data-i18n="nav.faq">FAQ</a>
+    </div>
+    <button class="lang-btn" onclick="toggleLang()" style="display:flex;align-items:center;gap:6px;background:#fff;border:1px solid rgba(46,26,102,.12);color:#5E5478;font-weight:700;font-size:13px;padding:8px 12px;border-radius:999px">
+      <span id="lang-ru" style="color:#221544">RU</span><span style="opacity:.3">/</span><span id="lang-en" style="opacity:.4">EN</span>
+    </button>
+    <a class="hov hov-btn nav-cta-mobile-hide" href="https://t.me/volya_gate_bot" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14px;color:#fff;padding:10px 20px;border-radius:999px;background:linear-gradient(100deg,#7C3AED,#5B2BD6);box-shadow:0 8px 22px -8px rgba(124,58,237,.6)" data-i18n="nav.connect">Подключить</a>
+    <button class="burger" onclick="toggleMenu()" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mobileMenu" class="mobile-menu">
+  <button class="mm-close" onclick="toggleMenu()" aria-label="Закрыть">✕</button>
+  <a href="#services" onclick="toggleMenu()" data-i18n="nav.services">Сервисы</a>
+  <a href="#why" onclick="toggleMenu()" data-i18n="nav.features">Возможности</a>
+  <a href="/privacy.html" data-i18n="nav.privacy">Приватность</a>
+  <a href="#tariffs" onclick="toggleMenu()" data-i18n="nav.tariffs">Тарифы</a>
+  <a href="/terms.html" data-i18n="nav.terms">Условия</a>
+  <a href="#faq" onclick="toggleMenu()" data-i18n="nav.faq">FAQ</a>
+  <a class="mm-cta" href="https://t.me/volya_gate_bot" target="_blank" rel="noopener" data-i18n="nav.connect">Подключить</a>
+</div>
+
+<!-- HERO -->
+<header id="top" class="hero-grid section-pad" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:158px 32px 70px;display:grid;grid-template-columns:1.04fr .96fr;gap:48px;align-items:center">
+  <div>
+    <div data-reveal style="display:inline-flex;align-items:center;gap:9px;padding:7px 15px 7px 11px;border-radius:999px;background:#fff;border:1px solid rgba(46,26,102,.1);box-shadow:0 6px 20px -10px rgba(46,26,102,.25);font-size:13px;font-weight:700;color:#7C3AED;margin-bottom:26px;white-space:nowrap">
+      <span style="width:8px;height:8px;border-radius:50%;background:#22C55E;box-shadow:0 0 0 4px rgba(34,197,94,.18);animation:pulseDot 1.8s infinite"></span><span data-i18n="hero.badge">Бета — бесплатно для всех</span>
+    </div>
+    <h1 data-reveal data-delay="80" class="shdisplay" style="font-weight:700;font-size:clamp(40px,5.4vw,72px);line-height:1.02;letter-spacing:-.02em;color:#1A0F3D;margin-bottom:24px">
+      <span data-i18n="hero.title1">Свободный интернет</span> <span class="shimmer" data-i18n="hero.title2">без границ</span>
+    </h1>
+    <p data-reveal data-delay="160" style="font-size:clamp(16px,1.5vw,19px);line-height:1.6;color:#5E5478;max-width:500px;margin-bottom:32px" data-i18n="hero.sub">Защищённое подключение нового поколения. Серфинг без блокировок и слежки — в один клик. Без логов. Без компромиссов.</p>
+    <div data-reveal data-delay="240" style="display:flex;gap:13px;flex-wrap:wrap;margin-bottom:32px">
+      <a class="hov hov-cta" href="https://t.me/volya_gate_bot" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:16px;color:#fff;padding:16px 30px;border-radius:14px;background:linear-gradient(100deg,#7C3AED,#5B2BD6);box-shadow:0 16px 36px -12px rgba(124,58,237,.6)"><span data-i18n="hero.cta1">Подключить бесплатно</span> →</a>
+      <a class="hov hov-secondary" href="#how" style="display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:16px;color:#221544;padding:16px 28px;border-radius:14px;background:#fff;border:1px solid rgba(46,26,102,.12)" data-i18n="hero.cta2">Как это работает</a>
+    </div>
+    <div data-reveal data-delay="320" id="hero-chips" style="display:flex;gap:10px;flex-wrap:wrap"></div>
+  </div>
+  <div class="hero-visual" data-reveal data-delay="120" style="position:relative;min-height:480px;display:flex;align-items:center;justify-content:center">
+    <div style="position:relative;width:100%;max-width:430px;aspect-ratio:1;border-radius:38px;background:linear-gradient(160deg,#fff,#F2EFFB);border:1px solid rgba(46,26,102,.08);box-shadow:0 44px 90px -34px rgba(46,26,102,.42);overflow:hidden;display:flex;align-items:center;justify-content:center">
+      <div style="position:absolute;width:130%;height:130%;background:conic-gradient(from 30deg,rgba(124,58,237,.20),rgba(42,143,224,.16),rgba(192,38,211,.20),rgba(124,58,237,.20));filter:blur(42px);animation:meshShift 16s ease-in-out infinite"></div>
+      <div style="position:absolute;width:94%;height:94%;border:1px solid rgba(124,58,237,.10);border-radius:50%"></div>
+      <div style="position:absolute;width:70%;height:70%;border:1px solid rgba(42,143,224,.13);border-radius:50%"></div>
+      <div style="position:absolute;width:46%;height:46%;border:1px dashed rgba(192,38,211,.16);border-radius:50%"></div>
+      <div style="position:absolute;top:16%;left:30%;width:5px;height:5px;border-radius:50%;background:#9B6BF5;box-shadow:0 0 10px #9B6BF5;animation:pulseDot 2.6s ease-in-out infinite"></div>
+      <div style="position:absolute;top:74%;left:24%;width:4px;height:4px;border-radius:50%;background:#42A5E0;box-shadow:0 0 9px #42A5E0;animation:pulseDot 3.1s ease-in-out infinite"></div>
+      <div style="position:absolute;top:30%;left:78%;width:4px;height:4px;border-radius:50%;background:#C026D3;box-shadow:0 0 9px #C026D3;animation:pulseDot 2.2s ease-in-out infinite"></div>
+      <div style="position:absolute;top:84%;left:70%;width:5px;height:5px;border-radius:50%;background:#7C3AED;box-shadow:0 0 10px #7C3AED;animation:pulseDot 3.4s ease-in-out infinite"></div>
+      <div style="position:absolute;width:88%;height:88%;border-radius:50%;animation:orbit 46s linear infinite">
+        <div style="position:absolute;top:0%;left:50%;transform:translate(-50%,-50%)"><div style="width:48px;height:48px;border-radius:15px;background:#fff;border:1px solid rgba(46,26,102,.06);box-shadow:0 12px 28px -10px rgba(124,58,237,.55);display:flex;align-items:center;justify-content:center;font-size:21px;animation:orbitR 46s linear infinite">🕊</div></div>
+        <div style="position:absolute;top:25%;left:93%;transform:translate(-50%,-50%)"><div style="width:48px;height:48px;border-radius:15px;background:#fff;border:1px solid rgba(46,26,102,.06);box-shadow:0 12px 28px -10px rgba(34,197,94,.5);display:flex;align-items:center;justify-content:center;font-size:21px;animation:orbitR 46s linear infinite">🛡</div></div>
+        <div style="position:absolute;top:75%;left:93%;transform:translate(-50%,-50%)"><div style="width:48px;height:48px;border-radius:15px;background:#fff;border:1px solid rgba(46,26,102,.06);box-shadow:0 12px 28px -10px rgba(91,43,214,.5);display:flex;align-items:center;justify-content:center;font-size:21px;animation:orbitR 46s linear infinite">🔒</div></div>
+        <div style="position:absolute;top:100%;left:50%;transform:translate(-50%,-50%)"><div style="width:48px;height:48px;border-radius:15px;background:#fff;border:1px solid rgba(46,26,102,.06);box-shadow:0 12px 28px -10px rgba(42,143,224,.55);display:flex;align-items:center;justify-content:center;font-size:21px;animation:orbitR 46s linear infinite">🌐</div></div>
+        <div style="position:absolute;top:75%;left:7%;transform:translate(-50%,-50%)"><div style="width:48px;height:48px;border-radius:15px;background:#fff;border:1px solid rgba(46,26,102,.06);box-shadow:0 12px 28px -10px rgba(245,158,11,.5);display:flex;align-items:center;justify-content:center;font-size:21px;animation:orbitR 46s linear infinite">⚡</div></div>
+        <div style="position:absolute;top:25%;left:7%;transform:translate(-50%,-50%)"><div style="width:48px;height:48px;border-radius:15px;background:#fff;border:1px solid rgba(46,26,102,.06);box-shadow:0 12px 28px -10px rgba(192,38,211,.5);display:flex;align-items:center;justify-content:center;font-size:21px;animation:orbitR 46s linear infinite">🔑</div></div>
+      </div>
+      <div style="position:absolute;width:58%;height:58%;border-radius:50%;animation:orbitR 32s linear infinite">
+        <div style="position:absolute;top:0%;left:50%;transform:translate(-50%,-50%)"><div style="width:40px;height:40px;border-radius:13px;background:#fff;border:1px solid rgba(46,26,102,.06);box-shadow:0 10px 22px -8px rgba(42,143,224,.5);display:flex;align-items:center;justify-content:center;font-size:18px;animation:orbit 32s linear infinite">🌍</div></div>
+        <div style="position:absolute;top:50%;left:100%;transform:translate(-50%,-50%)"><div style="width:40px;height:40px;border-radius:13px;background:#fff;border:1px solid rgba(46,26,102,.06);box-shadow:0 10px 22px -8px rgba(124,58,237,.5);display:flex;align-items:center;justify-content:center;font-size:18px;animation:orbit 32s linear infinite">✨</div></div>
+        <div style="position:absolute;top:100%;left:50%;transform:translate(-50%,-50%)"><div style="width:40px;height:40px;border-radius:13px;background:#fff;border:1px solid rgba(46,26,102,.06);box-shadow:0 10px 22px -8px rgba(34,197,94,.45);display:flex;align-items:center;justify-content:center;font-size:18px;animation:orbit 32s linear infinite">🛰</div></div>
+        <div style="position:absolute;top:50%;left:0%;transform:translate(-50%,-50%)"><div style="width:40px;height:40px;border-radius:13px;background:#fff;border:1px solid rgba(46,26,102,.06);box-shadow:0 10px 22px -8px rgba(192,38,211,.5);display:flex;align-items:center;justify-content:center;font-size:19px;color:#7C3AED;font-weight:800;font-family:Unbounded,sans-serif;animation:orbit 32s linear infinite">∞</div></div>
+      </div>
+      <img src="assets/bird.png" alt="VOLYA" style="position:relative;width:58%;filter:drop-shadow(0 22px 44px rgba(124,58,237,.38));animation:floatY 6s ease-in-out infinite">
+    </div>
+    <div style="position:absolute;top:7%;left:-3%;display:flex;align-items:center;gap:10px;padding:12px 15px;border-radius:15px;background:#fff;box-shadow:0 16px 40px -14px rgba(46,26,102,.4);animation:floatY2 5s ease-in-out infinite">
+      <span style="width:32px;height:32px;border-radius:10px;background:rgba(34,197,94,.12);display:flex;align-items:center;justify-content:center;font-size:16px">🛡</span>
+      <div><div style="font-size:11px;color:#8A82A0;font-weight:600">DPI</div><div style="font-size:14px;font-weight:800;color:#16A34A" data-i18n="proof.dpi">не виден</div></div>
+    </div>
+    <div style="position:absolute;bottom:8%;right:-4%;display:flex;align-items:center;gap:10px;padding:12px 15px;border-radius:15px;background:#fff;box-shadow:0 16px 40px -14px rgba(46,26,102,.4);animation:floatY 5.6s ease-in-out infinite">
+      <span style="width:32px;height:32px;border-radius:10px;background:rgba(124,58,237,.12);display:flex;align-items:center;justify-content:center;font-size:16px">🔒</span>
+      <div><div style="font-size:11px;color:#8A82A0;font-weight:600" data-i18n="proof.logsLabel">Логов</div><div style="font-size:14px;font-weight:800;color:#7C3AED">0</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- SERVICES -->
+<section id="services" class="section-pad" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:60px 32px 40px">
+  <div data-reveal style="position:relative;overflow:hidden;border-radius:32px;background:linear-gradient(160deg,#fff,#F4F1FB);border:1px solid rgba(46,26,102,.08);box-shadow:0 30px 70px -38px rgba(46,26,102,.4);padding:clamp(32px,4vw,56px)">
+    <div style="position:absolute;top:-30%;right:-8%;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,.12),transparent 65%);filter:blur(20px)"></div>
+    <div style="position:relative;text-align:center;max-width:720px;margin:0 auto 40px">
+      <div style="font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#7C3AED;margin-bottom:14px" data-i18n="services.kicker">Снова доступно</div>
+      <h2 class="shdisplay" style="font-weight:700;font-size:clamp(28px,3.8vw,46px);line-height:1.05;letter-spacing:-.01em;color:#1A0F3D"><span data-i18n="services.title1">Работает всё,</span> <span class="shimmer" data-i18n="services.title2">что вам нужно</span></h2>
+      <p style="font-size:16.5px;color:#6B6088;margin-top:16px" data-i18n="services.sub">Один ключ открывает сервисы, которые в вашей стране заблокированы, замедлены или недоступны.</p>
+    </div>
+    <div id="brands-grid" class="grid-6" style="position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:14px"></div>
+    <div style="position:relative;text-align:center;margin-top:34px;font-size:15.5px;color:#6B6088">
+      <span data-i18n="services.caption">…и тысячи других сайтов. Что разрешено, а что технически блокируется —</span> <a href="/terms.html#rules" style="color:#7C3AED;font-weight:700;border-bottom:1px solid rgba(124,58,237,.35)" data-i18n="services.captionLink">честно в Условиях</a> →
+    </div>
+  </div>
+</section>
+
+<!-- WHY / FEATURES -->
+<section id="why" class="section-pad" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:60px 32px 40px">
+  <div data-reveal style="margin-bottom:42px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px"><span style="width:26px;height:3px;border-radius:3px;background:linear-gradient(90deg,#7C3AED,#2A8FE0)"></span><span style="font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#7C3AED" data-i18n="features.kicker">Технологии</span></div>
+    <h2 class="shdisplay" style="font-weight:700;font-size:clamp(28px,3.8vw,46px);line-height:1.05;letter-spacing:-.01em;color:#1A0F3D" data-i18n="features.title">Почему Воля</h2>
+  </div>
+  <div class="grid-features" style="display:grid;grid-template-columns:1.4fr 1fr;gap:16px">
+    <div data-reveal style="position:relative;overflow:hidden;padding:38px;border-radius:26px;background:linear-gradient(150deg,#221544,#3A2178);color:#fff;display:flex;flex-direction:column;justify-content:space-between;min-height:310px">
+      <div style="position:absolute;top:-30%;right:-15%;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,.6),transparent 65%);filter:blur(30px)"></div>
+      <img src="assets/bird.png" alt="" style="position:absolute;bottom:-20px;right:-10px;width:180px;opacity:.5">
+      <div style="position:relative;font-size:30px;width:64px;height:64px;display:flex;align-items:center;justify-content:center;border-radius:17px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18)" data-i18n="featureMain.icon">🛡</div>
+      <div style="position:relative">
+        <h3 class="shdisplay" style="font-weight:600;font-size:26px;letter-spacing:-.01em;margin-bottom:12px" data-i18n="featureMain.title">Абсолютная невидимость</h3>
+        <p style="font-size:15.5px;line-height:1.6;color:#C9BEF0;max-width:430px" data-i18n="featureMain.text">Протокол VLESS Reality маскирует трафик под обычное HTTPS-соединение. Системы глубокого анализа (DPI) не видят защищённый туннель — для провайдера это обычный визит на сайт.</p>
+      </div>
+    </div>
+    <div id="features-list" style="display:grid;gap:16px"></div>
+  </div>
+</section>
+
+<!-- TRANSPARENCY -->
+<section id="transparency" class="section-pad" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:60px 32px 40px">
+  <div data-reveal style="position:relative;overflow:hidden;border-radius:30px;background:linear-gradient(150deg,#1C1140,#34206E);color:#fff;padding:clamp(32px,4vw,52px)">
+    <div style="position:absolute;bottom:-30%;right:-6%;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(42,143,224,.4),transparent 65%);filter:blur(40px)"></div>
+    <div style="position:relative;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:30px">
+      <div>
+        <div style="font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#9FD0FF;margin-bottom:14px" data-i18n="trans.kicker">Прозрачность</div>
+        <h2 class="shdisplay" style="font-weight:700;font-size:clamp(26px,3.4vw,40px);line-height:1.08;letter-spacing:-.01em" data-i18n="trans.title">Что мы знаем и НЕ знаем о вас</h2>
+      </div>
+      <a class="hov hov-lift" href="/terms.html" style="display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:15px;color:#1A0F3D;padding:14px 24px;border-radius:13px;background:#fff;box-shadow:0 14px 34px -14px rgba(0,0,0,.5)"><span data-i18n="trans.cta">Читать Условия</span> →</a>
+    </div>
+    <div class="grid-features" style="position:relative;display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div style="padding:26px;border-radius:20px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.28)">
+        <div style="font-weight:800;font-size:15px;color:#86EFAC;margin-bottom:16px;display:flex;align-items:center;gap:8px"><span>✓</span><span data-i18n="trans.knowLabel">Знаем — минимум</span></div>
+        <div id="trans-know" style="display:flex;flex-direction:column;gap:10px"></div>
+      </div>
+      <div style="padding:26px;border-radius:20px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.26)">
+        <div style="font-weight:800;font-size:15px;color:#FCA5A5;margin-bottom:16px;display:flex;align-items:center;gap:8px"><span>✗</span><span data-i18n="trans.dontLabel">НЕ знаем — принципиально</span></div>
+        <div id="trans-dont" style="display:flex;flex-direction:column;gap:10px"></div>
+      </div>
+    </div>
+    <p style="position:relative;margin-top:22px;font-size:14.5px;color:#C9BEF0">🔐 <span data-i18n="trans.note">Это техническое обещание: история активности не записывается даже в оперативную память.</span> <a href="/terms.html#privacy" style="color:#9FD0FF;font-weight:700" data-i18n="trans.noteLink">Подробно о приватности</a> →</p>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="section-pad" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:60px 32px 40px">
+  <div data-reveal style="text-align:center;margin-bottom:48px">
+    <div style="font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#7C3AED;margin-bottom:14px" data-i18n="steps.kicker">Быстрый старт</div>
+    <h2 class="shdisplay" style="font-weight:700;font-size:clamp(28px,3.8vw,46px);line-height:1.05;letter-spacing:-.01em;color:#1A0F3D" data-i18n="steps.title">Три шага к свободе</h2>
+  </div>
+  <div id="steps-list" class="grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px"></div>
+</section>
+
+<!-- SETUP — detailed per-platform (added back at user's request) -->
+<section id="setup" class="section-pad" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:60px 32px 40px">
+  <div data-reveal style="text-align:center;margin-bottom:36px">
+    <div style="font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#7C3AED;margin-bottom:14px" data-i18n="setup.kicker">Установка</div>
+    <h2 class="shdisplay" style="font-weight:700;font-size:clamp(28px,3.8vw,46px);line-height:1.05;letter-spacing:-.01em;color:#1A0F3D" data-i18n="setup.title">Готовые приложения для каждой платформы</h2>
+    <p style="font-size:16px;color:#6B6088;max-width:620px;margin:16px auto 0" data-i18n="setup.sub">Бот выдаст ссылку на официальную, проверенную версию. Никаких сторонних сборок и сомнительных установщиков.</p>
+  </div>
+  <div id="setup-list" class="grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px"></div>
+  <div data-reveal style="margin-top:20px;text-align:center;padding:20px;border-radius:18px;background:#fff;border:1px solid rgba(46,26,102,.08);font-size:15px;color:#5E5478">💡 <span data-i18n="setup.note">Подробный пошаговый мастер с экранами выдаст бот после получения ключа — выберите свою платформу и следуйте подсказкам.</span></div>
+</section>
+
+<!-- TARIFFS -->
+<section id="tariffs" class="section-pad" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:60px 32px 40px">
+  <div data-reveal style="text-align:center;margin-bottom:46px">
+    <div style="font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#7C3AED;margin-bottom:14px" data-i18n="tariffs.kicker">Скорость</div>
+    <h2 class="shdisplay" style="font-weight:700;font-size:clamp(28px,3.8vw,46px);line-height:1.05;letter-spacing:-.01em;color:#1A0F3D" data-i18n="tariffs.title">Гибкие тарифы</h2>
+    <p style="font-size:16px;color:#6B6088;max-width:520px;margin:16px auto 0" data-i18n="tariffs.sub">Переключайте скорость бесплатно в зависимости от задач.</p>
+  </div>
+  <div id="tariffs-list" class="grid-tariffs grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px"></div>
+  <div data-reveal style="margin-top:20px;text-align:center;padding:20px;border-radius:18px;background:#fff;border:1px solid rgba(46,26,102,.08);font-size:15px;color:#5E5478">🚀 <span data-i18n="tariffs.note">Нужна большая скорость или безлимит? Выберите «Свой вариант» в боте.</span> <a href="/terms.html#limits" style="color:#7C3AED;font-weight:700" data-i18n="tariffs.noteLink">Лимиты и тарифы</a> →</div>
+</section>
+
+<!-- TELEGRAM HUB -->
+<section class="section-pad" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:60px 32px 40px">
+  <div data-reveal class="grid-tg" style="position:relative;overflow:hidden;border-radius:30px;background:linear-gradient(150deg,#221544,#3A2178);color:#fff;padding:clamp(32px,4vw,52px);display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center">
+    <div style="position:absolute;bottom:-30%;left:-8%;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(42,143,224,.45),transparent 65%);filter:blur(40px)"></div>
+    <div style="position:relative">
+      <div style="font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#9FD0FF;margin-bottom:14px" data-i18n="tg.kicker">Экосистема VOLYA</div>
+      <h2 class="shdisplay" style="font-weight:700;font-size:clamp(26px,3.2vw,40px);line-height:1.07;letter-spacing:-.01em;margin-bottom:14px" data-i18n="tg.title">Не бот — целая экосистема</h2>
+      <p style="font-size:16px;line-height:1.6;color:#C9BEF0;max-width:420px;margin-bottom:26px" data-i18n="tg.sub">Единый аккаунт VOLYA ID связывает все поверхности: Telegram сегодня, веб-кабинет и нативные приложения — дальше. Один ключ, один профиль, одна Воля.</p>
+      <a class="hov hov-lift" href="https://t.me/volya_gate_bot" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:16px;color:#fff;padding:15px 28px;border-radius:14px;background:linear-gradient(100deg,#229ED9,#1683b8);box-shadow:0 14px 36px -12px rgba(34,158,217,.7)">✈ <span data-i18n="tg.cta">Начать в Telegram</span></a>
+    </div>
+    <div id="tg-steps" style="position:relative;display:flex;flex-direction:column;gap:11px"></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="section-pad" style="position:relative;z-index:1;max-width:820px;margin:0 auto;padding:60px 32px 40px">
+  <div data-reveal style="text-align:center;margin-bottom:42px">
+    <div style="font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#7C3AED;margin-bottom:14px" data-i18n="faq.kicker">Вопросы</div>
+    <h2 class="shdisplay" style="font-weight:700;font-size:clamp(28px,3.8vw,46px);line-height:1.05;letter-spacing:-.01em;color:#1A0F3D" data-i18n="faq.title">Частые вопросы</h2>
+  </div>
+  <div id="faq-list" style="display:flex;flex-direction:column;gap:11px"></div>
+  <div data-reveal style="text-align:center;margin-top:24px;font-size:15px;color:#6B6088"><span data-i18n="faq.more">Полные правила, приватность и философия проекта —</span> <a href="/terms.html" style="color:#7C3AED;font-weight:700;border-bottom:1px solid rgba(124,58,237,.35)" data-i18n="faq.moreLink">в разделе Условия</a> →</div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="section-pad" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:50px 32px 90px">
+  <div data-reveal style="position:relative;overflow:hidden;text-align:center;border-radius:32px;padding:68px 40px;background:#fff;border:1px solid rgba(46,26,102,.08);box-shadow:0 40px 90px -40px rgba(46,26,102,.4)">
+    <div style="position:absolute;top:-30%;left:50%;transform:translateX(-50%);width:520px;height:340px;background:radial-gradient(ellipse,rgba(124,58,237,.16),transparent 70%);filter:blur(20px)"></div>
+    <img src="assets/bird.png" alt="" style="position:relative;width:88px;margin:0 auto 18px;filter:drop-shadow(0 12px 26px rgba(124,58,237,.4))">
+    <h2 class="shdisplay" style="position:relative;font-weight:700;font-size:clamp(28px,4.2vw,52px);line-height:1.05;letter-spacing:-.02em;color:#1A0F3D;margin-bottom:16px"><span data-i18n="cta.title1">Готовы почувствовать</span> <span class="shimmer" data-i18n="cta.title2">свободу?</span></h2>
+    <p style="position:relative;font-size:18px;color:#6B6088;max-width:500px;margin:0 auto 32px" data-i18n="cta.sub">Подключение занимает меньше минуты. Без регистраций, паролей и платёжных данных.</p>
+    <div style="position:relative;display:flex;gap:13px;justify-content:center;flex-wrap:wrap">
+      <a class="hov hov-cta" href="https://t.me/volya_gate_bot" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:17px;color:#fff;padding:17px 34px;border-radius:14px;background:linear-gradient(100deg,#7C3AED,#5B2BD6);box-shadow:0 18px 44px -12px rgba(124,58,237,.6)"><span data-i18n="cta.btn1">Подключить бесплатно</span> →</a>
+      <a class="hov" href="/terms.html" style="display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:17px;color:#221544;padding:17px 30px;border-radius:14px;background:#F3F1F9;border:1px solid rgba(46,26,102,.1)" data-i18n="cta.btn2">Узнать, как всё устроено</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="position:relative;z-index:1;border-top:1px solid rgba(46,26,102,.08);background:rgba(248,247,252,.6)">
+  <div class="section-pad" style="max-width:1200px;margin:0 auto;padding:36px 32px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+    <img src="assets/logo.png" alt="VOLYA" style="height:30px;margin-right:auto">
+    <span style="font-size:13.5px;color:#9089A6" data-i18n="footer.rights">© 2026 VOLYA. Все права защищены.</span>
+    <a class="hov" href="/terms.html" style="font-size:13.5px;color:#6B6088" data-i18n="footer.terms">Условия и приватность</a>
+    <a class="hov" href="https://t.me/volya_gate_bot" target="_blank" rel="noopener" style="font-size:13.5px;color:#6B6088" data-i18n="footer.contact">Связаться</a>
+  </div>
+</footer>
+
+</div>
+
+<script>
+// ── i18n dictionaries ────────────────────────────────────────────────────────
+const RU = {
+  nav: {services:'Сервисы',features:'Возможности',privacy:'Приватность',tariffs:'Тарифы',terms:'Условия',faq:'FAQ',connect:'Подключить'},
+  hero: {badge:'Бета — бесплатно для всех',title1:'Свободный интернет',title2:'без границ',sub:'Защищённое подключение нового поколения. Серфинг без блокировок и слежки — в один клик. Без логов. Без компромиссов.',cta1:'Подключить бесплатно',cta2:'Как это работает',chips:['Без логов','VLESS Reality','5 устройств','0 ₽ в бете']},
+  proof: {dpi:'не виден',logsLabel:'Логов'},
+  services: {kicker:'Снова доступно',title1:'Работает всё,',title2:'что вам нужно',sub:'Один ключ открывает сервисы, которые в вашей стране заблокированы, замедлены или недоступны.',caption:'…и тысячи других сайтов. Что разрешено, а что технически блокируется —',captionLink:'честно в Условиях'},
+  features: {kicker:'Технологии',title:'Почему Воля'},
+  featureMain: {icon:'🛡',title:'Абсолютная невидимость',text:'Протокол VLESS Reality маскирует трафик под обычное HTTPS-соединение. Системы глубокого анализа (DPI) не видят защищённый туннель — для провайдера это обычный визит на сайт.'},
+  featureList: [
+    {icon:'🔒',title:'Нулевые логи',text:'Мы не ведём журналов активности. Ваш IP, сайты и запросы нигде не хранятся.',link:'/terms.html#privacy',linkText:'Что мы знаем'},
+    {icon:'⚡',title:'Чистый интернет',text:'Блокировка рекламы и трекеров на уровне сервера — быстрее и экономнее.'},
+    {icon:'📜',title:'Прозрачные правила',text:'Никакого мелкого шрифта — простым человеческим языком.'}
+  ],
+  trans: {kicker:'Прозрачность',title:'Что мы знаем и НЕ знаем о вас',cta:'Читать Условия',knowLabel:'Знаем — минимум',know:['Telegram ID — чей это ключ','Тариф и дату создания','Суммарный объём трафика'],dontLabel:'НЕ знаем — принципиально',dont:['Ваш реальный IP-адрес','Какие сайты вы посещаете','DNS-запросы и содержимое','Ваши пароли и местоположение'],note:'Это техническое обещание: история активности не записывается даже в оперативную память.',noteLink:'Подробно о приватности'},
+  steps: {kicker:'Быстрый старт',title:'Три шага к свободе'},
+  stepList: [
+    {n:'01',icon:'📱',title:'Получите ключ',text:'Откройте бота в Telegram и получите персональную ссылку за 10 секунд.'},
+    {n:'02',icon:'📥',title:'Установите приложение',text:'Скачайте рекомендованное приложение для вашей платформы по безопасной ссылке.'},
+    {n:'03',icon:'🚀',title:'Подключитесь',text:'Вставьте ссылку в приложение — готово, интернет свободен.'}
+  ],
+  setup: {kicker:'Установка',title:'Готовые приложения для каждой платформы',sub:'Бот выдаст ссылку на официальную, проверенную версию. Никаких сторонних сборок и сомнительных установщиков.',note:'Подробный пошаговый мастер с экранами выдаст бот после получения ключа — выберите свою платформу и следуйте подсказкам.'},
+  setupList: [
+    {icon:'🤖',platform:'Android',app:'Hiddify',text:'Установка из Google Play в один тап. Бот даст ссылку на ключ — Hiddify подхватит её из буфера обмена автоматически.',tag:'1 минута'},
+    {icon:'📱',platform:'iPhone / iPad',app:'Hiddify',text:'Установка из App Store. Альтернатива для регионов без App Store — V2Box, бот покажет инструкцию.',tag:'1 минута'},
+    {icon:'💻',platform:'Windows',app:'v2rayN',text:'Стабильный клиент с 2018 года. Бот пошагово проведёт через настройку профиля и system proxy.',tag:'3 минуты'}
+  ],
+  tariffs: {kicker:'Скорость',title:'Гибкие тарифы',sub:'Переключайте скорость бесплатно в зависимости от задач.',note:'Нужна большая скорость или безлимит? Выберите «Свой вариант» в боте.',noteLink:'Лимиты и тарифы'},
+  tariffList: [
+    {speed:'10',unit:'Мбит/с',tag:'Базовый',items:['Мессенджеры и соцсети','AI-сервисы','Видео до 1080p','Повседневный серфинг']},
+    {speed:'20',unit:'Мбит/с',tag:'Оптимальный',items:['Стриминг Full HD','Видеоконференции','Облачные файлы','Мгновенная загрузка']},
+    {speed:'30',unit:'Мбит/с',tag:'Максимум',items:['Видео 2K и 4K','Игры с низким пингом','Несколько устройств','Тяжёлые загрузки']}
+  ],
+  tg: {kicker:'Экосистема VOLYA',title:'Не бот — целая экосистема',sub:'Единый аккаунт VOLYA ID связывает все поверхности: Telegram сегодня, веб-кабинет и нативные приложения — дальше. Один ключ, один профиль, одна Воля.',cta:'Начать в Telegram'},
+  tgSteps: [
+    {n:'✓',text:'Telegram-бот — доступно сейчас'},
+    {n:'∙',text:'Веб-кабинет VOLYA — скоро'},
+    {n:'∙',text:'Приложения iOS / Android / ПК — скоро'},
+    {n:'★',text:'VOLYA ID — единый аккаунт для всего'}
+  ],
+  faq: {kicker:'Вопросы',title:'Частые вопросы',more:'Полные правила, приватность и философия проекта —',moreLink:'в разделе Условия'},
+  faqList: [
+    {q:'Это безопасно?',a:'Да. Воля использует VLESS Reality — одну из самых продвинутых технологий защиты трафика. Соединение выглядит как обычный HTTPS, данные шифруются end-to-end, а логи активности не ведутся.'},
+    {q:'Увидит ли провайдер, что я использую Volya?',a:'Нет. Технология VLESS Reality делает трафик неотличимым от обычного HTTPS. Системы DPI, которые используют провайдеры, не могут обнаружить защищённое соединение.'},
+    {q:'Это бесплатно?',a:'Да, пока проект в бета-тестировании — всё полностью бесплатно. Мы будем рады вашей обратной связи: отзывы помогают улучшать сервис.'},
+    {q:'На скольких устройствах можно использовать?',a:'Один ключ работает одновременно на 5 устройствах. Этого хватит для телефона, планшета, ПК и ТВ.'},
+    {q:'Как делится скорость?',a:'Установленный лимит скорости — это общий пул для вашего ключа. Все устройства делят его между собой, и этого хватает с запасом.'},
+    {q:'Что будет, когда закончится трафик?',a:'Когда трафик закончится, просто напишите в бота и получите новый объём. В бета-режиме продление бесплатное.'}
+  ],
+  cta: {title1:'Готовы почувствовать',title2:'свободу?',sub:'Подключение занимает меньше минуты. Без регистраций, паролей и платёжных данных.',btn1:'Подключить бесплатно',btn2:'Узнать, как всё устроено'},
+  footer: {rights:'© 2026 VOLYA. Все права защищены.',terms:'Условия и приватность',contact:'Связаться'}
+};
+
+const EN = {
+  nav: {services:'Services',features:'Features',privacy:'Privacy',tariffs:'Plans',terms:'Terms',faq:'FAQ',connect:'Connect'},
+  hero: {badge:'Beta — free for everyone',title1:'A free internet',title2:'without borders',sub:'A next-generation protected connection. Unrestricted, untracked browsing in one click. No logs. No compromises.',cta1:'Connect for free',cta2:'How it works',chips:['No logs','VLESS Reality','5 devices','Free in beta']},
+  proof: {dpi:'invisible',logsLabel:'Logs'},
+  services: {kicker:'Unblocked',title1:'Everything you need',title2:'works again',sub:'One key opens the services that are blocked, throttled or unavailable in your country.',caption:'…and thousands more sites. What is allowed and what is technically blocked is',captionLink:'honest in the Terms'},
+  features: {kicker:'Technology',title:'Why Volya'},
+  featureMain: {icon:'🛡',title:'Absolute invisibility',text:'The VLESS Reality protocol masks traffic as ordinary HTTPS. Deep packet inspection (DPI) cannot detect the protected tunnel — to your ISP it looks like a normal website visit.'},
+  featureList: [
+    {icon:'🔒',title:'Zero logs',text:'We keep no activity logs. Your IP, sites and requests are stored nowhere.',link:'/terms.html#privacy',linkText:'What we know'},
+    {icon:'⚡',title:'Clean internet',text:'Server-side ad and tracker blocking — faster and more efficient.'},
+    {icon:'📜',title:'Transparent rules',text:'No fine print — in plain human language.'}
+  ],
+  trans: {kicker:'Transparency',title:'What we know and do NOT know about you',cta:'Read the Terms',knowLabel:'We know — the minimum',know:['Telegram ID — whose key it is','Your plan and creation date','Total traffic volume'],dontLabel:'We do NOT know — by design',dont:['Your real IP address','Which sites you visit','DNS requests and content','Your passwords and location'],note:'This is a technical promise: your activity history is never written, not even to memory.',noteLink:'More on privacy'},
+  steps: {kicker:'Quick start',title:'Three steps to freedom'},
+  stepList: [
+    {n:'01',icon:'📱',title:'Get your key',text:'Open the bot in Telegram and get a personal link in 10 seconds.'},
+    {n:'02',icon:'📥',title:'Install the app',text:'Download the recommended app for your platform via a safe link.'},
+    {n:'03',icon:'🚀',title:'Connect',text:'Paste the link into the app — done, the internet is free.'}
+  ],
+  setup: {kicker:'Setup',title:'Ready apps for every platform',sub:'The bot will give you an official, verified download link. No third-party builds, no shady installers.',note:'A step-by-step wizard with screenshots is inside the bot after you get your key — pick your platform and follow the prompts.'},
+  setupList: [
+    {icon:'🤖',platform:'Android',app:'Hiddify',text:'One-tap install from Google Play. The bot gives you a key link — Hiddify picks it up from the clipboard automatically.',tag:'1 minute'},
+    {icon:'📱',platform:'iPhone / iPad',app:'Hiddify',text:'Install from the App Store. For regions without App Store — V2Box is the alternative, the bot will guide you.',tag:'1 minute'},
+    {icon:'💻',platform:'Windows',app:'v2rayN',text:'A stable client since 2018. The bot walks you through profile setup and system proxy step by step.',tag:'3 minutes'}
+  ],
+  tariffs: {kicker:'Speed',title:'Flexible plans',sub:'Switch speed for free depending on your needs.',note:'Need more speed or unlimited? Pick “Custom” in the bot.',noteLink:'Limits and plans'},
+  tariffList: [
+    {speed:'10',unit:'Mbps',tag:'Basic',items:['Messengers & social','AI services','Video up to 1080p','Everyday browsing']},
+    {speed:'20',unit:'Mbps',tag:'Optimal',items:['Full HD streaming','Video calls','Cloud files','Instant loading']},
+    {speed:'30',unit:'Mbps',tag:'Maximum',items:['2K and 4K video','Low-ping gaming','Multiple devices','Heavy downloads']}
+  ],
+  tg: {kicker:'VOLYA ecosystem',title:'Not a bot — a whole ecosystem',sub:'A single VOLYA ID ties every surface together: Telegram today, a web dashboard and native apps next. One key, one profile, one Volya.',cta:'Start in Telegram'},
+  tgSteps: [
+    {n:'✓',text:'Telegram bot — available now'},
+    {n:'∙',text:'VOLYA web dashboard — coming soon'},
+    {n:'∙',text:'iOS / Android / desktop apps — coming soon'},
+    {n:'★',text:'VOLYA ID — one account for everything'}
+  ],
+  faq: {kicker:'Questions',title:'Frequently asked',more:'Full rules, privacy and the philosophy of the project —',moreLink:'in the Terms'},
+  faqList: [
+    {q:'Is it safe?',a:'Yes. Volya uses VLESS Reality — one of the most advanced traffic-protection technologies. The connection looks like ordinary HTTPS, data is encrypted end-to-end, and no activity logs are kept.'},
+    {q:'Will my ISP see that I use Volya?',a:'No. VLESS Reality makes traffic indistinguishable from ordinary HTTPS. The DPI systems used by ISPs cannot detect the protected connection.'},
+    {q:'Is it free?',a:'Yes, while the project is in beta — completely free. We welcome your feedback: it helps us improve the service.'},
+    {q:'How many devices can I use?',a:'One key works on 5 devices simultaneously. That covers a phone, tablet, PC and TV.'},
+    {q:'How is speed shared?',a:'Your speed limit is a shared pool for the key. All devices share it, and it is more than enough.'},
+    {q:'What happens when traffic runs out?',a:'Just message the bot and get a new allowance. In beta, renewal is free.'}
+  ],
+  cta: {title1:'Ready to feel the',title2:'freedom?',sub:'Connecting takes under a minute. No sign-ups, passwords or payment details.',btn1:'Connect for free',btn2:'See how it works'},
+  footer: {rights:'© 2026 VOLYA. All rights reserved.',terms:'Terms & privacy',contact:'Contact'}
+};
+
+const TARIFF_STYLE = [
+  {bg:'#fff',border:'rgba(46,26,102,.08)',shadow:'0 8px 30px -20px rgba(46,26,102,.3)',fg:'#1A0F3D',unitColor:'#8A82A0',itemColor:'#5E5478',check:'#7C3AED',tagColor:'#7C3AED',tagBg:'rgba(124,58,237,.1)'},
+  {bg:'linear-gradient(160deg,#2E1A66,#4326A0)',border:'rgba(124,58,237,.5)',shadow:'0 26px 60px -24px rgba(124,58,237,.7)',fg:'#fff',unitColor:'#C9BEF0',itemColor:'#E2DAF6',check:'#9FE0FF',tagColor:'#fff',tagBg:'rgba(255,255,255,.18)'},
+  {bg:'#fff',border:'rgba(46,26,102,.08)',shadow:'0 8px 30px -20px rgba(46,26,102,.3)',fg:'#1A0F3D',unitColor:'#8A82A0',itemColor:'#5E5478',check:'#7C3AED',tagColor:'#7C3AED',tagBg:'rgba(124,58,237,.1)'}
+];
+
+// ── Brand SVGs ──────────────────────────────────────────────────────────────
+const SVGS = {
+  TG:'<svg viewBox="0 0 48 48" width="40" height="40"><circle cx="24" cy="24" r="22" fill="#229ED9"/><path d="M11 23.4l24.4-9.4c1.1-.4 2.1.3 1.8 2l-4.2 19.5c-.3 1.3-1.1 1.6-2.2 1l-6.3-4.7-3 2.9c-.3.3-.6.6-1.2.6l.4-6.4 11.7-10.6c.5-.4-.1-.7-.8-.3L15.4 26.5l-6.2-1.9c-1.3-.4-1.4-1.3.3-1.9z" fill="#fff"/></svg>',
+  YT:'<svg viewBox="0 0 48 48" width="40" height="40"><rect x="3" y="10" width="42" height="28" rx="8" fill="#FF0000"/><path d="M20 17l11 7-11 7z" fill="#fff"/></svg>',
+  IG:'<svg viewBox="0 0 48 48" width="40" height="40"><defs><linearGradient id="ig" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FEDA75"/><stop offset=".35" stop-color="#FA7E1E"/><stop offset=".65" stop-color="#D62976"/><stop offset="1" stop-color="#962FBF"/></linearGradient></defs><rect x="4" y="4" width="40" height="40" rx="12" fill="url(#ig)"/><rect x="13" y="13" width="22" height="22" rx="7" fill="none" stroke="#fff" stroke-width="2.6"/><circle cx="24" cy="24" r="5.6" fill="none" stroke="#fff" stroke-width="2.6"/><circle cx="32.6" cy="15.4" r="1.7" fill="#fff"/></svg>',
+  WA:'<svg viewBox="0 0 48 48" width="40" height="40"><circle cx="24" cy="24" r="22" fill="#25D366"/><path d="M24 12c-6.6 0-12 5.4-12 12 0 2.1.6 4.1 1.6 5.9L12 36l6.4-1.6c1.7.9 3.6 1.4 5.6 1.4 6.6 0 12-5.4 12-12s-5.4-12-12-12z" fill="#fff"/><path d="M19.4 17.6c-.3 0-.7.1-1.1.5-.4.4-1.4 1.4-1.4 3.3s1.4 3.8 1.6 4.1c.2.3 2.8 4.4 6.9 6 3.4 1.3 4.1 1.1 4.9 1 .7-.1 2.3-.9 2.7-1.9.3-.9.3-1.7.2-1.9-.1-.2-.4-.3-.8-.5-.4-.2-2.3-1.2-2.7-1.3-.4-.1-.6-.2-.9.2-.3.4-1 1.3-1.2 1.5-.2.2-.4.3-.8.1-.4-.2-1.8-.7-3.4-2.1-1.2-1.1-2.1-2.4-2.3-2.8-.2-.4 0-.6.2-.8l.6-.7c.2-.2.3-.4.4-.7.1-.2 0-.5-.1-.7-.1-.2-.9-2.2-1.2-3-.3-.6-.6-.5-.8-.5l-.7.1z" fill="#25D366"/></svg>',
+  GPT:'<svg viewBox="0 0 24 24" width="38" height="38"><path d="M22.28 9.82a5.98 5.98 0 0 0-.52-4.91 6.05 6.05 0 0 0-6.51-2.9A6.07 6.07 0 0 0 4.98 4.18a5.98 5.98 0 0 0-3.99 2.9 6.05 6.05 0 0 0 .74 7.1 5.98 5.98 0 0 0 .51 4.91 6.05 6.05 0 0 0 6.52 2.9A5.98 5.98 0 0 0 13.26 24a6.06 6.06 0 0 0 5.77-4.21 5.99 5.99 0 0 0 4-2.9 6.06 6.06 0 0 0-.75-7.07zm-9.02 12.6a4.48 4.48 0 0 1-2.88-1.04l.14-.08 4.78-2.76a.79.79 0 0 0 .39-.68v-6.74l2.02 1.17a.07.07 0 0 1 .04.05v5.58a4.5 4.5 0 0 1-4.5 4.5zm-9.66-4.13a4.47 4.47 0 0 1-.54-3.01l.14.09 4.78 2.76a.77.77 0 0 0 .78 0l5.84-3.37v2.33a.08.08 0 0 1-.03.06L9.74 19.9a4.5 4.5 0 0 1-6.14-1.64zM2.34 7.9a4.48 4.48 0 0 1 2.34-1.97V11.6a.77.77 0 0 0 .39.68l5.81 3.35-2.02 1.17a.08.08 0 0 1-.07 0l-4.83-2.79A4.5 4.5 0 0 1 2.34 7.9zm16.6 3.86l-5.84-3.39 2.02-1.16a.08.08 0 0 1 .07 0l4.83 2.79a4.5 4.5 0 0 1-.68 8.12v-5.68a.79.79 0 0 0-.4-.68zm2.01-3.02l-.14-.09-4.77-2.78a.78.78 0 0 0-.79 0L11.42 7.2V4.87a.07.07 0 0 1 .03-.06l4.83-2.79a4.5 4.5 0 0 1 6.68 4.66zM10.32 12.9l-2.02-1.17a.08.08 0 0 1-.04-.05V6.1a4.5 4.5 0 0 1 7.38-3.45l-.14.08-4.78 2.76a.79.79 0 0 0-.39.68l-.01 6.73zm1.1-2.37L14 8.99l2.6 1.5v3l-2.6 1.5-2.6-1.5z" fill="#10A37F"/></svg>',
+  X:'<svg viewBox="0 0 48 48" width="40" height="40"><rect width="48" height="48" rx="12" fill="#000"/><path d="M28.9 14h3.6l-7.9 9 9.3 11h-7.3l-5.7-7.4L14.3 34H10.7l8.4-9.6L10.2 14h7.5l5.2 6.8L28.9 14z" fill="#fff"/></svg>',
+  NF:'<svg viewBox="0 0 48 48" width="40" height="40"><rect width="48" height="48" rx="11" fill="#000"/><path d="M17 10h4.2v28l-4.2-.3z" fill="#E50914"/><path d="M26.8 10H31v28.3l-4.2-.4z" fill="#E50914"/><path d="M17 10l13.9 28.3-4.1-.4L17 17.2z" fill="#B1060F"/></svg>',
+  SP:'<svg viewBox="0 0 48 48" width="40" height="40"><circle cx="24" cy="24" r="22" fill="#1DB954"/><path d="M14 21.5c6.2-1.7 13.4-1.2 19.5 1.9" stroke="#fff" stroke-width="3.2" stroke-linecap="round" fill="none"/><path d="M15.5 27c5.1-1.3 11.3-1 16.3 1.7" stroke="#fff" stroke-width="2.7" stroke-linecap="round" fill="none"/><path d="M16.5 32c4-1 8.2-.7 12.2 1.3" stroke="#fff" stroke-width="2.3" stroke-linecap="round" fill="none"/></svg>',
+  DC:'<svg viewBox="0 0 48 48" width="40" height="40"><rect width="48" height="48" rx="12" fill="#5865F2"/><path d="M33.4 15.6c-1.7-.8-3.5-1.3-5.4-1.6-.2.4-.5 1-.7 1.5-2-.3-4-.3-6 0-.2-.5-.5-1.1-.7-1.5-1.9.3-3.7.8-5.4 1.6-3.4 5-4.3 9.9-3.9 14.7 2.1 1.6 4.2 2.5 6.2 3.2.5-.7 1-1.4 1.3-2.1-.7-.3-1.4-.6-2.1-1 .2-.1.4-.3.5-.4 4.1 1.9 8.6 1.9 12.6 0 .2.1.3.3.5.4-.7.4-1.4.7-2.1 1 .4.7.8 1.4 1.3 2.1 2.1-.7 4.2-1.6 6.2-3.2.5-5.6-.8-10.5-3.9-14.7zM19.6 27.3c-1.3 0-2.3-1.2-2.3-2.6 0-1.4 1-2.6 2.3-2.6s2.3 1.2 2.3 2.6c0 1.4-1 2.6-2.3 2.6zm8.8 0c-1.3 0-2.3-1.2-2.3-2.6 0-1.4 1-2.6 2.3-2.6s2.3 1.2 2.3 2.6c0 1.4-1 2.6-2.3 2.6z" fill="#fff"/></svg>',
+  GM:'<svg viewBox="0 0 48 48" width="38" height="38"><defs><linearGradient id="gm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4285F4"/><stop offset=".5" stop-color="#9B72CB"/><stop offset="1" stop-color="#D96570"/></linearGradient></defs><path d="M24 3c1.1 11.2 9.8 19.9 21 21-11.2 1.1-19.9 9.8-21 21-1.1-11.2-9.8-19.9-21-21 11.2-1.1 19.9-9.8 21-21z" fill="url(#gm)"/></svg>',
+  TT:'<svg viewBox="0 0 48 48" width="40" height="40"><rect width="48" height="48" rx="12" fill="#000"/><path d="M31 11.5c.7 3.3 2.7 5.5 5.9 5.9v4c-2 .1-3.8-.5-5.8-1.5v8.4c0 4.7-3.5 8.5-8.1 8.5s-7.8-3.5-7.8-7.8c0-4.7 4.1-8.2 8.7-7.5v4.1c-.6-.2-1.3-.3-1.9-.2-1.9.2-3.2 1.8-3.1 3.7.1 1.8 1.6 3.2 3.5 3.1 1.9 0 3.3-1.5 3.3-3.5V11.5H31z" fill="#fff" opacity=".95"/></svg>'
+};
+const BRANDS = [
+  {name:'Telegram',svg:SVGS.TG},{name:'Instagram',svg:SVGS.IG},{name:'YouTube',svg:SVGS.YT},
+  {name:'WhatsApp',svg:SVGS.WA},{name:'ChatGPT',svg:SVGS.GPT},{name:'X / Twitter',svg:SVGS.X},
+  {name:'Netflix',svg:SVGS.NF},{name:'Spotify',svg:SVGS.SP},{name:'Discord',svg:SVGS.DC},
+  {name:'Gemini',svg:SVGS.GM},{name:'TikTok',svg:SVGS.TT},{name:'Claude',svg:SVGS.GPT}
+];
+
+// ── Render lists ────────────────────────────────────────────────────────────
+let openFaqIndex = -1;
+
+function renderAll(L){
+  // hero chips
+  document.getElementById('hero-chips').innerHTML = L.hero.chips.map(c =>
+    `<span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#5E5478;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid rgba(46,26,102,.08)"><span style="width:5px;height:5px;border-radius:50%;background:linear-gradient(#7C3AED,#2A8FE0)"></span>${c}</span>`
+  ).join('');
+
+  // brands
+  document.getElementById('brands-grid').innerHTML = BRANDS.map(b =>
+    `<div class="hov hov-card" style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px 10px;border-radius:18px;background:#fff;border:1px solid rgba(46,26,102,.07);box-shadow:0 6px 22px -16px rgba(46,26,102,.3)">
+      <span style="width:46px;height:46px;display:flex;align-items:center;justify-content:center">${b.svg}</span>
+      <span style="font-size:12.5px;font-weight:700;color:#5E5478">${b.name}</span>
+    </div>`
+  ).join('');
+
+  // features list (3 small cards)
+  document.getElementById('features-list').innerHTML = L.featureList.map((f,i) =>
+    `<div class="hov hov-card-feat" data-reveal data-delay="${i*100}" style="display:flex;gap:18px;padding:24px;border-radius:22px;background:#fff;border:1px solid rgba(46,26,102,.07);box-shadow:0 8px 30px -20px rgba(46,26,102,.3)">
+      <div style="flex-shrink:0;font-size:22px;width:50px;height:50px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:linear-gradient(160deg,#F3EEFD,#EAF4FD)">${f.icon}</div>
+      <div>
+        <h3 style="font-weight:800;font-size:17px;color:#1A0F3D;margin-bottom:6px">${f.title}</h3>
+        <p style="font-size:14px;line-height:1.5;color:#6B6088">${f.text}${f.link?` <a href="${f.link}" style="color:#7C3AED;font-weight:700">${f.linkText} →</a>`:''}</p>
+      </div>
+    </div>`
+  ).join('');
+
+  // transparency lists
+  document.getElementById('trans-know').innerHTML = L.trans.know.map(k => `<div style="font-size:14.5px;color:#D8F3E0">${k}</div>`).join('');
+  document.getElementById('trans-dont').innerHTML = L.trans.dont.map(k => `<div style="font-size:14.5px;color:#F6D9D9">${k}</div>`).join('');
+
+  // steps
+  document.getElementById('steps-list').innerHTML = L.stepList.map((s,i) =>
+    `<div class="hov" data-reveal data-delay="${i*100}" style="position:relative;padding:34px 28px;border-radius:22px;background:#fff;border:1px solid rgba(46,26,102,.07);box-shadow:0 8px 30px -20px rgba(46,26,102,.3)">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
+        <span class="shdisplay" style="font-weight:700;font-size:14px;width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(135deg,#7C3AED,#2A8FE0)">${s.n}</span>
+        <span style="font-size:26px">${s.icon}</span>
+      </div>
+      <h3 style="font-weight:800;font-size:18px;color:#1A0F3D;margin-bottom:9px">${s.title}</h3>
+      <p style="font-size:14.5px;line-height:1.55;color:#6B6088">${s.text}</p>
+    </div>`
+  ).join('');
+
+  // setup per-platform
+  document.getElementById('setup-list').innerHTML = L.setupList.map((s,i) =>
+    `<div class="hov hov-card-feat" data-reveal data-delay="${i*100}" style="position:relative;padding:28px;border-radius:22px;background:#fff;border:1px solid rgba(46,26,102,.07);box-shadow:0 8px 30px -20px rgba(46,26,102,.3)">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="font-size:30px">${s.icon}</span>
+          <div>
+            <div class="shdisplay" style="font-weight:600;font-size:18px;color:#1A0F3D">${s.platform}</div>
+            <div style="font-size:13px;font-weight:700;color:#7C3AED;margin-top:2px">${s.app}</div>
+          </div>
+        </div>
+        <span style="font-size:11.5px;font-weight:700;color:#7C3AED;padding:5px 11px;border-radius:999px;background:rgba(124,58,237,.1)">${s.tag}</span>
+      </div>
+      <p style="font-size:14px;line-height:1.55;color:#6B6088">${s.text}</p>
+    </div>`
+  ).join('');
+
+  // tariffs
+  document.getElementById('tariffs-list').innerHTML = L.tariffList.map((t,i) => {
+    const s = TARIFF_STYLE[i];
+    return `<div class="hov hov-tariff" data-reveal data-delay="${i*110}" style="position:relative;padding:32px 28px;border-radius:24px;background:${s.bg};border:1px solid ${s.border};box-shadow:${s.shadow};color:${s.fg}">
+      <div style="display:inline-block;font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:${s.tagColor};padding:5px 11px;border-radius:999px;background:${s.tagBg};margin-bottom:18px">${t.tag}</div>
+      <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:22px">
+        <span class="shdisplay" style="font-weight:700;font-size:44px;line-height:1;letter-spacing:-.02em;color:${s.fg}">${t.speed}</span>
+        <span style="font-size:16px;font-weight:700;color:${s.unitColor}">${t.unit}</span>
+      </div>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:12px">
+        ${t.items.map(it => `<li style="display:flex;gap:10px;align-items:flex-start;font-size:14.5px;color:${s.itemColor}"><span style="color:${s.check};flex-shrink:0;font-weight:800">✓</span>${it}</li>`).join('')}
+      </ul>
+    </div>`;
+  }).join('');
+
+  // tg steps
+  document.getElementById('tg-steps').innerHTML = L.tgSteps.map(g =>
+    `<div style="display:flex;align-items:center;gap:15px;padding:15px 18px;border-radius:14px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1)">
+      <span class="shdisplay" style="flex-shrink:0;width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;background:linear-gradient(135deg,#7C3AED,#2A8FE0);color:#fff">${g.n}</span>
+      <span style="font-size:15px;font-weight:600;color:#EDE8FA">${g.text}</span>
+    </div>`
+  ).join('');
+
+  // faq
+  document.getElementById('faq-list').innerHTML = L.faqList.map((q,i) =>
+    `<div class="faq-item${i===openFaqIndex?' open':''}" data-reveal style="border-radius:16px;background:#fff;border:1px solid rgba(46,26,102,.07);box-shadow:0 6px 22px -16px rgba(46,26,102,.3);overflow:hidden">
+      <button class="faq-button" onclick="toggleFaq(${i})" style="width:100%;display:flex;align-items:center;gap:16px;text-align:left;padding:21px 24px;background:transparent;border:none;color:#1A0F3D;cursor:pointer;font-family:'Manrope';font-weight:700;font-size:16.5px">
+        <span style="flex:1">${q.q}</span>
+        <span class="faq-icon" style="flex-shrink:0;font-size:24px;color:#7C3AED;transition:transform .3s">+</span>
+      </button>
+      <div class="faq-answer" style="max-height:0;overflow:hidden;transition:max-height .4s ease">
+        <p style="padding:0 24px 22px;font-size:15px;line-height:1.65;color:#6B6088">${q.a}</p>
+      </div>
+    </div>`
+  ).join('');
+
+  // text replacements via data-i18n
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const path = el.getAttribute('data-i18n').split('.');
+    let v = L;
+    for (const p of path) v = v && v[p];
+    if (typeof v === 'string') el.textContent = v;
+  });
+
+  setupReveals();
+}
+
+function toggleFaq(i){
+  openFaqIndex = (openFaqIndex === i) ? -1 : i;
+  document.querySelectorAll('.faq-item').forEach((el, idx) => {
+    el.classList.toggle('open', idx === openFaqIndex);
+  });
+}
+
+// ── Language ────────────────────────────────────────────────────────────────
+let currentLang = localStorage.getItem('volya_lang') || 'ru';
+function applyLang(lang){
+  currentLang = lang;
+  localStorage.setItem('volya_lang', lang);
+  document.documentElement.lang = lang;
+  document.getElementById('lang-ru').style.cssText = lang==='ru' ? 'color:#221544' : 'opacity:.4';
+  document.getElementById('lang-en').style.cssText = lang==='en' ? 'color:#221544' : 'opacity:.4';
+  renderAll(lang==='en' ? EN : RU);
+}
+function toggleLang(){ applyLang(currentLang === 'ru' ? 'en' : 'ru'); }
+
+// ── Mobile menu ─────────────────────────────────────────────────────────────
+function toggleMenu(){
+  const m = document.getElementById('mobileMenu');
+  const open = m.style.display === 'flex';
+  m.style.display = open ? 'none' : 'flex';
+  document.body.style.overflow = open ? '' : 'hidden';
+}
+addEventListener('resize', () => {
+  if(innerWidth > 920){
+    const m = document.getElementById('mobileMenu');
+    if(m){ m.style.display = 'none'; document.body.style.overflow = ''; }
+  }
+}, {passive:true});
+
+// ── Reveal on scroll ────────────────────────────────────────────────────────
+const _reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let _io;
+function setupReveals(){
+  if(_reduceMotion){
+    document.querySelectorAll('[data-reveal]:not([data-revealed])').forEach(el => {
+      el.style.opacity='1'; el.style.transform='none'; el.setAttribute('data-revealed','1');
+    });
+    return;
+  }
+  if(!_io){
+    _io = new IntersectionObserver(es => es.forEach(e => {
+      if(e.isIntersecting){
+        e.target.style.opacity='1'; e.target.style.transform='none';
+        e.target.setAttribute('data-revealed','1');
+        _io.unobserve(e.target);
+      }
+    }), {threshold:.08, rootMargin:'0px 0px -6% 0px'});
+  }
+  document.querySelectorAll('[data-reveal]:not([data-revealed])').forEach(el => {
+    const d = parseInt(el.getAttribute('data-delay')||'0', 10);
+    el.style.transition = `opacity .7s cubic-bezier(.22,1,.36,1) ${d}ms, transform .8s cubic-bezier(.22,1,.36,1) ${d}ms`;
+    el.style.opacity='0'; el.style.transform='translateY(22px)';
+    const r = el.getBoundingClientRect();
+    if(r.top < innerHeight*.94 && r.bottom > 0){
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        el.style.opacity='1'; el.style.transform='none';
+        el.setAttribute('data-revealed','1');
+      }));
+    } else {
+      _io.observe(el);
+    }
+  });
+}
+
+// ── Cosmos canvas (scroll-driven star field) ────────────────────────────────
+(function initCosmos(){
+  const cv = document.getElementById('cosmosCanvas');
+  if(!cv) return;
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobile = innerWidth < 760 || matchMedia('(pointer:coarse)').matches;
+  const DPR = Math.min(isMobile ? 1 : 1.5, window.devicePixelRatio || 1);
+  const ctx = cv.getContext('2d');
+  const rnd = (a,b) => a + Math.random()*(b-a);
+  let stars = [], W = 0, H = 0;
+  const mouse = {x:-9999, y:-9999, on:false};
+  if(!isMobile && !reduceMotion){
+    addEventListener('mousemove', e => {mouse.x = e.clientX*DPR; mouse.y = e.clientY*DPR; mouse.on = true;}, {passive:true});
+    addEventListener('mouseout', () => {mouse.on = false; mouse.x = mouse.y = -9999;}, {passive:true});
+  }
+  const STOPS = [[124,58,237],[42,143,224],[192,38,211]];
+  const mix = p => {
+    const tt = p*(STOPS.length-1), i = Math.min(STOPS.length-2, Math.floor(tt)), f = tt-i;
+    const a = STOPS[i], b = STOPS[i+1];
+    return [Math.round(a[0]+(b[0]-a[0])*f), Math.round(a[1]+(b[1]-a[1])*f), Math.round(a[2]+(b[2]-a[2])*f)];
+  };
+  let scrollP = 0;
+  function updateScroll(){
+    const se = document.scrollingElement || document.documentElement;
+    const top = se.scrollTop || scrollY || 0;
+    const h = (se.scrollHeight || 0) - (se.clientHeight || innerHeight);
+    scrollP = h > 0 ? Math.min(1, Math.max(0, top/h)) : 0;
+  }
+  function resize(){
+    W = Math.floor(innerWidth*DPR); H = Math.floor(innerHeight*DPR);
+    cv.width = W; cv.height = H;
+    cv.style.width = innerWidth + 'px'; cv.style.height = innerHeight + 'px';
+    const COUNT = isMobile ? 24 : Math.max(36, Math.min(60, Math.floor(innerWidth/22)));
+    stars = [];
+    for(let i=0; i<COUNT; i++){
+      const z = rnd(.25, 1);
+      stars.push({x:Math.random()*W, y:Math.random()*H, z,
+        vx:rnd(-.24,.24)*z*DPR, vy:rnd(-.32,-.08)*z*DPR,
+        r:(rnd(.6,1.8)*z+.4)*DPR, tw:Math.random()*6.28});
+    }
+  }
+  function paint(step){
+    const p = scrollP, col = mix(p), cR = col[0], cG = col[1], cB = col[2];
+    const dive = Math.sin(p*Math.PI), intensity = .7 + .5*dive;
+    ctx.clearRect(0,0,W,H);
+    const ng = ctx.createRadialGradient(W*(.25+.5*p), H*(.2+.6*dive), 0, W*.5, H*.5, Math.max(W,H)*.75);
+    ng.addColorStop(0, `rgba(${cR},${cG},${cB},${.09*intensity})`);
+    ng.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = ng; ctx.fillRect(0,0,W,H);
+    const pull = p*H*.6;
+    for(const s of stars){
+      if(step){
+        s.x += s.vx; s.y += s.vy; s.tw += .06;
+        if(s.x < -10) s.x = W+10; else if(s.x > W+10) s.x = -10;
+        if(s.y < -10) s.y = H+10; else if(s.y > H+10) s.y = -10;
+      }
+      let px = s.x, py = s.y - pull*s.z; py = ((py % H) + H) % H;
+      if(mouse.on){
+        const dx = px-mouse.x, dy = py-mouse.y, d2 = dx*dx+dy*dy, R = 150*DPR;
+        if(d2 < R*R){ const d = Math.sqrt(d2)||1, f = (1-d/R)*18*DPR; px += dx/d*f; py += dy/d*f; }
+      }
+      s._px = px; s._py = py;
+      const tw = .55 + .45*Math.sin(s.tw);
+      ctx.beginPath(); ctx.arc(px, py, s.r, 0, 6.2832);
+      ctx.fillStyle = `rgba(${cR},${cG},${cB},${(.42+.55*s.z)*tw*intensity})`; ctx.fill();
+    }
+    const LINK = 120*DPR, LINK2 = LINK*LINK;
+    for(let i=0; i<stars.length; i++){
+      const a = stars[i];
+      for(let j=i+1; j<stars.length; j++){
+        const b = stars[j], dx = a._px-b._px, dy = a._py-b._py, d2 = dx*dx+dy*dy;
+        if(d2 < LINK2){
+          const al = (1-d2/LINK2)*.24*intensity;
+          ctx.strokeStyle = `rgba(${cR},${cG},${cB},${al})`;
+          ctx.lineWidth = DPR*.7;
+          ctx.beginPath(); ctx.moveTo(a._px, a._py); ctx.lineTo(b._px, b._py); ctx.stroke();
+        }
+      }
+      if(mouse.on){
+        const dx = a._px-mouse.x, dy = a._py-mouse.y, d2 = dx*dx+dy*dy;
+        if(d2 < LINK2*1.7){
+          const al = (1 - d2/(LINK2*1.7))*.34;
+          ctx.strokeStyle = `rgba(${cR},${cG},${cB},${al})`;
+          ctx.lineWidth = DPR*.8;
+          ctx.beginPath(); ctx.moveTo(a._px, a._py); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
+        }
+      }
+    }
+  }
+  resize(); updateScroll();
+  let rT;
+  addEventListener('resize', () => { cancelAnimationFrame(rT); rT = requestAnimationFrame(resize); }, {passive:true});
+
+  // Mobile / reduced-motion: static field, repaint only on scroll (rAF-throttled). No animation loop.
+  if(isMobile || reduceMotion){
+    let sT = false;
+    addEventListener('scroll', () => {
+      if(sT) return; sT = true;
+      requestAnimationFrame(() => { sT = false; updateScroll(); paint(false); });
+    }, {passive:true});
+    paint(false);
+    return;
+  }
+
+  // Desktop: ~30fps animation loop, paused when tab hidden.
+  addEventListener('scroll', updateScroll, {passive:true});
+  let last = 0;
+  function loop(ts){
+    if(document.hidden) return;
+    if(ts - last >= 33){ last = ts; paint(true); }
+    requestAnimationFrame(loop);
+  }
+  document.addEventListener('visibilitychange', () => { if(!document.hidden) requestAnimationFrame(loop); });
+  requestAnimationFrame(loop);
+})();
+
+// ── Init ────────────────────────────────────────────────────────────────────
+applyLang(currentLang);
+</script>
+</body>
+</html>

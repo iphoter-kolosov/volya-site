@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Tests — VOLYA</title>
+<meta name="description" content="VOLYA проходит все 8 объективных тестов на утечки. Сравнение с Hola, TunnelBear, Windscribe, Proton, NordVPN, ExpressVPN. Проверь свой VPN сам.">
+<link rel="icon" type="image/png" href="favicon.png?v=2">
+<link href="assets/fonts/fonts.css" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:#F4F3F9;color:#221544;font-family:'Manrope',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:rgba(124,58,237,.18);color:#221544}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+img{max-width:100%;display:block}
+code,.mono{font-family:'JetBrains Mono',monospace}
+@keyframes pulseDot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.6)}}
+@keyframes meshShift{0%{transform:translate(0,0) rotate(0)}50%{transform:translate(-4%,3%) rotate(8deg)}100%{transform:translate(0,0) rotate(0)}}
+@keyframes shimmer{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+.shdisplay{font-family:'Unbounded',sans-serif}
+.shimmer{background:linear-gradient(100deg,#7C3AED 0%,#C026D3 38%,#2A8FE0 72%,#7C3AED 100%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 7s linear infinite}
+.hov{transition:transform .25s,box-shadow .25s,border-color .25s,background .25s,color .25s}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
+@media(max-width:760px){[style*="blur(42px)"]{animation:none!important}}
+.burger{display:none;align-items:center;justify-content:center;width:42px;height:42px;border-radius:12px;background:#fff;border:1px solid rgba(46,26,102,.12);cursor:pointer;flex-direction:column;gap:4px}
+.burger span{display:block;width:18px;height:2px;border-radius:2px;background:#5E5478}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:60;background:rgba(248,247,252,.98);flex-direction:column;padding:88px 26px 30px;gap:6px}
+.mobile-menu a{font-family:'Unbounded',sans-serif;font-weight:600;font-size:22px;color:#1A0F3D;padding:14px 0;border-bottom:1px solid rgba(46,26,102,.06)}
+.mobile-menu .mm-cta{font-family:'Manrope';font-weight:700;font-size:16px;color:#fff;text-align:center;border:none;border-bottom:none;border-radius:14px;padding:16px;margin-top:16px;background:linear-gradient(100deg,#7C3AED,#5B2BD6)}
+.mm-close{position:absolute;top:20px;right:20px;width:42px;height:42px;border-radius:12px;background:#fff;border:1px solid rgba(46,26,102,.12);cursor:pointer;font-size:20px;color:#5E5478}
+.hov-nav:hover{color:#221544!important}
+.hov-nav-active:hover{color:#5B2BD6!important}
+.hov-btn:hover{transform:translateY(-1px);box-shadow:0 12px 28px -8px rgba(124,58,237,.75)!important}
+.hov-cta:hover{transform:translateY(-2px);box-shadow:0 22px 46px -12px rgba(124,58,237,.75)!important}
+.hov-secondary:hover{border-color:rgba(124,58,237,.4)!important}
+.hov-card:hover{transform:translateY(-5px);box-shadow:0 18px 40px -18px rgba(124,58,237,.5)!important}
+.hov-card-feat:hover{border-color:rgba(124,58,237,.3)!important}
+.hov-lift:hover{transform:translateY(-2px)}
+.lang-btn{cursor:pointer;letter-spacing:.04em}
+.lang-btn:hover{border-color:rgba(124,58,237,.4)!important}
+.test-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.cmp-wrap{overflow-x:auto;border-radius:22px;background:#fff;border:1px solid rgba(46,26,102,.07);box-shadow:0 8px 30px -20px rgba(46,26,102,.3)}
+.cmp{width:100%;border-collapse:collapse;font-size:14px;min-width:780px}
+.cmp th,.cmp td{padding:14px 16px;text-align:center;border-bottom:1px solid rgba(46,26,102,.06)}
+.cmp th{font-family:'Unbounded',sans-serif;font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#5E5478;background:#FAF9FC}
+.cmp th:first-child,.cmp td:first-child{text-align:left;font-weight:700;color:#221544;background:#FAF9FC}
+.cmp th.volya{background:linear-gradient(100deg,#7C3AED,#5B2BD6);color:#fff}
+.cmp td.volya{background:rgba(124,58,237,.04);font-weight:700;color:#1A0F3D}
+.cmp tr:last-child td{border-bottom:none}
+.pass{color:#16A34A;font-weight:800;font-size:16px}
+.fail{color:#DC2626;font-weight:800;font-size:16px}
+.mixed{color:#D97706;font-weight:800;font-size:16px}
+@media(max-width:920px){
+  .hero-grid{grid-template-columns:1fr!important;padding-top:120px!important}
+  .nav-links{display:none!important}
+  .nav-cta-mobile-hide{display:none!important}
+  .burger{display:flex!important}
+  #siteNav{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(248,247,252,.97)!important}
+  .test-grid{grid-template-columns:1fr!important}
+  .arch-grid{grid-template-columns:1fr 1fr!important}
+}
+@media(max-width:560px){
+  .nav-cta-mobile-hide{display:none!important}
+  .nav-bar{padding:10px 18px!important;gap:14px!important}
+  .section-pad{padding-left:18px!important;padding-right:18px!important}
+  .arch-grid{grid-template-columns:1fr!important}
+}
+</style>
+</head>
+<body>
+<div style="position:relative;min-height:100vh;background:linear-gradient(180deg,#F8F7FC 0%,#F1EFF8 100%)">
+
+<canvas id="cosmosCanvas" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
+
+<div id="ambient" style="position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden">
+  <div style="position:absolute;top:-10%;right:-6%;width:46vw;height:46vw;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,.16),transparent 65%);filter:blur(20px)"></div>
+  <div style="position:absolute;top:34%;left:-10%;width:42vw;height:42vw;border-radius:50%;background:radial-gradient(circle,rgba(42,143,224,.13),transparent 65%);filter:blur(20px)"></div>
+  <div style="position:absolute;bottom:-12%;right:18%;width:38vw;height:38vw;border-radius:50%;background:radial-gradient(circle,rgba(192,38,211,.10),transparent 65%);filter:blur(24px)"></div>
+</div>
+
+<!-- NAV — 1:1 с index.html -->
+<nav id="siteNav" style="position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:rgba(248,247,252,.74);border-bottom:1px solid rgba(46,26,102,.07)">
+  <div class="nav-bar" style="max-width:1200px;margin:0 auto;padding:12px 32px;display:flex;align-items:center;gap:26px">
+    <a href="/" style="display:flex;align-items:center;margin-right:auto"><img src="assets/logo.png" alt="VOLYA" style="height:34px;width:auto"></a>
+    <div class="nav-links" style="display:flex;gap:28px;align-items:center">
+      <a class="hov hov-nav" href="/#services" style="font-size:14.5px;font-weight:600;color:#5E5478" data-i18n="nav.services">Сервисы</a>
+      <a class="hov hov-nav" href="/#why" style="font-size:14.5px;font-weight:600;color:#5E5478" data-i18n="nav.features">Возможности</a>
+      <a class="hov hov-nav" href="/#tariffs" style="font-size:14.5px;font-weight:600;color:#5E5478" data-i18n="nav.tariffs">Тарифы</a>
+      <a class="hov hov-nav" href="/terms.html" style="font-size:14.5px;font-weight:600;color:#5E5478" data-i18n="nav.terms">Условия</a>
+      <a class="hov hov-nav" href="/#faq" style="font-size:14.5px;font-weight:600;color:#5E5478" data-i18n="nav.faq">FAQ</a>
+    </div>
+    <button class="lang-btn" onclick="toggleLang()" style="display:flex;align-items:center;gap:6px;background:#fff;border:1px solid rgba(46,26,102,.12);color:#5E5478;font-weight:700;font-size:13px;padding:8px 12px;border-radius:999px">
+      <span id="lang-ru" style="color:#221544">RU</span><span style="opacity:.3">/</span><span id="lang-en" style="opacity:.4">EN</span>
+    </button>
+    <a class="hov hov-btn nav-cta-mobile-hide" href="https://t.me/volya_gate_bot" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14px;color:#fff;padding:10px 20px;border-radius:999px;background:linear-gradient(100deg,#7C3AED,#5B2BD6);box-shadow:0 8px 22px -8px rgba(124,58,237,.6)" data-i18n="nav.connect">Подключить</a>
+    <button class="burger" onclick="toggleMenu()" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mobileMenu" class="mobile-menu">
+  <button class="mm-close" onclick="toggleMenu()" aria-label="Закрыть">✕</button>
+  <a href="/#services" onclick="toggleMenu()" data-i18n="nav.services">Сервисы</a>
+  <a href="/#why" onclick="toggleMenu()" data-i18n="nav.features">Возможности</a>
+  <a href="/#tariffs" onclick="toggleMenu()" data-i18n="nav.tariffs">Тарифы</a>
+  <a href="/terms.html" data-i18n="nav.terms">Условия</a>
+  <a href="/#faq" onclick="toggleMenu()" data-i18n="nav.faq">FAQ</a>
+  <a class="mm-cta" href="https://t.me/volya_gate_bot" target="_blank" rel="noopener" data-i18n="nav.connect">Подключить</a>
+</div>
+
+<!-- HERO -->
+<header id="top" class="section-pad" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:158px 32px 60px">
+  <div style="max-width:820px">
+    <div data-reveal style="display:inline-flex;align-items:center;gap:9px;padding:7px 15px 7px 11px;border-radius:999px;background:#fff;border:1px solid rgba(46,26,102,.1);box-shadow:0 6px 20px -10px rgba(46,26,102,.25);font-size:13px;font-weight:700;color:#16A34A;margin-bottom:26px;white-space:nowrap">
+      <span style="width:8px;height:8px;border-radius:50%;background:#22C55E;box-shadow:0 0 0 4px rgba(34,197,94,.18);animation:pulseDot 1.8s infinite"></span><span data-i18n="hero.badge">Доказательно · 8 объективных тестов</span>
+    </div>
+    <h1 data-reveal data-delay="80" class="shdisplay" style="font-weight:700;font-size:clamp(38px,5vw,64px);line-height:1.04;letter-spacing:-.02em;color:#1A0F3D;margin-bottom:22px">
+      <span data-i18n="hero.title1">Проверь, не</span> <span class="shimmer" data-i18n="hero.title2">«дырявый» ли</span> <span data-i18n="hero.title3">твой VPN</span>
+    </h1>
+    <p data-reveal data-delay="160" style="font-size:clamp(15.5px,1.5vw,18.5px);line-height:1.6;color:#5E5478;max-width:680px;margin-bottom:30px" data-i18n="hero.sub">
+      Хороший VPN на рекламной страничке — это слова. Хороший VPN на тесте — это факт. VOLYA построен на VLESS + Reality + Vision и проходит все стандартные leak-тесты по архитектуре, а не «благодаря удаче». Ниже — что эти тесты проверяют, почему это важно, и как сравнивает VOLYA с известными платными конкурентами.
+    </p>
+    <div data-reveal data-delay="240" style="display:flex;gap:13px;flex-wrap:wrap;margin-bottom:36px">
+      <a class="hov hov-cta" href="#tests" style="display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:16px;color:#fff;padding:16px 30px;border-radius:14px;background:linear-gradient(100deg,#7C3AED,#5B2BD6);box-shadow:0 16px 36px -12px rgba(124,58,237,.6)"><span data-i18n="hero.cta1">К тестам</span> →</a>
+      <a class="hov hov-secondary" href="#comparison" style="display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:16px;color:#221544;padding:16px 28px;border-radius:14px;background:#fff;border:1px solid rgba(46,26,102,.12)" data-i18n="hero.cta2">Сравнение с конкурентами</a>
+    </div>
+    <div data-reveal data-delay="320" style="display:flex;gap:30px;flex-wrap:wrap">
+      <div><div class="shdisplay" style="font-weight:700;font-size:34px;color:#1A0F3D">8/8</div><div style="font-size:12.5px;color:#8A82A0;font-weight:600;text-transform:uppercase;letter-spacing:.06em" data-i18n="hero.stat1">сетевых тестов</div></div>
+      <div><div class="shdisplay" style="font-weight:700;font-size:34px;color:#1A0F3D">0</div><div style="font-size:12.5px;color:#8A82A0;font-weight:600;text-transform:uppercase;letter-spacing:.06em" data-i18n="hero.stat2">DNS-логов</div></div>
+      <div><div class="shdisplay" style="font-weight:700;font-size:34px;color:#1A0F3D">100%</div><div style="font-size:12.5px;color:#8A82A0;font-weight:600;text-transform:uppercase;letter-spacing:.06em" data-i18n="hero.stat3">бесплатно</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ARCHITECTURE -->
+<section id="arch" class="section-pad" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:50px 32px 40px">
+  <div data-reveal style="margin-bottom:34px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px"><span style="width:26px;height:3px;border-radius:3px;background:linear-gradient(90deg,#7C3AED,#2A8FE0)"></span><span style="font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#7C3AED" data-i18n="arch.kicker">Архитектура</span></div>
+    <h2 class="shdisplay" style="font-weight:700;font-size:clamp(28px,3.8vw,46px);line-height:1.05;letter-spacing:-.01em;color:#1A0F3D;margin-bottom:14px" data-i18n="arch.title">Почему VOLYA проходит, а другие — нет</h2>
+    <p style="font-size:16px;color:#6B6088;max-width:680px" data-i18n="arch.sub">Это не магия. Конкретные технические решения, которые большинство платных VPN либо не используют, либо реализуют наспех.</p>
+  </div>
+  <div class="arch-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+    <div class="hov hov-card-feat" data-reveal style="padding:24px;border-radius:22px;background:#fff;border:1px solid rgba(46,26,102,.07);box-shadow:0 8px 30px -20px rgba(46,26,102,.3)">
+      <div style="font-size:22px;width:50px;height:50px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:linear-gradient(160deg,#F3EEFD,#EAF4FD);margin-bottom:14px">🛡</div>
+      <h3 class="shdisplay" style="font-weight:600;font-size:16.5px;color:#1A0F3D;margin-bottom:10px" data-i18n="arch.c1.t">Reality protocol</h3>
+      <p style="font-size:13.5px;line-height:1.55;color:#6B6088;margin-bottom:10px" data-i18n="arch.c1.p">Маскирует TLS-handshake под реальный сайт (yahoo.com, microsoft.com). DPI не отличает от обычного HTTPS — работает в Иране, Китае, Туркменистане.</p>
+      <div class="mono" style="font-size:11.5px;color:#7C3AED">VLESS + Reality + Vision</div>
+    </div>
+    <div class="hov hov-card-feat" data-reveal data-delay="100" style="padding:24px;border-radius:22px;background:#fff;border:1px solid rgba(46,26,102,.07);box-shadow:0 8px 30px -20px rgba(46,26,102,.3)">
+      <div style="font-size:22px;width:50px;height:50px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:linear-gradient(160deg,#F3EEFD,#EAF4FD);margin-bottom:14px">🌐</div>
+      <h3 class="shdisplay" style="font-weight:600;font-size:16.5px;color:#1A0F3D;margin-bottom:10px" data-i18n="arch.c2.t">DNS-туннелирование</h3>
+      <p style="font-size:13.5px;line-height:1.55;color:#6B6088;margin-bottom:10px" data-i18n="arch.c2.p">Все DNS-запросы принудительно идут через Xray до Cloudflare. ISP не видит, на какие сайты ты заходишь — даже доменные имена скрыты.</p>
+      <div class="mono" style="font-size:11.5px;color:#7C3AED">1.1.1.1 · 9.9.9.9 (резерв)</div>
+    </div>
+    <div class="hov hov-card-feat" data-reveal data-delay="200" style="padding:24px;border-radius:22px;background:#fff;border:1px solid rgba(46,26,102,.07);box-shadow:0 8px 30px -20px rgba(46,26,102,.3)">
+      <div style="font-size:22px;width:50px;height:50px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:linear-gradient(160deg,#F3EEFD,#EAF4FD);margin-bottom:14px">🔒</div>
+      <h3 class="shdisplay" style="font-weight:600;font-size:16.5px;color:#1A0F3D;margin-bottom:10px" data-i18n="arch.c3.t">WebRTC + IPv6</h3>
+      <p style="font-size:13.5px;line-height:1.55;color:#6B6088;margin-bottom:10px" data-i18n="arch.c3.p">Xray туннелирует и TCP, и UDP — STUN-запросы WebRTC не выдают реальный IP. IPv6 отключён архитектурно — leak невозможен.</p>
+      <div class="mono" style="font-size:11.5px;color:#7C3AED">IPv4 only · STUN tunneled</div>
+    </div>
+    <div class="hov hov-card-feat" data-reveal data-delay="300" style="padding:24px;border-radius:22px;background:#fff;border:1px solid rgba(46,26,102,.07);box-shadow:0 8px 30px -20px rgba(46,26,102,.3)">
+      <div style="font-size:22px;width:50px;height:50px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:linear-gradient(160deg,#F3EEFD,#EAF4FD);margin-bottom:14px">📜</div>
+      <h3 class="shdisplay" style="font-weight:600;font-size:16.5px;color:#1A0F3D;margin-bottom:10px" data-i18n="arch.c4.t">No-log архитектура</h3>
+      <p style="font-size:13.5px;line-height:1.55;color:#6B6088;margin-bottom:10px" data-i18n="arch.c4.p">Только uptime и суммарный bandwidth для антиабьюза. Контент и DNS-запросы нигде не записываются — даже в RAM.</p>
+      <div class="mono" style="font-size:11.5px;color:#7C3AED">Oracle Cloud · Ashburn</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTS -->
+<section id="tests" class="section-pad" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:50px 32px 40px">
+  <div data-reveal style="margin-bottom:36px">
+    <div style="font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#7C3AED;margin-bottom:14px" data-i18n="tests.kicker">8 тестов · 5–10 минут</div>
+    <h2 class="shdisplay" style="font-weight:700;font-size:clamp(28px,3.8vw,46px);line-height:1.05;letter-spacing:-.01em;color:#1A0F3D;margin-bottom:14px" data-i18n="tests.title">Проверь свой VPN сам</h2>
+    <p style="font-size:16px;color:#6B6088;max-width:680px" data-i18n="tests.sub">Каждый тест — конкретный угрозовой вектор. Если VPN не проходит хотя бы один — приватность фиктивна. Делай тесты с включённым VPN. Если нет — открой <a href="https://t.me/volya_gate_bot" style="color:#7C3AED;font-weight:700">@volya_gate_bot</a> и получи ключ.</p>
+  </div>
+  <div id="tests-list" style="display:flex;flex-direction:column;gap:14px"></div>
+</section>
+
+<!-- COMPARISON -->
+<section id="comparison" class="section-pad" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:50px 32px 40px">
+  <div data-reveal style="margin-bottom:30px">
+    <div style="font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#7C3AED;margin-bottom:14px" data-i18n="cmp.kicker">Сравнение</div>
+    <h2 class="shdisplay" style="font-weight:700;font-size:clamp(28px,3.8vw,46px);line-height:1.05;letter-spacing:-.01em;color:#1A0F3D;margin-bottom:14px" data-i18n="cmp.title">VOLYA vs известные VPN</h2>
+    <p style="font-size:16px;color:#6B6088;max-width:720px" data-i18n="cmp.sub">По результатам публичных независимых тестов и аудитов (источники в сносках). VOLYA — единственный бесплатный VPN в таблице, проходящий все network-level тесты.</p>
+  </div>
+  <div data-reveal class="cmp-wrap">
+    <table class="cmp">
+      <thead><tr>
+        <th data-i18n="cmp.th0">Тест</th>
+        <th class="volya">VOLYA</th>
+        <th>Hola<br><span style="font-weight:400;font-size:11px;opacity:.7">free</span></th>
+        <th>TunnelBear<br><span style="font-weight:400;font-size:11px;opacity:.7">free</span></th>
+        <th>Windscribe<br><span style="font-weight:400;font-size:11px;opacity:.7">free</span></th>
+        <th>Proton<br><span style="font-weight:400;font-size:11px;opacity:.7">free</span></th>
+        <th>NordVPN<br><span style="font-weight:400;font-size:11px;opacity:.7">paid</span></th>
+        <th>ExpressVPN<br><span style="font-weight:400;font-size:11px;opacity:.7">paid</span></th>
+      </tr></thead>
+      <tbody>
+        <tr><td data-i18n="cmp.r1">1. IP скрыт</td><td class="volya"><span class="pass">✓</span></td><td><span class="pass">✓</span></td><td><span class="pass">✓</span></td><td><span class="pass">✓</span></td><td><span class="pass">✓</span></td><td><span class="pass">✓</span></td><td><span class="pass">✓</span></td></tr>
+        <tr><td data-i18n="cmp.r2">2. DNS leak</td><td class="volya"><span class="pass">✓</span></td><td><span class="fail">✗</span><sup>1</sup></td><td><span class="pass">✓</span></td><td><span class="mixed">~</span><sup>2</sup></td><td><span class="pass">✓</span></td><td><span class="pass">✓</span></td><td><span class="pass">✓</span></td></tr>
+        <tr><td data-i18n="cmp.r3">3. WebRTC leak</td><td class="volya"><span class="pass">✓</span></td><td><span class="fail">✗</span><sup>1</sup></td><td><span class="pass">✓</span></td><td><span class="mixed">~</span><sup>2</sup></td><td><span class="pass">✓</span></td><td><span class="pass">✓</span></td><td><span class="pass">✓</span></td></tr>
+        <tr><td data-i18n="cmp.r4">4. IPv6 leak</td><td class="volya"><span class="pass">✓</span></td><td><span class="fail">✗</span></td><td><span class="pass">✓</span></td><td><span class="mixed">~</span></td><td><span class="pass">✓</span></td><td><span class="pass">✓</span></td><td><span class="pass">✓</span></td></tr>
+        <tr><td data-i18n="cmp.r5">5. Comprehensive (ipleak.net)</td><td class="volya"><span class="pass">✓</span></td><td><span class="fail">✗</span></td><td><span class="pass">✓</span></td><td><span class="mixed">~</span></td><td><span class="pass">✓</span></td><td><span class="pass">✓</span></td><td><span class="pass">✓</span></td></tr>
+        <tr><td data-i18n="cmp.r6">6. Multi-leak snapshot</td><td class="volya"><span class="pass">✓</span></td><td><span class="fail">✗</span></td><td><span class="pass">✓</span></td><td><span class="mixed">~</span></td><td><span class="pass">✓</span></td><td><span class="pass">✓</span></td><td><span class="pass">✓</span></td></tr>
+        <tr><td data-i18n="cmp.r7">7. TLS fingerprint (JA3)</td><td class="volya"><span class="pass">✓</span></td><td><span class="fail">✗</span></td><td><span class="fail">✗</span></td><td><span class="fail">✗</span></td><td><span class="fail">✗</span></td><td><span class="fail">✗</span></td><td><span class="fail">✗</span></td></tr>
+        <tr><td data-i18n="cmp.r8">Работает в Иране / Китае</td><td class="volya"><span class="pass">✓</span></td><td><span class="fail">✗</span></td><td><span class="fail">✗</span></td><td><span class="fail">✗</span></td><td><span class="mixed">~</span><sup>3</sup></td><td><span class="mixed">~</span><sup>3</sup></td><td><span class="mixed">~</span><sup>3</sup></td></tr>
+        <tr><td data-i18n="cmp.r9">No-log policy (audited)</td><td class="volya"><span class="pass">✓</span></td><td><span class="fail">✗</span><sup>1</sup></td><td><span class="mixed">~</span><sup>4</sup></td><td><span class="mixed">~</span></td><td><span class="pass">✓</span></td><td><span class="pass">✓</span><sup>5</sup></td><td><span class="pass">✓</span></td></tr>
+        <tr><td data-i18n="cmp.r10">Цена</td><td class="volya"><strong style="color:#16A34A" data-i18n="cmp.free">бесплатно</strong></td><td>$2.99</td><td>$3.33</td><td>$5.75</td><td>$4.99</td><td>$3.99</td><td>$8.32</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div data-reveal style="margin-top:18px;padding:20px 22px;border-radius:18px;background:#fff;border:1px solid rgba(46,26,102,.07);font-size:13px;line-height:1.7;color:#6B6088" data-i18n="cmp.notes">
+    <strong style="color:#221544">Источники:</strong>
+    <sup>1</sup> Hola продаёт трафик юзеров как exit-nodes сети Bright Data (Luminati) — Vectra Networks 2015, подтверждение Trend Micro 2019.
+    <sup>2</sup> Windscribe Free: WebRTC leak в Chrome без расширений — тест PCMag 2024.
+    <sup>3</sup> NordVPN/ExpressVPN/Proton имеют obfuscated servers, но не Reality. JA3-сигнатура их обфускации известна Iran DPI с 2023, в Китае — с 2021 (OONI Probe, NetBlocks).
+    <sup>4</sup> TunnelBear прошёл audit Cure53 (2021/2023), но принадлежит McAfee — корпоративная политика данных.
+    <sup>5</sup> NordVPN 2018 — один из exit-nodes в Финляндии (через Creanova) был скомпрометирован; официально признано в октябре 2019.
+  </div>
+</section>
+
+<!-- DISCLAIMER -->
+<section class="section-pad" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:30px 32px 50px">
+  <div data-reveal style="position:relative;overflow:hidden;border-radius:30px;background:linear-gradient(150deg,#1C1140,#34206E);color:#fff;padding:clamp(28px,3.6vw,44px)">
+    <div style="position:absolute;bottom:-30%;right:-6%;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(192,38,211,.35),transparent 65%);filter:blur(40px)"></div>
+    <div style="position:relative;display:flex;align-items:flex-start;gap:16px;margin-bottom:18px">
+      <div style="flex-shrink:0;font-size:24px;width:54px;height:54px;display:flex;align-items:center;justify-content:center;border-radius:15px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18)">⚠️</div>
+      <div>
+        <div style="font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#FCD34D;margin-bottom:8px" data-i18n="disc.kicker">Честный disclaimer</div>
+        <h2 class="shdisplay" style="font-weight:700;font-size:clamp(22px,2.8vw,32px);line-height:1.1;letter-spacing:-.01em" data-i18n="disc.title">Browser fingerprinting — почему VPN не панацея</h2>
+      </div>
+    </div>
+    <div style="position:relative;display:grid;gap:14px;font-size:15px;line-height:1.65;color:#E2DAF6;max-width:920px">
+      <p data-i18n="disc.p1">Network-level privacy (тесты 1–7) — это то, что VPN <strong style="color:#fff">должен</strong> делать. Browser-level privacy (тест 8) — это уровень браузера. Если ты в Chrome с включённым VPN, сайт всё равно знает: какие fonts, какой canvas-рендеринг, какие плагины, какое разрешение экрана. Это уникальная подпись, идентифицирующая тебя среди миллионов.</p>
+      <p data-i18n="disc.p2"><strong style="color:#fff">Решение в 2 шага:</strong> (1) VOLYA закрывает network-уровень. (2) <a href="https://mullvad.net/en/browser" target="_blank" rel="noopener" style="color:#9FE0FF;font-weight:700;border-bottom:1px solid rgba(159,224,255,.4)">Mullvad Browser</a> (бесплатный, open-source) закрывает browser-уровень. Сделан как Tor Browser без Tor-сети — для использования с любым VPN.</p>
+      <p data-i18n="disc.p3">Вместе они закрывают <strong style="color:#fff">все 8 тестов</strong>. По отдельности — частично. Это честно: ни один VPN сам по себе не решает fingerprint, и продавцы которые обещают «100% анонимность» — врут.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER — 1:1 с index.html -->
+<footer style="position:relative;z-index:1;border-top:1px solid rgba(46,26,102,.08);background:rgba(248,247,252,.6)">
+  <div class="section-pad" style="max-width:1200px;margin:0 auto;padding:36px 32px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+    <img src="assets/logo.png" alt="VOLYA" style="height:30px;margin-right:auto">
+    <span style="font-size:13.5px;color:#9089A6" data-i18n="footer.rights">© 2026 VOLYA. Все права защищены.</span>
+    <a class="hov" href="/terms.html" style="font-size:13.5px;color:#6B6088" data-i18n="footer.terms">Условия и приватность</a>
+    <a class="hov" href="https://t.me/volya_gate_bot" target="_blank" rel="noopener" style="font-size:13.5px;color:#6B6088" data-i18n="footer.contact">Связаться</a>
+  </div>
+</footer>
+
+</div>
+
+<script>
+// ── i18n ────────────────────────────────────────────────────────────────────
+const RU = {
+  nav:{services:'Сервисы',features:'Возможности',tariffs:'Тарифы',terms:'Условия',faq:'FAQ',connect:'Подключить'},
+  hero:{badge:'Доказательно · 8 объективных тестов',title1:'Проверь, не',title2:'«дырявый» ли',title3:'твой VPN',sub:'Хороший VPN на рекламной страничке — это слова. Хороший VPN на тесте — это факт. VOLYA построен на VLESS + Reality + Vision и проходит все стандартные leak-тесты по архитектуре, а не «благодаря удаче». Ниже — что эти тесты проверяют, почему это важно, и как сравнивает VOLYA с известными платными конкурентами.',cta1:'К тестам',cta2:'Сравнение с конкурентами',stat1:'сетевых тестов',stat2:'DNS-логов',stat3:'бесплатно'},
+  arch:{kicker:'Архитектура',title:'Почему VOLYA проходит, а другие — нет',sub:'Это не магия. Конкретные технические решения, которые большинство платных VPN либо не используют, либо реализуют наспех.',
+    c1:{t:'Reality protocol',p:'Маскирует TLS-handshake под реальный сайт (yahoo.com, microsoft.com). DPI не отличает от обычного HTTPS — работает в Иране, Китае, Туркменистане.'},
+    c2:{t:'DNS-туннелирование',p:'Все DNS-запросы принудительно идут через Xray до Cloudflare. ISP не видит, на какие сайты ты заходишь — даже доменные имена скрыты.'},
+    c3:{t:'WebRTC + IPv6',p:'Xray туннелирует и TCP, и UDP — STUN-запросы WebRTC не выдают реальный IP. IPv6 отключён архитектурно — leak невозможен.'},
+    c4:{t:'No-log архитектура',p:'Только uptime и суммарный bandwidth для антиабьюза. Контент и DNS-запросы нигде не записываются — даже в RAM.'}},
+  tests:{kicker:'8 тестов · 5–10 минут',title:'Проверь свой VPN сам',sub:'Каждый тест — конкретный угрозовой вектор. Если VPN не проходит хотя бы один — приватность фиктивна.',
+    list:[
+      {n:1,t:'IP & Geolocation',d:'whatismyipaddress.com',u:'https://whatismyipaddress.com',badge:'Базовый',badgeColor:'#DC2626',badgeBg:'rgba(220,38,38,.1)',
+        what:'Видимый внешний IP, его геолокация по базам MaxMind, ISP/ASN и часовой пояс. Самый базовый тест: «видит ли мир мой реальный IP».',
+        why:'Если VPN сломан или туннель разорвался — видишь свой реальный IP. Любой сайт по этому IP знает страну, город, ISP, и часто примерный район.',
+        how:['Зайди БЕЗ VPN — запиши реальный IP и страну','Включи VOLYA, обнови страницу','Должен показать другой IP и другую страну','Сверь ASN — должен быть Oracle / Cloudflare / Hetzner, не твой провайдер'],
+        exp:'IP принадлежит Oracle Cloud (Ashburn, Virginia, US). ASN AS31898 (Oracle). Часовой пояс может остаться твоим (это уровень браузера, см. тест 8).',
+        volya:'Exit-нода в Ashburn (US), реальный IP полностью скрыт. ASN всегда Oracle, не локального провайдера.'},
+      {n:2,t:'DNS Leak (Standard + Extended)',d:'dnsleaktest.com',u:'https://dnsleaktest.com',badge:'Критично',badgeColor:'#DC2626',badgeBg:'rgba(220,38,38,.1)',
+        what:'Куда идут твои DNS-запросы (преобразование доменных имён в IP). «Когда ты заходишь на habr.com, какой DNS-сервер видит этот запрос?»',
+        why:'Главная скрытая угроза. VPN может шифровать трафик, но если DNS идут через DNS-сервер провайдера — ISP видит каждый сайт, на который ты заходишь. Содержимое скрыто, но «кому ты звонишь» — видно.',
+        how:['Нажми Extended Test (не Standard)','Жди 20–40 секунд — система делает 6+ запросов','Смотри список DNS-серверов','Все должны быть Cloudflare/Google/наши, ни одного — от ISP'],
+        exp:'1–4 DNS-сервера от Cloudflare (AS13335) или Google (AS15169). Геолокация — США или EU. Никаких Magyar Telekom / Vodafone HU / Beeline / МТС / Ростелеком.',
+        volya:'DNS-трафик принудительно туннелируется через Xray до Cloudflare 1.1.1.1. 0 leaks в Extended Test, проверено в Венгрии, России, Турции, ОАЭ, Иране.'},
+      {n:3,t:'WebRTC Leak',d:'browserleaks.com/webrtc',u:'https://browserleaks.com/webrtc',badge:'Скрытый killer',badgeColor:'#DC2626',badgeBg:'rgba(220,38,38,.1)',
+        what:'WebRTC — технология P2P-связи в браузере (Zoom, Discord-веб). Для P2P делает STUN-запросы, которые могут раскрыть реальный IP даже за VPN.',
+        why:'Самая известная и распространённая дыра VPN-индустрии. Юзер уверен, что защищён, IP-тест показывает VPN-адрес, но WebRTC палит реальный IP через STUN — и любой сайт с одной строкой JS получает твой реальный адрес.',
+        how:['Открой страницу с VPN','Смотри «Public IP Address (WebRTC)»','Должен совпадать с твоим VPN-IP, не реальным','«Local IP Address» — окей если приватный (192.168 или 10.0)'],
+        exp:'Public IP via WebRTC — тот же что в тесте 1 (Oracle Ashburn). Если видишь там реальный IP (Magyar Telekom) — VPN дырявый. Local IP скрывается через chrome://flags → WebRTC IP handling.',
+        volya:'Xray туннелирует ВСЕ TCP/UDP-соединения включая STUN. WebRTC видит только Oracle-IP. Реальный IP не утекает ни при каких настройках браузера.'},
+      {n:4,t:'IPv6 Leak',d:'ipv6-test.com',u:'https://ipv6-test.com',badge:'Важно',badgeColor:'#D97706',badgeBg:'rgba(217,119,6,.1)',
+        what:'Виден ли твой IPv6 — следующее поколение интернет-адресации. У многих провайдеров IPv6 включён по умолчанию, и если VPN туннелирует только IPv4, IPv6 уходит вне туннеля.',
+        why:'Сайт может использовать обе версии протокола. Если IPv4 идёт через VPN, а IPv6 — нет, сайт получает оба адреса. Твой реальный IPv6 палит провайдера и регион. WireGuard-конфиги без IPv6-туннеля страдают этим по умолчанию.',
+        how:['Открой страницу с VPN','Смотри «IPv6: Not supported by your browser»','Или IPv6 показывает адрес VPN-сервера','Если показывает 2a02:… с твоего ISP — leak'],
+        exp:'Либо «IPv6 not detected», либо адрес Oracle. Никаких 2a02:8388: (DT-HU) / 2001:4860: (твой ISP). Score — IPv4 only (10/10) ИЛИ dual-stack с VPN-адресом.',
+        volya:'IPv6 отключён на уровне Xray-config (только IPv4 через туннель). IPv6-leak архитектурно невозможен.'},
+      {n:5,t:'Comprehensive Leak Check',d:'ipleak.net',u:'https://ipleak.net',badge:'All-in-one',badgeColor:'#D97706',badgeBg:'rgba(217,119,6,.1)',
+        what:'Удобный all-in-one от AirVPN: IP, DNS, WebRTC, geolocation, торрент-IP, mDNS. За одну страницу проверяет 6+ векторов утечки.',
+        why:'Один экран — все основные угрозы. Удобно для быстрой проверки после смены настроек или переподключения. Также показывает torrent-leak — отдельный IP, видимый торрент-трекерам.',
+        how:['Зайди с включённым VPN','Все секции должны показать VPN-IP','Geolocation Coordinates — точка в Ashburn','Torrent Address Detection — нажми «Activate» и сверь'],
+        exp:'Главный IP, DNS, WebRTC, Torrent — все одинаковые, все Oracle. Geolocation — Ashburn (38.7°, -77.5°). mDNS — отсутствует или приватный.',
+        volya:'Все 6 секций показывают Oracle Ashburn. Реальный IP скрыт во всех векторах.'},
+      {n:6,t:'Multi-Leak Snapshot',d:'doileak.com',u:'https://doileak.com',badge:'Быстро',badgeColor:'#D97706',badgeBg:'rgba(217,119,6,.1)',
+        what:'Быстрая мгновенная проверка большинства leak-векторов с цветной индикацией: красный/жёлтый/зелёный. За 5 секунд — общая картина.',
+        why:'Удобно для регулярного контроля. Делать раз в неделю или после каждого major update. Страница вся зелёная — спокоен. Жёлтое/красное — копай глубже через ipleak.net.',
+        how:['Открой с VPN — авто-сканирует','Скролл вниз, читай блоки','Все индикаторы должны быть зелёными','Если жёлтый — обычно false positive timezone/lang'],
+        exp:'WebRTC, DNS, IPv6 — все зелёные. Browser Headers — частично жёлтые (timezone браузера может не совпадать с IP-страной — это норма, см. тест 8).',
+        volya:'Сетевые тесты все зелёные. Браузерные warnings (timezone) — нормальны, fixятся отдельным инструментом.'},
+      {n:7,t:'TLS Fingerprint (JA3)',d:'browserleaks.com/tls',u:'https://browserleaks.com/tls',badge:'Продвинутый',badgeColor:'#7C3AED',badgeBg:'rgba(124,58,237,.1)',
+        what:'JA3 — хеш твоего TLS handshake. Каждый клиент (Chrome, Firefox, специфический VPN) имеет уникальную TLS-подпись. Системы цензуры в странах с блокировками используют JA3 для блокировки VPN-протоколов.',
+        why:'Если VPN использует OpenVPN или WireGuard — JA3 палит «это VPN». Государство видит TLS-подпись и блокирует. Reality (наш протокол) маскирует TLS-handshake под обычный Chrome — JA3 идентичен любому браузеру.',
+        how:['Открой с VPN','Смотри JA3 hash и fingerprint','Сравни с Chrome без VPN — должно быть похоже','Никаких «OpenVPN» / «WireGuard» / «known VPN» меток'],
+        exp:'JA3 hash совпадает с обычным Chrome. Никаких «VPN signature detected». User-Agent — Chrome/Firefox.',
+        volya:'Reality маскирует TLS под Chrome через fp=chrome параметр. JA3 идентичен обычному браузеру — критично для работы в Иране/Китае/Туркменистане.'},
+      {n:8,t:'Browser Fingerprint',d:'coveryourtracks.eff.org',u:'https://coveryourtracks.eff.org',badge:'Не про VPN',badgeColor:'#7C3AED',badgeBg:'rgba(124,58,237,.1)',
+        what:'Уникальная «подпись» браузера: User-Agent + fonts + canvas-rendering + screen + timezone + audio context + plugins. Каждый юзер почти уникален среди миллионов.',
+        why:'Это не уровень VPN, а уровень браузера. Любой VPN провалит этот тест в обычном Chrome. Браузер выдаёт fingerprint напрямую через JavaScript, минуя сеть. Решение — Tor Browser или Mullvad Browser.',
+        how:['Открой — авто-сканирует 60 секунд','Смотри «Tracking Protection» и «Fingerprint Uniqueness»','В Chrome — fingerprint уникален среди millions','В Mullvad Browser — обезличен'],
+        exp:'В Chrome: «Your browser has a unique fingerprint» — это правда, и VPN не помогает. В Mullvad Browser: «nearly-identical fingerprint to others» — это цель.',
+        volya:'VOLYA даёт network-level privacy (тесты 1–7). Тест 8 — про браузер. Любой VPN провалит его в Chrome. Для полной анонимности — Mullvad Browser + VOLYA вместе закрывают все 8.',
+        warn:true}
+    ],
+    lbl:{what:'Что проверяет',why:'Почему важно',how:'Как пройти',exp:'Что должен увидеть',volya:'VOLYA',honest:'Честно'}
+  },
+  cmp:{kicker:'Сравнение',title:'VOLYA vs известные VPN',sub:'По результатам публичных независимых тестов и аудитов (источники в сносках). VOLYA — единственный бесплатный VPN в таблице, проходящий все network-level тесты.',
+    th0:'Тест',free:'бесплатно',
+    r1:'1. IP скрыт',r2:'2. DNS leak',r3:'3. WebRTC leak',r4:'4. IPv6 leak',r5:'5. Comprehensive (ipleak.net)',r6:'6. Multi-leak snapshot',r7:'7. TLS fingerprint (JA3)',r8:'Работает в Иране / Китае',r9:'No-log policy (audited)',r10:'Цена',
+    notes:'<strong style="color:#221544">Источники:</strong> <sup>1</sup> Hola продаёт трафик юзеров как exit-nodes сети Bright Data (Luminati) — Vectra Networks 2015, подтверждение Trend Micro 2019. <sup>2</sup> Windscribe Free: WebRTC leak в Chrome без расширений — тест PCMag 2024. <sup>3</sup> NordVPN/ExpressVPN/Proton имеют obfuscated servers, но не Reality. JA3-сигнатура их обфускации известна Iran DPI с 2023, в Китае — с 2021 (OONI Probe, NetBlocks). <sup>4</sup> TunnelBear прошёл audit Cure53 (2021/2023), но принадлежит McAfee — корпоративная политика данных. <sup>5</sup> NordVPN 2018 — один из exit-nodes в Финляндии (через Creanova) был скомпрометирован; официально признано в октябре 2019.'},
+  disc:{kicker:'Честный disclaimer',title:'Browser fingerprinting — почему VPN не панацея',
+    p1:'Network-level privacy (тесты 1–7) — это то, что VPN <strong style="color:#fff">должен</strong> делать. Browser-level privacy (тест 8) — это уровень браузера. Если ты в Chrome с включённым VPN, сайт всё равно знает: какие fonts, какой canvas-рендеринг, какие плагины, какое разрешение экрана. Это уникальная подпись, идентифицирующая тебя среди миллионов.',
+    p2:'<strong style="color:#fff">Решение в 2 шага:</strong> (1) VOLYA закрывает network-уровень. (2) <a href="https://mullvad.net/en/browser" target="_blank" rel="noopener" style="color:#9FE0FF;font-weight:700;border-bottom:1px solid rgba(159,224,255,.4)">Mullvad Browser</a> (бесплатный, open-source) закрывает browser-уровень. Сделан как Tor Browser без Tor-сети — для использования с любым VPN.',
+    p3:'Вместе они закрывают <strong style="color:#fff">все 8 тестов</strong>. По отдельности — частично. Это честно: ни один VPN сам по себе не решает fingerprint, и продавцы которые обещают «100% анонимность» — врут.'},
+  footer:{rights:'© 2026 VOLYA. Все права защищены.',terms:'Условия и приватность',contact:'Связаться'}
+};
+
+const EN = {
+  nav:{services:'Services',features:'Features',tariffs:'Plans',terms:'Terms',faq:'FAQ',connect:'Connect'},
+  hero:{badge:'Evidence-based · 8 objective tests',title1:'Check if your',title2:'VPN is leaking',title3:'',sub:'A good VPN on a landing page is words. A good VPN under test is fact. VOLYA is built on VLESS + Reality + Vision and passes every standard leak test by architecture, not by luck. Below — what each test checks, why it matters, and how VOLYA compares to known paid competitors.',cta1:'To the tests',cta2:'Competitor comparison',stat1:'network tests',stat2:'DNS logs',stat3:'free'},
+  arch:{kicker:'Architecture',title:'Why VOLYA passes and others don’t',sub:'Not magic. Specific technical choices that most paid VPNs either don’t use or implement in haste.',
+    c1:{t:'Reality protocol',p:'Masks the TLS handshake as a real site (yahoo.com, microsoft.com). DPI cannot distinguish it from normal HTTPS — works in Iran, China, Turkmenistan.'},
+    c2:{t:'DNS tunneling',p:'All DNS requests are forced through Xray to Cloudflare. Your ISP cannot see which sites you visit — even domain names are hidden.'},
+    c3:{t:'WebRTC + IPv6',p:'Xray tunnels both TCP and UDP — WebRTC STUN requests do not reveal the real IP. IPv6 is disabled architecturally — leak impossible.'},
+    c4:{t:'No-log architecture',p:'Only uptime and total bandwidth for abuse prevention. Content and DNS queries are never recorded — not even in RAM.'}},
+  tests:{kicker:'8 tests · 5–10 minutes',title:'Test your VPN yourself',sub:'Each test is a concrete threat vector. If a VPN fails even one — its privacy is fictional. Run the tests with VPN enabled. No key yet? Open <a href="https://t.me/volya_gate_bot" style="color:#7C3AED;font-weight:700">@volya_gate_bot</a>.',
+    list:[
+      {n:1,t:'IP & Geolocation',d:'whatismyipaddress.com',u:'https://whatismyipaddress.com',badge:'Basic',badgeColor:'#DC2626',badgeBg:'rgba(220,38,38,.1)',
+        what:'Your visible external IP, its geolocation via MaxMind databases, ISP/ASN and timezone. The most basic test: "does the world see my real IP?"',
+        why:'If your VPN is broken or the tunnel drops — you see your real IP. Any site knows your country, city, ISP, often the approximate district.',
+        how:['Visit WITHOUT VPN — note real IP and country','Enable VOLYA, refresh','Should show different IP and country','Check ASN — must be Oracle / Cloudflare / Hetzner, not your provider'],
+        exp:'IP belongs to Oracle Cloud (Ashburn, Virginia, US). ASN AS31898 (Oracle). Timezone may stay yours (browser-level, see test 8).',
+        volya:'Exit node in Ashburn (US), real IP fully hidden. ASN always Oracle, not your local provider.'},
+      {n:2,t:'DNS Leak (Standard + Extended)',d:'dnsleaktest.com',u:'https://dnsleaktest.com',badge:'Critical',badgeColor:'#DC2626',badgeBg:'rgba(220,38,38,.1)',
+        what:'Where your DNS queries go (domain name to IP resolution). "When you visit habr.com, which DNS server sees that request?"',
+        why:'The main hidden threat. VPN can encrypt traffic, but if DNS goes through your ISP DNS server — the ISP sees every site you visit. Content is hidden, but "who you call" is visible.',
+        how:['Click Extended Test (not Standard)','Wait 20–40 seconds — system makes 6+ queries','Look at the DNS server list','All must be Cloudflare/Google/ours, none from ISP'],
+        exp:'1–4 DNS servers from Cloudflare (AS13335) or Google (AS15169). Server geolocation — US or EU. No Magyar Telekom / Vodafone / Beeline / MTS / Rostelecom.',
+        volya:'DNS traffic is forced through Xray to Cloudflare 1.1.1.1. 0 leaks in Extended Test, verified across multiple restricted regions.'},
+      {n:3,t:'WebRTC Leak',d:'browserleaks.com/webrtc',u:'https://browserleaks.com/webrtc',badge:'Hidden killer',badgeColor:'#DC2626',badgeBg:'rgba(220,38,38,.1)',
+        what:'WebRTC — browser P2P technology (Zoom, Discord web). For P2P it makes STUN requests, which can reveal the real IP even behind a VPN.',
+        why:'The most famous and widespread leak in the VPN industry. User thinks they\'re safe, IP test shows VPN address, but WebRTC leaks real IP via STUN — any site with one line of JS gets your real address.',
+        how:['Open the page with VPN','Look at "Public IP Address (WebRTC)"','Must match your VPN IP, not real','"Local IP Address" — OK if private (192.168 or 10.0)'],
+        exp:'Public IP via WebRTC — same as test 1 (Oracle Ashburn). If you see real IP (Magyar Telekom) there — VPN is leaky. Local IP can be hidden via chrome://flags → WebRTC IP handling.',
+        volya:'Xray tunnels ALL TCP/UDP connections including STUN. WebRTC sees only Oracle IP. Real IP doesn\'t leak under any browser settings.'},
+      {n:4,t:'IPv6 Leak',d:'ipv6-test.com',u:'https://ipv6-test.com',badge:'Important',badgeColor:'#D97706',badgeBg:'rgba(217,119,6,.1)',
+        what:'Whether your IPv6 is visible — next generation internet addressing. Many ISPs have IPv6 on by default, and if VPN tunnels only IPv4, your IPv6 escapes outside the tunnel.',
+        why:'A site can use both protocol versions. If IPv4 goes through VPN but IPv6 doesn\'t, the site gets both addresses. Your real IPv6 leaks provider and region. WireGuard configs without IPv6 tunneling suffer this by default.',
+        how:['Open with VPN','Look for "IPv6: Not supported by your browser"','Or IPv6 shows VPN server address','If it shows 2a02:… from your ISP — leak'],
+        exp:'Either "IPv6 not detected" or Oracle address. No 2a02:8388: (DT-HU) / 2001:4860: (your ISP). Score — IPv4 only (10/10) OR dual-stack with VPN address.',
+        volya:'IPv6 disabled at Xray config level (IPv4 only through tunnel). IPv6 leak architecturally impossible.'},
+      {n:5,t:'Comprehensive Leak Check',d:'ipleak.net',u:'https://ipleak.net',badge:'All-in-one',badgeColor:'#D97706',badgeBg:'rgba(217,119,6,.1)',
+        what:'Convenient all-in-one from AirVPN: IP, DNS, WebRTC, geolocation, torrent IP, mDNS. Tests 6+ leak vectors in one page.',
+        why:'One screen — all major threats. Convenient for quick checks after settings change or reconnect. Also shows torrent leak — separate IP visible to torrent trackers.',
+        how:['Visit with VPN enabled','All sections must show VPN IP','Geolocation Coordinates — point in Ashburn','Torrent Address Detection — click "Activate" and verify'],
+        exp:'Main IP, DNS, WebRTC, Torrent — all identical, all Oracle. Geolocation — Ashburn (38.7°, -77.5°). mDNS — absent or private.',
+        volya:'All 6 sections show Oracle Ashburn. Real IP hidden in all vectors.'},
+      {n:6,t:'Multi-Leak Snapshot',d:'doileak.com',u:'https://doileak.com',badge:'Fast',badgeColor:'#D97706',badgeBg:'rgba(217,119,6,.1)',
+        what:'Fast instant check of most leak vectors with color indication: red/yellow/green. Overall picture in 5 seconds.',
+        why:'Convenient for regular monitoring. Run weekly or after every major update. All-green page — relax. Yellow/red — dig deeper via ipleak.net.',
+        how:['Open with VPN — auto-scans','Scroll down, read blocks','All indicators must be green','Yellow — usually false positive timezone/lang'],
+        exp:'WebRTC, DNS, IPv6 — all green. Browser Headers — partially yellow (browser timezone may not match IP country — that\'s normal, see test 8).',
+        volya:'Network tests all green. Browser warnings (timezone) are normal, fixed by a separate tool.'},
+      {n:7,t:'TLS Fingerprint (JA3)',d:'browserleaks.com/tls',u:'https://browserleaks.com/tls',badge:'Advanced',badgeColor:'#7C3AED',badgeBg:'rgba(124,58,237,.1)',
+        what:'JA3 — hash of your TLS handshake. Every client (Chrome, Firefox, specific VPN) has a unique TLS signature. Censorship systems in restrictive regions use JA3 to block VPN protocols.',
+        why:'If your VPN uses OpenVPN or WireGuard — JA3 reveals "this is a VPN". State sees TLS signature and blocks. Reality (our protocol) masks the TLS handshake as ordinary Chrome — JA3 is identical to any browser.',
+        how:['Open with VPN','Look at JA3 hash and fingerprint','Compare with Chrome without VPN — should be similar','No "OpenVPN" / "WireGuard" / "known VPN" markers'],
+        exp:'JA3 hash matches ordinary Chrome. No "VPN signature detected". User-Agent — Chrome/Firefox.',
+        volya:'Reality masks TLS as Chrome via the fp=chrome parameter. JA3 is identical to an ordinary browser — critical for working in Iran/China/Turkmenistan.'},
+      {n:8,t:'Browser Fingerprint',d:'coveryourtracks.eff.org',u:'https://coveryourtracks.eff.org',badge:'Not about VPN',badgeColor:'#7C3AED',badgeBg:'rgba(124,58,237,.1)',
+        what:'Unique browser "signature": User-Agent + fonts + canvas rendering + screen + timezone + audio context + plugins. Every user is almost unique among millions.',
+        why:'This is not a VPN layer, it\'s a browser layer. Any VPN will fail this test in regular Chrome. The browser reveals the fingerprint directly via JavaScript, bypassing the network. Solution — Tor Browser or Mullvad Browser.',
+        how:['Open — auto-scans 60 seconds','Look at "Tracking Protection" and "Fingerprint Uniqueness"','In Chrome — fingerprint unique among millions','In Mullvad Browser — depersonalized'],
+        exp:'In Chrome: "Your browser has a unique fingerprint" — that\'s true, and VPN doesn\'t help. In Mullvad Browser: "nearly-identical fingerprint to others" — that\'s the goal.',
+        volya:'VOLYA provides network-level privacy (tests 1–7). Test 8 is about the browser. Any VPN will fail it in Chrome. For full anonymity — Mullvad Browser + VOLYA together cover all 8.',
+        warn:true}
+    ],
+    lbl:{what:'What it checks',why:'Why it matters',how:'How to run it',exp:'What you should see',volya:'VOLYA',honest:'Honest'}
+  },
+  cmp:{kicker:'Comparison',title:'VOLYA vs known VPNs',sub:'Based on public independent tests and audits (sources in footnotes). VOLYA is the only free VPN in this table that passes all network-level tests.',
+    th0:'Test',free:'free',
+    r1:'1. IP hidden',r2:'2. DNS leak',r3:'3. WebRTC leak',r4:'4. IPv6 leak',r5:'5. Comprehensive (ipleak.net)',r6:'6. Multi-leak snapshot',r7:'7. TLS fingerprint (JA3)',r8:'Works in Iran / China',r9:'No-log policy (audited)',r10:'Price',
+    notes:'<strong style="color:#221544">Sources:</strong> <sup>1</sup> Hola sells user traffic as exit-nodes of Bright Data (Luminati) — Vectra Networks 2015, confirmed by Trend Micro 2019. <sup>2</sup> Windscribe Free: WebRTC leak in Chrome without extensions — PCMag test 2024. <sup>3</sup> NordVPN/ExpressVPN/Proton have obfuscated servers, but not Reality. The JA3 signature of their obfuscation is known to Iran DPI since 2023, China since 2021 (OONI Probe, NetBlocks). <sup>4</sup> TunnelBear passed Cure53 audit (2021/2023), but owned by McAfee — corporate data policy. <sup>5</sup> NordVPN 2018 — one exit-node in Finland (via Creanova) was compromised; officially acknowledged in October 2019.'},
+  disc:{kicker:'Honest disclaimer',title:'Browser fingerprinting — why VPN is not a silver bullet',
+    p1:'Network-level privacy (tests 1–7) is what a VPN <strong style="color:#fff">should</strong> do. Browser-level privacy (test 8) is browser-level. In Chrome with a VPN, the site still knows your fonts, canvas rendering, plugins, screen resolution. A unique signature identifying you among millions.',
+    p2:'<strong style="color:#fff">Two-step solution:</strong> (1) VOLYA covers the network layer. (2) <a href="https://mullvad.net/en/browser" target="_blank" rel="noopener" style="color:#9FE0FF;font-weight:700;border-bottom:1px solid rgba(159,224,255,.4)">Mullvad Browser</a> (free, open-source) covers the browser layer. Built like Tor Browser without Tor network — for use with any VPN.',
+    p3:'Together they cover <strong style="color:#fff">all 8 tests</strong>. Separately — partially. This is honest: no VPN alone solves fingerprinting, and vendors promising "100% anonymity" lie.'},
+  footer:{rights:'© 2026 VOLYA. All rights reserved.',terms:'Terms & privacy',contact:'Contact'}
+};
+
+// ── Render tests ────────────────────────────────────────────────────────────
+function renderTests(L){
+  const c = document.getElementById('tests-list');
+  c.innerHTML = L.tests.list.map((t,i) => `
+    <div class="hov hov-card-feat" data-reveal data-delay="${Math.min(i*40,200)}" style="position:relative;padding:26px 28px;border-radius:24px;background:#fff;border:1px solid rgba(46,26,102,.07);box-shadow:0 8px 30px -20px rgba(46,26,102,.3)">
+      <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:14px">
+        <div class="shdisplay" style="flex-shrink:0;width:54px;height:54px;border-radius:15px;background:linear-gradient(135deg,#7C3AED,#2A8FE0);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px">${t.n}</div>
+        <div style="flex:1;min-width:200px">
+          <h3 class="shdisplay" style="font-weight:600;font-size:19px;color:#1A0F3D;margin-bottom:4px">${t.t}</h3>
+          <a href="${t.u}" target="_blank" rel="noopener" class="mono" style="font-size:13px;color:#7C3AED;font-weight:600;border-bottom:1px solid rgba(124,58,237,.3)">${t.d}</a>
+        </div>
+        <span style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:${t.badgeColor};background:${t.badgeBg};padding:6px 12px;border-radius:999px">${t.badge}</span>
+      </div>
+      <div class="test-grid">
+        <div style="padding:16px 18px;border-radius:14px;background:#FAF9FC">
+          <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#7C3AED;margin-bottom:8px">${L.tests.lbl.what}</div>
+          <p style="font-size:13.5px;line-height:1.55;color:#5E5478">${t.what}</p>
+        </div>
+        <div style="padding:16px 18px;border-radius:14px;background:#FAF9FC">
+          <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#C026D3;margin-bottom:8px">${L.tests.lbl.why}</div>
+          <p style="font-size:13.5px;line-height:1.55;color:#5E5478">${t.why}</p>
+        </div>
+        <div style="padding:16px 18px;border-radius:14px;background:#FAF9FC">
+          <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#16A34A;margin-bottom:8px">${L.tests.lbl.how}</div>
+          <ul style="list-style:none">${t.how.map(h => `<li style="font-size:13.5px;color:#5E5478;padding-left:18px;position:relative;margin-bottom:5px"><span style="position:absolute;left:0;color:#7C3AED;font-weight:700">→</span>${h}</li>`).join('')}</ul>
+        </div>
+        <div style="padding:16px 18px;border-radius:14px;background:#FAF9FC">
+          <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#D97706;margin-bottom:8px">${L.tests.lbl.exp}</div>
+          <p style="font-size:13.5px;line-height:1.55;color:#5E5478">${t.exp}</p>
+        </div>
+      </div>
+      <div style="margin-top:14px;padding:15px 18px;border-radius:14px;background:${t.warn?'rgba(217,119,6,.07)':'rgba(34,197,94,.07)'};border:1px solid ${t.warn?'rgba(217,119,6,.22)':'rgba(34,197,94,.22)'};display:flex;gap:11px;align-items:flex-start">
+        <span style="flex-shrink:0;font-size:18px;color:${t.warn?'#D97706':'#16A34A'}">${t.warn?'⚠':'✓'}</span>
+        <div><span style="font-weight:800;font-size:13px;color:${t.warn?'#D97706':'#16A34A'};text-transform:uppercase;letter-spacing:.06em">${t.warn?L.tests.lbl.honest:L.tests.lbl.volya}:</span> <span style="font-size:14px;color:#221544;line-height:1.55">${t.volya}</span></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── i18n apply ──────────────────────────────────────────────────────────────
+let currentLang = 'RU';
+function applyI18n(L){
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const path = el.getAttribute('data-i18n').split('.');
+    let v = L;
+    for (const k of path) { v = v?.[k]; if (v === undefined) return; }
+    if (typeof v === 'string') el.innerHTML = v;
+  });
+  renderTests(L);
+  // Re-arm reveals
+  document.querySelectorAll('[data-reveal]').forEach(el => { el.style.opacity=''; el.style.transform=''; });
+  initReveal();
+}
+function toggleLang(){
+  currentLang = currentLang === 'RU' ? 'EN' : 'RU';
+  document.getElementById('lang-ru').style.opacity = currentLang === 'RU' ? '1' : '.4';
+  document.getElementById('lang-ru').style.color = currentLang === 'RU' ? '#221544' : '#5E5478';
+  document.getElementById('lang-en').style.opacity = currentLang === 'EN' ? '1' : '.4';
+  document.getElementById('lang-en').style.color = currentLang === 'EN' ? '#221544' : '#5E5478';
+  document.documentElement.lang = currentLang === 'EN' ? 'en' : 'ru';
+  applyI18n(currentLang === 'EN' ? EN : RU);
+}
+
+// ── Mobile menu ─────────────────────────────────────────────────────────────
+function toggleMenu(){
+  const m = document.getElementById('mobileMenu');
+  m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+}
+
+// ── Reveal observer ─────────────────────────────────────────────────────────
+function initReveal(){
+  const els = document.querySelectorAll('[data-reveal]');
+  els.forEach(el => {
+    const delay = parseInt(el.getAttribute('data-delay') || '0', 10);
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = `opacity .7s cubic-bezier(.16,1,.3,1) ${delay}ms, transform .7s cubic-bezier(.16,1,.3,1) ${delay}ms`;
+  });
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: .12, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(el => io.observe(el));
+}
+
+// ── Cosmos canvas (scroll-driven star field) — 1:1 from index.html ─────────
+(function initCosmos(){
+  const cv = document.getElementById('cosmosCanvas');
+  if(!cv) return;
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobile = innerWidth < 760 || matchMedia('(pointer:coarse)').matches;
+  const DPR = Math.min(isMobile ? 1 : 1.5, window.devicePixelRatio || 1);
+  const ctx = cv.getContext('2d');
+  const rnd = (a,b) => a + Math.random()*(b-a);
+  let stars = [], W = 0, H = 0;
+  const mouse = {x:-9999, y:-9999, on:false};
+  if(!isMobile && !reduceMotion){
+    addEventListener('mousemove', e => {mouse.x = e.clientX*DPR; mouse.y = e.clientY*DPR; mouse.on = true;}, {passive:true});
+    addEventListener('mouseout', () => {mouse.on = false; mouse.x = mouse.y = -9999;}, {passive:true});
+  }
+  const STOPS = [[124,58,237],[42,143,224],[192,38,211]];
+  const mix = p => {
+    const tt = p*(STOPS.length-1), i = Math.min(STOPS.length-2, Math.floor(tt)), f = tt-i;
+    const a = STOPS[i], b = STOPS[i+1];
+    return [Math.round(a[0]+(b[0]-a[0])*f), Math.round(a[1]+(b[1]-a[1])*f), Math.round(a[2]+(b[2]-a[2])*f)];
+  };
+  let scrollP = 0;
+  function updateScroll(){
+    const se = document.scrollingElement || document.documentElement;
+    const top = se.scrollTop || scrollY || 0;
+    const h = (se.scrollHeight || 0) - (se.clientHeight || innerHeight);
+    scrollP = h > 0 ? Math.min(1, Math.max(0, top/h)) : 0;
+  }
+  function resize(){
+    W = Math.floor(innerWidth*DPR); H = Math.floor(innerHeight*DPR);
+    cv.width = W; cv.height = H;
+    cv.style.width = innerWidth + 'px'; cv.style.height = innerHeight + 'px';
+    const COUNT = isMobile ? 24 : Math.max(36, Math.min(60, Math.floor(innerWidth/22)));
+    stars = [];
+    for(let i=0; i<COUNT; i++){
+      const z = rnd(.25, 1);
+      stars.push({x:Math.random()*W, y:Math.random()*H, z,
+        vx:rnd(-.24,.24)*z*DPR, vy:rnd(-.32,-.08)*z*DPR,
+        r:(rnd(.6,1.8)*z+.4)*DPR, tw:Math.random()*6.28});
+    }
+  }
+  function paint(step){
+    const p = scrollP, col = mix(p), cR = col[0], cG = col[1], cB = col[2];
+    const dive = Math.sin(p*Math.PI), intensity = .7 + .5*dive;
+    ctx.clearRect(0,0,W,H);
+    const ng = ctx.createRadialGradient(W*(.25+.5*p), H*(.2+.6*dive), 0, W*.5, H*.5, Math.max(W,H)*.75);
+    ng.addColorStop(0, `rgba(${cR},${cG},${cB},${.09*intensity})`);
+    ng.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = ng; ctx.fillRect(0,0,W,H);
+    const pull = p*H*.6;
+    for(const s of stars){
+      if(step){
+        s.x += s.vx; s.y += s.vy; s.tw += .06;
+        if(s.x < -10) s.x = W+10; else if(s.x > W+10) s.x = -10;
+        if(s.y < -10) s.y = H+10; else if(s.y > H+10) s.y = -10;
+      }
+      let px = s.x, py = s.y - pull*s.z; py = ((py % H) + H) % H;
+      if(mouse.on){
+        const dx = px-mouse.x, dy = py-mouse.y, d2 = dx*dx+dy*dy, R = 150*DPR;
+        if(d2 < R*R){ const d = Math.sqrt(d2)||1, f = (1-d/R)*18*DPR; px += dx/d*f; py += dy/d*f; }
+      }
+      s._px = px; s._py = py;
+      const tw = .55 + .45*Math.sin(s.tw);
+      ctx.beginPath(); ctx.arc(px, py, s.r, 0, 6.2832);
+      ctx.fillStyle = `rgba(${cR},${cG},${cB},${(.42+.55*s.z)*tw*intensity})`; ctx.fill();
+    }
+    const LINK = 120*DPR, LINK2 = LINK*LINK;
+    for(let i=0; i<stars.length; i++){
+      const a = stars[i];
+      for(let j=i+1; j<stars.length; j++){
+        const b = stars[j], dx = a._px-b._px, dy = a._py-b._py, d2 = dx*dx+dy*dy;
+        if(d2 < LINK2){
+          const al = (1-d2/LINK2)*.24*intensity;
+          ctx.strokeStyle = `rgba(${cR},${cG},${cB},${al})`;
+          ctx.lineWidth = DPR*.7;
+          ctx.beginPath(); ctx.moveTo(a._px, a._py); ctx.lineTo(b._px, b._py); ctx.stroke();
+        }
+      }
+      if(mouse.on){
+        const dx = a._px-mouse.x, dy = a._py-mouse.y, d2 = dx*dx+dy*dy;
+        if(d2 < LINK2*1.7){
+          const al = (1 - d2/(LINK2*1.7))*.34;
+          ctx.strokeStyle = `rgba(${cR},${cG},${cB},${al})`;
+          ctx.lineWidth = DPR*.8;
+          ctx.beginPath(); ctx.moveTo(a._px, a._py); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
+        }
+      }
+    }
+  }
+  resize(); updateScroll();
+  let rT;
+  addEventListener('resize', () => { cancelAnimationFrame(rT); rT = requestAnimationFrame(resize); }, {passive:true});
+
+  // Mobile / reduced-motion: static field, repaint only on scroll (rAF-throttled). No animation loop.
+  if(isMobile || reduceMotion){
+    let sT = false;
+    addEventListener('scroll', () => {
+      if(sT) return; sT = true;
+      requestAnimationFrame(() => { sT = false; updateScroll(); paint(false); });
+    }, {passive:true});
+    paint(false);
+    return;
+  }
+
+  // Desktop: ~30fps animation loop, paused when tab hidden.
+  addEventListener('scroll', updateScroll, {passive:true});
+  let last = 0;
+  function loop(ts){
+    if(document.hidden) return;
+    if(ts - last >= 33){ last = ts; paint(true); }
+    requestAnimationFrame(loop);
+  }
+  document.addEventListener('visibilitychange', () => { if(!document.hidden) requestAnimationFrame(loop); });
+  requestAnimationFrame(loop);
+})();
+
+// ── Init ────────────────────────────────────────────────────────────────────
+applyI18n(RU);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VOLYA — Условия использования и приватность</title>
+<meta name="description" content="Как работает VOLYA, что мы знаем и НЕ знаем о вас, что разрешено и что технически блокируется, и почему — человеческим языком.">
+<link rel="icon" type="image/png" href="favicon.png?v=2">
+<link href="assets/fonts/fonts.css" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:#F4F3F9;color:#221544;font-family:'Manrope',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:rgba(124,58,237,.18);color:#221544}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+img{max-width:100%;display:block}
+[data-sec]{scroll-margin-top:96px}
+@keyframes shimmer{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+@keyframes floatY{0%{transform:translateY(0)}50%{transform:translateY(-14px)}100%{transform:translateY(0)}}
+.shdisplay{font-family:'Unbounded',sans-serif}
+.shimmer{background:linear-gradient(100deg,#7C3AED 0%,#C026D3 38%,#2A8FE0 72%,#7C3AED 100%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 7s linear infinite}
+.hov{transition:transform .25s,box-shadow .25s,border-color .25s,background .25s,color .25s}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
+.burger{display:none;align-items:center;justify-content:center;width:42px;height:42px;border-radius:12px;background:#fff;border:1px solid rgba(46,26,102,.12);cursor:pointer;flex-direction:column;gap:4px}
+.burger span{display:block;width:18px;height:2px;border-radius:2px;background:#5E5478}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:60;background:rgba(248,247,252,.98);flex-direction:column;padding:88px 26px 30px;gap:6px}
+.mobile-menu a{font-family:'Unbounded',sans-serif;font-weight:600;font-size:22px;color:#1A0F3D;padding:14px 0;border-bottom:1px solid rgba(46,26,102,.06)}
+.mobile-menu .mm-cta{font-family:'Manrope';font-weight:700;font-size:16px;color:#fff;text-align:center;border:none;border-bottom:none;border-radius:14px;padding:16px;margin-top:16px;background:linear-gradient(100deg,#7C3AED,#5B2BD6)}
+.mm-close{position:absolute;top:20px;right:20px;width:42px;height:42px;border-radius:12px;background:#fff;border:1px solid rgba(46,26,102,.12);cursor:pointer;font-size:20px;color:#5E5478}
+.hov-nav:hover{color:#221544!important}
+.hov-btn:hover{transform:translateY(-1px)}
+.hov-lift:hover{transform:translateY(-2px)}
+.hov-value:hover{background:rgba(255,255,255,.1)!important;transform:translateY(-3px)}
+.hov-toc:hover{background:rgba(124,58,237,.06)}
+.lang-btn{cursor:pointer;letter-spacing:.04em}
+.lang-btn:hover{border-color:rgba(124,58,237,.4)!important}
+@media(max-width:920px){
+  .nav-links{display:none!important}
+  .nav-cta-mobile-hide{display:none!important}
+  .burger{display:flex!important}
+  #siteNav{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(248,247,252,.97)!important}
+  .doc-grid{grid-template-columns:1fr!important;gap:24px!important}
+  .toc-aside{position:static!important}
+  .grid-2{grid-template-columns:1fr!important}
+  .grid-3{grid-template-columns:1fr 1fr!important}
+  .grid-4{grid-template-columns:1fr 1fr!important}
+}
+@media(max-width:560px){
+  .grid-3,.grid-4{grid-template-columns:1fr!important}
+  .nav-cta-mobile-hide{display:none!important}
+  .nav-bar{padding:10px 18px!important;gap:14px!important}
+  .section-pad{padding-left:18px!important;padding-right:18px!important}
+  .blocked-row{grid-template-columns:1fr!important;gap:8px!important}
+}
+</style>
+</head>
+<body>
+<div style="position:relative;min-height:100vh;background:linear-gradient(180deg,#F8F7FC 0%,#F1EFF8 100%)">
+
+<!-- reading progress bar -->
+<div style="position:fixed;top:0;left:0;right:0;height:3px;z-index:60;background:rgba(46,26,102,.06)">
+  <div id="readbar" style="height:100%;width:0%;background:linear-gradient(90deg,#7C3AED,#C026D3,#2A8FE0);transition:width .15s linear"></div>
+</div>
+
+<canvas id="cosmosCanvas" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
+
+<div id="ambient" style="position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden">
+  <div style="position:absolute;top:-8%;right:-6%;width:42vw;height:42vw;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,.13),transparent 65%);filter:blur(20px)"></div>
+  <div style="position:absolute;top:46%;left:-10%;width:38vw;height:38vw;border-radius:50%;background:radial-gradient(circle,rgba(42,143,224,.1),transparent 65%);filter:blur(20px)"></div>
+</div>
+
+<!-- NAV -->
+<nav id="siteNav" style="position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:rgba(248,247,252,.78);border-bottom:1px solid rgba(46,26,102,.07)">
+  <div class="nav-bar" style="max-width:1180px;margin:0 auto;padding:12px 32px;display:flex;align-items:center;gap:26px">
+    <a href="/" style="display:flex;align-items:center;margin-right:auto"><img src="assets/logo.png" alt="VOLYA" style="height:32px;width:auto"></a>
+    <div class="nav-links" style="display:flex;gap:28px;align-items:center">
+      <a class="hov hov-nav" href="/#services" style="font-size:14.5px;font-weight:600;color:#5E5478" data-i18n="nav.services">Сервисы</a>
+      <a class="hov hov-nav" href="/#why" style="font-size:14.5px;font-weight:600;color:#5E5478" data-i18n="nav.features">Возможности</a>
+      <a class="hov hov-nav" href="/privacy.html" style="font-size:14.5px;font-weight:600;color:#5E5478" data-i18n="nav.privacy">Приватность</a>
+      <a class="hov hov-nav" href="/#tariffs" style="font-size:14.5px;font-weight:600;color:#5E5478" data-i18n="nav.tariffs">Тарифы</a>
+      <a href="#about" style="font-size:14.5px;font-weight:700;color:#7C3AED" data-i18n="nav.terms">Условия</a>
+      <a class="hov hov-nav" href="/#faq" style="font-size:14.5px;font-weight:600;color:#5E5478" data-i18n="nav.faq">FAQ</a>
+    </div>
+    <button class="lang-btn" onclick="toggleLang()" style="display:flex;align-items:center;gap:6px;background:#fff;border:1px solid rgba(46,26,102,.12);color:#5E5478;font-weight:700;font-size:13px;padding:8px 12px;border-radius:999px">
+      <span id="lang-ru" style="color:#221544">RU</span><span style="opacity:.3">/</span><span id="lang-en" style="opacity:.4">EN</span>
+    </button>
+    <a class="hov hov-btn nav-cta-mobile-hide" href="https://t.me/volya_gate_bot" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14px;color:#fff;padding:10px 20px;border-radius:999px;background:linear-gradient(100deg,#7C3AED,#5B2BD6);box-shadow:0 8px 22px -8px rgba(124,58,237,.6)" data-i18n="nav.connect">Подключить</a>
+    <button class="burger" onclick="toggleMenu()" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mobileMenu" class="mobile-menu">
+  <button class="mm-close" onclick="toggleMenu()" aria-label="Закрыть">✕</button>
+  <a href="/#services" data-i18n="nav.services">Сервисы</a>
+  <a href="/#why" data-i18n="nav.features">Возможности</a>
+  <a href="/privacy.html" data-i18n="nav.privacy">Приватность</a>
+  <a href="/#tariffs" data-i18n="nav.tariffs">Тарифы</a>
+  <a href="#about" onclick="toggleMenu()" data-i18n="nav.terms">Условия</a>
+  <a href="/#faq" data-i18n="nav.faq">FAQ</a>
+  <a class="mm-cta" href="https://t.me/volya_gate_bot" target="_blank" rel="noopener" data-i18n="nav.connect">Подключить</a>
+</div>
+
+<!-- HERO -->
+<header class="section-pad" style="position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:140px 32px 50px">
+  <div data-reveal style="display:inline-flex;align-items:center;gap:9px;padding:7px 15px;border-radius:999px;background:#fff;border:1px solid rgba(46,26,102,.1);box-shadow:0 6px 20px -10px rgba(46,26,102,.25);font-size:13px;font-weight:700;color:#7C3AED;margin-bottom:24px" data-i18n="hero.badge">📖 Документация · Версия 1.0</div>
+  <h1 data-reveal data-delay="80" class="shdisplay" style="font-weight:700;font-size:clamp(36px,5vw,66px);line-height:1.04;letter-spacing:-.02em;color:#1A0F3D;max-width:880px;margin-bottom:22px">
+    <span data-i18n="hero.title1">Условия использования</span> <span class="shimmer" data-i18n="hero.title2">и приватность</span>
+  </h1>
+  <p data-reveal data-delay="140" style="font-size:clamp(17px,1.6vw,21px);line-height:1.55;color:#5E5478;max-width:680px;margin-bottom:26px" data-i18n="hero.sub">Здесь подробно о том, как устроен VOLYA, что мы знаем и НЕ знаем о вас, и по каким правилам всё работает. Без юридического канцелярита — человеческим языком, но конкретно.</p>
+  <div data-reveal data-delay="200" id="hero-meta" style="display:flex;gap:10px;flex-wrap:wrap"></div>
+</header>
+
+<!-- PHILOSOPHY -->
+<section class="section-pad" style="position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:30px 32px 50px">
+  <div data-reveal style="position:relative;overflow:hidden;border-radius:28px;background:linear-gradient(150deg,#1C1140,#34206E);color:#fff;padding:clamp(30px,4vw,48px)">
+    <img src="assets/bird.png" alt="" style="position:absolute;top:-10px;right:20px;width:150px;opacity:.4;animation:floatY 6s ease-in-out infinite">
+    <div style="position:absolute;bottom:-30%;left:-6%;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,.5),transparent 65%);filter:blur(40px)"></div>
+    <div style="position:relative;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#9FD0FF;margin-bottom:14px" data-i18n="philo.kicker">Философия проекта</div>
+    <h2 class="shdisplay" style="position:relative;font-weight:700;font-size:clamp(24px,3.2vw,38px);line-height:1.1;letter-spacing:-.01em;max-width:640px;margin-bottom:10px" data-i18n="philo.title">VOLYA — это «воля». Свобода как принцип, а не как фича.</h2>
+    <p style="position:relative;font-size:16px;line-height:1.6;color:#C9BEF0;max-width:600px;margin-bottom:32px" data-i18n="philo.sub">Шесть ценностей, на которых стоит весь проект — от строчки кода до этого документа.</p>
+    <div id="values-grid" class="grid-3" style="position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:14px"></div>
+  </div>
+</section>
+
+<!-- TOC + CONTENT -->
+<div class="doc-grid section-pad" style="position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:20px 32px 60px;display:grid;grid-template-columns:230px 1fr;gap:44px;align-items:start">
+
+  <aside class="toc-aside" style="position:sticky;top:96px">
+    <div style="font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#9089A6;margin-bottom:16px;padding-left:4px" data-i18n="tocHeading">Содержание</div>
+    <nav id="toc-nav" style="display:flex;flex-direction:column;gap:2px"></nav>
+    <a class="hov hov-lift" href="https://t.me/volya_gate_bot" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:18px;font-weight:700;font-size:14px;color:#fff;padding:13px;border-radius:13px;background:linear-gradient(100deg,#229ED9,#1683b8);box-shadow:0 12px 28px -12px rgba(34,158,217,.7)">✈ <span data-i18n="asideCta">Открыть VOLYA</span></a>
+  </aside>
+
+  <main style="display:flex;flex-direction:column;gap:20px">
+
+    <!-- 1 ABOUT -->
+    <article data-sec="about" id="about" data-reveal style="padding:clamp(28px,3vw,40px);border-radius:24px;background:#fff;border:1px solid rgba(46,26,102,.07);box-shadow:0 10px 36px -24px rgba(46,26,102,.35)">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
+        <span class="shdisplay" style="font-weight:700;font-size:14px;width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(135deg,#7C3AED,#2A8FE0)">01</span>
+        <h2 class="shdisplay" style="font-weight:700;font-size:clamp(22px,2.6vw,30px);letter-spacing:-.01em;color:#1A0F3D" data-i18n="about.title">Что такое VOLYA</h2>
+      </div>
+      <p id="about-p1" style="font-size:16px;line-height:1.7;color:#4A4168;margin-bottom:16px"></p>
+      <p id="about-p2" style="font-size:16px;line-height:1.7;color:#4A4168;margin-bottom:20px"></p>
+      <div style="display:flex;gap:14px;padding:20px;border-radius:16px;background:linear-gradient(135deg,#F3EEFD,#EAF4FD);border:1px solid rgba(124,58,237,.12)">
+        <span style="font-size:24px;flex-shrink:0">💡</span>
+        <p id="about-tip" style="font-size:15px;line-height:1.6;color:#4A4168"></p>
+      </div>
+    </article>
+
+    <!-- 2 HOW -->
+    <article data-sec="how" id="how" data-reveal style="padding:clamp(28px,3vw,40px);border-radius:24px;background:#fff;border:1px solid rgba(46,26,102,.07);box-shadow:0 10px 36px -24px rgba(46,26,102,.35)">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
+        <span class="shdisplay" style="font-weight:700;font-size:14px;width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(135deg,#7C3AED,#2A8FE0)">02</span>
+        <h2 class="shdisplay" style="font-weight:700;font-size:clamp(22px,2.6vw,30px);letter-spacing:-.01em;color:#1A0F3D" data-i18n="how.title">Как это работает</h2>
+      </div>
+      <p id="how-p1" style="font-size:16px;line-height:1.7;color:#4A4168;margin-bottom:22px"></p>
+      <div class="grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:22px">
+        <div style="padding:24px;border-radius:18px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.22)">
+          <div style="font-weight:800;font-size:14px;color:#B45309;margin-bottom:14px" data-i18n="how.seesTitle">👁 Что видит провайдер</div>
+          <div id="how-sees" style="display:flex;flex-direction:column;gap:9px"></div>
+        </div>
+        <div style="padding:24px;border-radius:18px;background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.24)">
+          <div style="font-weight:800;font-size:14px;color:#15803D;margin-bottom:14px" data-i18n="how.blindTitle">🛡 Чего провайдер НЕ видит</div>
+          <div id="how-blind" style="display:flex;flex-direction:column;gap:9px"></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;padding:20px;border-radius:16px;background:#F7F5FC;border:1px solid rgba(46,26,102,.08)">
+        <span style="font-size:22px;flex-shrink:0">⚙️</span>
+        <p id="how-note" style="font-size:15px;line-height:1.6;color:#4A4168"></p>
+      </div>
+    </article>
+
+    <!-- 3 PRIVACY -->
+    <article data-sec="privacy" id="privacy" data-reveal style="padding:clamp(28px,3vw,40px);border-radius:24px;background:linear-gradient(160deg,#fff,#F6F3FC);border:1px solid rgba(124,58,237,.16);box-shadow:0 16px 50px -28px rgba(124,58,237,.5)">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:8px">
+        <span class="shdisplay" style="font-weight:700;font-size:14px;width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(135deg,#7C3AED,#2A8FE0)">03</span>
+        <h2 class="shdisplay" style="font-weight:700;font-size:clamp(22px,2.6vw,30px);letter-spacing:-.01em;color:#1A0F3D" data-i18n="privacy.title">Что мы знаем и НЕ знаем</h2>
+      </div>
+      <p id="privacy-intro" style="font-size:16px;line-height:1.7;color:#4A4168;margin:0 0 24px 54px"></p>
+      <div class="grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div style="padding:26px;border-radius:20px;background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.26)">
+          <div style="font-weight:800;font-size:15px;color:#15803D;margin-bottom:18px;display:flex;align-items:center;gap:9px"><span style="width:26px;height:26px;border-radius:8px;background:#16A34A;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px">✓</span><span data-i18n="privacy.knowTitle">Знаем — минимально нужное</span></div>
+          <div id="privacy-know" style="display:flex;flex-direction:column;gap:12px"></div>
+        </div>
+        <div style="padding:26px;border-radius:20px;background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.26)">
+          <div style="font-weight:800;font-size:15px;color:#B91C1C;margin-bottom:18px;display:flex;align-items:center;gap:9px"><span style="width:26px;height:26px;border-radius:8px;background:#DC2626;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px">✗</span><span data-i18n="privacy.dontTitle">НЕ знаем — принципиально</span></div>
+          <div id="privacy-dont" style="display:flex;flex-direction:column;gap:12px"></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;margin-top:16px;padding:22px;border-radius:18px;background:linear-gradient(135deg,#221544,#3A2178);color:#fff">
+        <span style="font-size:26px;flex-shrink:0">🔐</span>
+        <p id="privacy-promise" style="font-size:15px;line-height:1.6;color:#E2DAF6"></p>
+      </div>
+    </article>
+
+    <!-- 4 LIMITS -->
+    <article data-sec="limits" id="limits" data-reveal style="padding:clamp(28px,3vw,40px);border-radius:24px;background:#fff;border:1px solid rgba(46,26,102,.07);box-shadow:0 10px 36px -24px rgba(46,26,102,.35)">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:22px">
+        <span class="shdisplay" style="font-weight:700;font-size:14px;width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(135deg,#7C3AED,#2A8FE0)">04</span>
+        <h2 class="shdisplay" style="font-weight:700;font-size:clamp(22px,2.6vw,30px);letter-spacing:-.01em;color:#1A0F3D" data-i18n="limits.title">Лимиты и тарифы</h2>
+      </div>
+      <div id="limits-grid" class="grid-4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px"></div>
+      <div style="display:flex;gap:14px;padding:20px;border-radius:16px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.22)">
+        <span style="font-size:22px;flex-shrink:0">⚡</span>
+        <p id="limits-note" style="font-size:15px;line-height:1.6;color:#6B5B3E"></p>
+      </div>
+    </article>
+
+    <!-- 5 RULES -->
+    <article data-sec="rules" id="rules" data-reveal style="padding:clamp(28px,3vw,40px);border-radius:24px;background:#fff;border:1px solid rgba(46,26,102,.07);box-shadow:0 10px 36px -24px rgba(46,26,102,.35)">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
+        <span class="shdisplay" style="font-weight:700;font-size:14px;width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(135deg,#7C3AED,#2A8FE0)">05</span>
+        <h2 class="shdisplay" style="font-weight:700;font-size:clamp(22px,2.6vw,30px);letter-spacing:-.01em;color:#1A0F3D" data-i18n="rules.title">Что разрешено и что блокируется</h2>
+      </div>
+      <p id="rules-intro" style="font-size:16px;line-height:1.7;color:#4A4168;margin-bottom:22px"></p>
+      <div class="grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:22px">
+        <div style="padding:24px;border-radius:18px;background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.24)">
+          <div style="font-weight:800;font-size:14px;color:#15803D;margin-bottom:16px" data-i18n="rules.allowedTitle">✓ Разрешено</div>
+          <div id="rules-allowed" style="display:flex;flex-direction:column;gap:10px"></div>
+        </div>
+        <div style="padding:24px;border-radius:18px;background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.24)">
+          <div style="font-weight:800;font-size:14px;color:#B91C1C;margin-bottom:16px" data-i18n="rules.prohibitedTitle">✗ Запрещено</div>
+          <div id="rules-prohibited" style="display:flex;flex-direction:column;gap:10px"></div>
+        </div>
+      </div>
+      <div style="font-weight:800;font-size:14px;color:#1A0F3D;margin-bottom:12px" data-i18n="rules.blockedTitle">🔧 Технически заблокировано на уровне сервера</div>
+      <div id="rules-blocked" style="display:flex;flex-direction:column;gap:12px;margin-bottom:18px"></div>
+      <div style="display:flex;gap:14px;padding:20px;border-radius:16px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.24)">
+        <span style="font-size:22px;flex-shrink:0">⚠️</span>
+        <p id="rules-warn" style="font-size:15px;line-height:1.6;color:#6B5B3E"></p>
+      </div>
+    </article>
+
+    <!-- 6 ENFORCEMENT -->
+    <article data-sec="enforcement" id="enforcement" data-reveal style="padding:clamp(28px,3vw,40px);border-radius:24px;background:#fff;border:1px solid rgba(46,26,102,.07);box-shadow:0 10px 36px -24px rgba(46,26,102,.35)">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
+        <span class="shdisplay" style="font-weight:700;font-size:14px;width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(135deg,#7C3AED,#2A8FE0)">06</span>
+        <h2 class="shdisplay" style="font-weight:700;font-size:clamp(22px,2.6vw,30px);letter-spacing:-.01em;color:#1A0F3D" data-i18n="enforcement.title">Если что-то пошло не так</h2>
+      </div>
+      <p id="enforcement-intro" style="font-size:16px;line-height:1.7;color:#4A4168;margin-bottom:24px"></p>
+      <div id="ladder" style="display:flex;flex-direction:column;gap:0"></div>
+      <div style="display:flex;gap:14px;margin-top:8px;padding:22px;border-radius:18px;background:linear-gradient(135deg,#F3EEFD,#EAF4FD);border:1px solid rgba(124,58,237,.14)">
+        <span style="font-size:26px;flex-shrink:0">🤝</span>
+        <div>
+          <p id="enforcement-help1" style="font-size:15px;line-height:1.6;color:#4A4168;margin-bottom:10px"></p>
+          <p id="enforcement-help2" style="font-size:14px;line-height:1.55;color:#6B6088"></p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 7 LEGAL -->
+    <article data-sec="legal" id="legal" data-reveal style="padding:clamp(28px,3vw,40px);border-radius:24px;background:#fff;border:1px solid rgba(46,26,102,.07);box-shadow:0 10px 36px -24px rgba(46,26,102,.35)">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
+        <span class="shdisplay" style="font-weight:700;font-size:14px;width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(135deg,#7C3AED,#2A8FE0)">07</span>
+        <h2 class="shdisplay" style="font-weight:700;font-size:clamp(22px,2.6vw,30px);letter-spacing:-.01em;color:#1A0F3D" data-i18n="legal.title">Юридический статус</h2>
+      </div>
+      <p id="legal-p1" style="font-size:16px;line-height:1.7;color:#4A4168;margin-bottom:20px"></p>
+      <div class="grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px">
+        <div style="padding:24px;border-radius:18px;background:#F7F5FC;border:1px solid rgba(46,26,102,.07)">
+          <div style="font-weight:800;font-size:15px;color:#7C3AED;margin-bottom:12px" data-i18n="legal.forUsTitle">Для нас</div>
+          <div id="legal-forUs" style="font-size:14.5px;line-height:1.6;color:#5E5478"></div>
+        </div>
+        <div style="padding:24px;border-radius:18px;background:#F7F5FC;border:1px solid rgba(46,26,102,.07)">
+          <div style="font-weight:800;font-size:15px;color:#7C3AED;margin-bottom:12px" data-i18n="legal.forYouTitle">Для вас</div>
+          <div id="legal-forYou" style="font-size:14.5px;line-height:1.6;color:#5E5478"></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;padding:20px;border-radius:16px;background:linear-gradient(135deg,#221544,#3A2178);color:#fff;margin-bottom:18px">
+        <span style="font-size:22px;flex-shrink:0">📜</span>
+        <p id="legal-dmca" style="font-size:14.5px;line-height:1.6;color:#E2DAF6"></p>
+      </div>
+      <div style="padding:20px;border-radius:16px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.22)">
+        <div style="font-weight:800;font-size:14px;color:#B45309;margin-bottom:12px" data-i18n="legal.noPromiseTitle">Чего мы НЕ обещаем</div>
+        <div id="legal-noPromise" style="display:flex;flex-direction:column;gap:8px"></div>
+      </div>
+    </article>
+
+    <!-- 8 CONTACT -->
+    <article data-sec="contact" id="contact" data-reveal style="position:relative;overflow:hidden;padding:clamp(30px,3.4vw,44px);border-radius:24px;background:linear-gradient(150deg,#1C1140,#34206E);color:#fff">
+      <div style="position:absolute;top:-30%;right:-6%;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(42,143,224,.4),transparent 65%);filter:blur(40px)"></div>
+      <img src="assets/bird.png" alt="" style="position:absolute;bottom:-20px;right:24px;width:130px;opacity:.4;animation:floatY 6s ease-in-out infinite">
+      <div style="position:relative">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
+          <span class="shdisplay" style="font-weight:700;font-size:14px;width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2)">08</span>
+          <h2 class="shdisplay" style="font-weight:700;font-size:clamp(22px,2.6vw,30px);letter-spacing:-.01em" data-i18n="contact.title">Связь и поддержка</h2>
+        </div>
+        <p id="contact-p1" style="font-size:16px;line-height:1.7;color:#C9BEF0;max-width:560px;margin-bottom:22px"></p>
+        <div id="contact-chips" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px"></div>
+        <a class="hov hov-lift" href="https://t.me/volya_gate_bot" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:16px;color:#1A0F3D;padding:16px 30px;border-radius:14px;background:#fff;box-shadow:0 16px 40px -14px rgba(0,0,0,.5)">✈ <span data-i18n="contact.cta">Открыть VOLYA в Telegram</span> →</a>
+      </div>
+    </article>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer style="position:relative;z-index:1;border-top:1px solid rgba(46,26,102,.08);background:rgba(248,247,252,.6)">
+  <div class="section-pad" style="max-width:1180px;margin:0 auto;padding:34px 32px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+    <a href="/" style="display:flex;align-items:center;margin-right:auto"><img src="assets/logo.png" alt="VOLYA" style="height:28px"></a>
+    <span style="font-size:13.5px;color:#9089A6" data-i18n="footer.rights">© 2026 VOLYA. Все права защищены.</span>
+    <a href="/" style="font-size:13.5px;font-weight:700;color:#7C3AED">← <span data-i18n="footer.home">На главную</span></a>
+  </div>
+</footer>
+
+</div>
+
+<script>
+// ── i18n ────────────────────────────────────────────────────────────────────
+const LADDER_STYLE = [
+  {color:'#22C55E', bg:'rgba(34,197,94,.07)', border:'rgba(34,197,94,.24)', titleColor:'#15803D', lineStyle:'flex:1;width:2px;background:linear-gradient(#22C55E,#F59E0B);margin:6px 0'},
+  {color:'#F59E0B', bg:'rgba(245,158,11,.08)', border:'rgba(245,158,11,.26)', titleColor:'#B45309', lineStyle:'flex:1;width:2px;background:linear-gradient(#F59E0B,#DC2626);margin:6px 0'},
+  {color:'#DC2626', bg:'rgba(239,68,68,.06)', border:'rgba(239,68,68,.26)', titleColor:'#B91C1C', lineStyle:'height:0'}
+];
+
+const RU = {
+  nav: {services:'Сервисы',features:'Возможности',privacy:'Приватность',tariffs:'Тарифы',terms:'Условия',faq:'FAQ',connect:'Подключить'},
+  hero: {badge:'📖 Документация · Версия 1.0', title1:'Условия использования', title2:'и приватность', sub:'Здесь подробно о том, как устроен VOLYA, что мы знаем и НЕ знаем о вас, и по каким правилам всё работает. Без юридического канцелярита — человеческим языком, но конкретно.',
+    meta: [{text:'📅 Действует с 27 июня 2026'}, {text:'⏱ Чтение ~8 минут'}, {text:'🇺🇸 Юрисдикция США', green:true}]},
+  philo: {kicker:'Философия проекта', title:'VOLYA — это «воля». Свобода как принцип, а не как фича.', sub:'Шесть ценностей, на которых стоит весь проект — от строчки кода до этого документа.'},
+  values: [
+    {icon:'🕊', t:'Свобода', d:'Доступ к мировому интернету — базовое право, а не привилегия.'},
+    {icon:'🧠', t:'Логика', d:'Каждое ограничение объяснено причиной, а не «потому что так надо».'},
+    {icon:'❤️', t:'Любовь', d:'Сделано для людей и с заботой о них, а не чтобы ловить и наказывать.'},
+    {icon:'✨', t:'Удобство', d:'Настройка за минуту через Telegram. Без боли и мануалов на 10 страниц.'},
+    {icon:'🔍', t:'Прозрачность', d:'Что знаем и не знаем — честно и человеческим языком.'},
+    {icon:'🌱', t:'Экологичность', d:'Один сервер, бережно к ресурсу. Без излишеств и цифрового мусора.'}
+  ],
+  tocHeading: 'Содержание', asideCta: 'Открыть VOLYA',
+  toc: [
+    {id:'about', t:'Что такое VOLYA'},
+    {id:'how', t:'Как это работает'},
+    {id:'privacy', t:'Что мы знаем'},
+    {id:'limits', t:'Лимиты и тарифы'},
+    {id:'rules', t:'Разрешено / блок'},
+    {id:'enforcement', t:'Если что-то не так'},
+    {id:'legal', t:'Юридический статус'},
+    {id:'contact', t:'Связь и поддержка'}
+  ],
+  about: {
+    title:'Что такое VOLYA',
+    p1:'VOLYA — это **шлюз в свободный интернет**, а не ещё одно «VPN-приложение». Мы даём вам безопасный канал к сайтам и сервисам, которые в вашей стране заблокированы, замедлены или контролируются — и делаем это так, чтобы факт использования VOLYA не могли заметить ни провайдер, ни системы DPI-анализа.',
+    p2:'Сейчас сервис работает на этапе бета-тестирования и **полностью бесплатен**. Управление — через Telegram-бота [@volya_gate_bot](https://t.me/volya_gate_bot). В будущем появятся веб-кабинет и нативные приложения с единым аккаунтом VOLYA ID.',
+    tip:'VOLYA создан для **обычных людей**, которым нужен надёжный доступ к мировому интернету без боли с настройкой. Если вы ждёте промышленных инструментов для скрытой коммерческой деятельности — это не тот сервис.'
+  },
+  how: {
+    title:'Как это работает',
+    p1:'VOLYA построен на протоколе **VLESS + Reality** — одной из самых современных технологий маскировки трафика. Обычный VPN провайдер может опознать по «следам» в первых байтах соединения. Reality эти следы убирает: ваш трафик внешне выглядит как обычный визит на настоящий легитимный сайт.',
+    seesTitle:'👁 Что видит провайдер',
+    sees: ['Что вы подключились к какому-то серверу в США', 'Сколько байт прошло туда и обратно'],
+    blindTitle:'🛡 Чего провайдер НЕ видит',
+    blind: ['Что это VPN или VOLYA', 'Какие сайты вы посещаете', 'Какие приложения используете', 'Содержимое сообщений и запросов'],
+    note:'**Тарифы работают «внутри» сервера.** Три тарифа — 10, 20 и 30 Мбит/с — это отдельные «входы» с разными портами, а ограничение скорости делает ядро Xray на уровне сети. Переключение тарифа моментально и ничего не нужно переустанавливать.'
+  },
+  privacy: {
+    title:'Что мы знаем и НЕ знаем',
+    intro:'Самый важный раздел. Без приукрашиваний — что храним, называем напрямую. Что не храним — тоже.',
+    knowTitle:'Знаем — минимально нужное',
+    know: ['Ваш Telegram ID — чтобы понимать, чей это ключ', 'Telegram username, если есть — для удобства поддержки', 'Когда создан ключ и на какой тариф', 'Сколько байт прошло суммарно — для учёта лимита', 'События по аккаунту: создание, смена тарифа, апелляции'],
+    dontTitle:'НЕ знаем — принципиально',
+    dont: ['Ваш реальный IP-адрес', 'Какие сайты вы посещаете', 'Ваши DNS-запросы', 'Содержимое сообщений, постов, запросов', 'Какие приложения используете', 'Ваше местоположение', 'Ваши пароли, токены, cookies'],
+    promise:'**Это техническое, а не декларативное обещание.** Сервер настроен так, что URL, DNS-запросы и ваш реальный IP не записываются нигде — даже временно, даже в оперативную память. Если завтра у нас попросят историю вашей активности — мы физически не сможем её выдать, потому что её никогда не существовало.'
+  },
+  limits: {
+    title:'Лимиты и тарифы',
+    items: [
+      {icon:'⚡', value:'10 / 20 / 30', label:'Мбит/с', note:'Выбираете и меняете в боте в любой момент.'},
+      {icon:'📱', value:'до 5', label:'устройств', note:'Телефон, планшет, ПК и ТВ. Скорость — общий пул.'},
+      {icon:'📊', value:'50 ГБ', label:'в месяц', note:'Хватает на ежедневное использование. Закончился — продлим.'},
+      {icon:'📅', value:'30 дней', label:'срок ключа', note:'Продление через бота, в бете — бесплатно.'}
+    ],
+    note:'**Скорость — общий пул на ключ, а не на устройство.** Все 5 устройств делят потолок между собой. На практике незаметно: интернет потребляется рывками, и 30 Мбит хватает на пятерых с запасом. Мало для задачи — напишите в бота, рассмотрим индивидуальный тариф.'
+  },
+  rules: {
+    title:'Что разрешено и что блокируется',
+    intro:'Большинство запретов — не цензура, а защита общего сервиса: у нас один IP-адрес, и если кто-то с него спамит или качает торренты, последствия лягут на всех сразу.',
+    allowedTitle:'✓ Разрешено',
+    allowed: ['Личный VPN, обход геоблокировок (соцсети, YouTube, Netflix)', 'Приватный сёрфинг и защита в публичных Wi-Fi', 'Любой легальный контент — включая взрослый', 'Любые мессенджеры и звонки', 'Работа, учёба, развлечения'],
+    prohibitedTitle:'✗ Запрещено',
+    prohibited: ['DDoS-атаки, port scanning, попытки взлома', 'Рассылка спама и фишинга', 'CSAM (детская порнография)', 'Деятельность, связанная с терроризмом', 'Использование под санкциями США (OFAC)'],
+    blockedTitle:'🔧 Технически заблокировано на уровне сервера',
+    blocked: [
+      {what:'Торренты и P2P', why:'Главный источник DMCA-жалоб. У нас один общий IP — одна жалоба может уронить сервис для всех. Заблокированный торрент жалоб не создаёт.'},
+      {what:'Порт 25 (SMTP)', why:'Канал для прямой рассылки писем и спама. Блокировка защищает наш IP от чёрных списков. Обычная почта через 465/587 (Gmail, Outlook) работает.'}
+    ],
+    warn:'Если торрент-клиент «не качает» через VOLYA — это **не поломка**, а нормальное поведение. Качайте торренты по обычному интернету: VOLYA для этого не подходит.'
+  },
+  enforcement: {
+    title:'Если что-то пошло не так',
+    intro:'Мы не банимся «с первого подозрения». Прозрачная многоступенчатая лестница — чтобы случайно сломавший правила успел разобраться и ничего не потерял.',
+    help1:'**Большинство людей не хотят ничего ломать.** Сервис придуман, чтобы вам было комфортно, а не чтобы вас ловить. В любом сообщении есть кнопка **«🛡 Оспорить / Объяснить»** — опишите ситуацию текстом, голосом или фото, и администратор разберётся вручную.',
+    help2:'Ключ удалён или «потерялся»? Откройте бота и нажмите «Получить ключ» — система выдаст новый с нуля.'
+  },
+  ladder: [
+    {step:'1', trigger:'Использовано 80% трафика', action:'Мягкое уведомление в Telegram. Ничего не блокируется — просто предупреждение.'},
+    {step:'2', trigger:'Резкий всплеск (≥25 ГБ между проверками)', action:'Страйк и сообщение с кнопкой «Оспорить, если ошибка». Ключ продолжает работать.'},
+    {step:'3', trigger:'Жёсткий лимит или второй страйк подряд', action:'Ключ приостанавливается, открывается апелляция. Администратор разбирает вручную и вернёт ключ, если это ошибка.'}
+  ],
+  legal: {
+    title:'Юридический статус',
+    p1:'VOLYA работает на серверах в США — значит, юрисдикция сервиса американская. Мы квалифицируемся как **provider of transitory digital network communications** (17 U.S.C. § 512(a)) — просто транзитный канал, не контролирующий и не хранящий содержимое трафика.',
+    forUsTitle:'Для нас',
+    forUs:'Мы **не обязаны** фильтровать или цензурировать контент и **не несём вторичной ответственности** за действия пользователей — потому что не контролируем и не знаем, что именно они делают.',
+    forYouTitle:'Для вас',
+    forYou:'Допустимость использования VPN определяется **законом вашей страны**. Если у вас есть ограничения на VPN или конкретные сайты — это ваша зона ответственности.',
+    dmca:'На DMCA-жалобы ответ прост: «We are a transitory network service. We do not store, log or have access to user content.» С нас взять нечего — и это не уловка, а техническая реальность.',
+    noPromiseTitle:'Чего мы НЕ обещаем',
+    noPromise: ['VOLYA — бета-проект: сервис может быть временно недоступен из-за техработ или проблем у хостинга.', 'Мы не отвечаем за убытки из-за недоступности сервиса.', 'Обход всех блокировок не гарантирован — отдельные сайты используют доп. ограничения (например, по геолокации карты), которые VPN не решает.']
+  },
+  contact: {
+    title:'Связь и поддержка',
+    p1:'Единственный канал — Telegram-бот [@volya_gate_bot](https://t.me/volya_gate_bot), кнопка «💬 Обратная связь». Продление, смена тарифа, технические проблемы, идеи — всё сюда.',
+    chips: ['⏱ Ответ обычно в течение суток', '🔧 Баги — приоритетно', '🛡 Апелляции — в тот же день'],
+    cta:'Открыть VOLYA в Telegram'
+  },
+  footer: {rights:'© 2026 VOLYA. Все права защищены.', home:'На главную'}
+};
+
+const EN = {
+  nav: {services:'Services',features:'Features',privacy:'Privacy',tariffs:'Plans',terms:'Terms',faq:'FAQ',connect:'Connect'},
+  hero: {badge:'📖 Documentation · Version 1.0', title1:'Terms of use', title2:'and privacy', sub:'A detailed look at how VOLYA is built, what we know and do NOT know about you, and the rules everything runs by. No legalese — in plain language, but specific.',
+    meta: [{text:'📅 Effective June 27, 2026'}, {text:'⏱ ~8 min read'}, {text:'🇺🇸 US jurisdiction', green:true}]},
+  philo: {kicker:'Project philosophy', title:'VOLYA means “will”. Freedom as a principle, not a feature.', sub:'Six values the whole project stands on — from a line of code to this document.'},
+  values: [
+    {icon:'🕊', t:'Freedom', d:'Access to the global internet is a basic right, not a privilege.'},
+    {icon:'🧠', t:'Logic', d:'Every restriction is explained with a reason, not “because we said so”.'},
+    {icon:'❤️', t:'Love', d:'Made for people and with care for them — not to catch and punish.'},
+    {icon:'✨', t:'Convenience', d:'Setup in a minute via Telegram. No pain, no 10-page manuals.'},
+    {icon:'🔍', t:'Transparency', d:'What we know and don’t — honestly, in human language.'},
+    {icon:'🌱', t:'Sustainability', d:'One server, gentle on resources. No excess, no digital clutter.'}
+  ],
+  tocHeading: 'Contents', asideCta: 'Open VOLYA',
+  toc: [
+    {id:'about', t:'What VOLYA is'},
+    {id:'how', t:'How it works'},
+    {id:'privacy', t:'What we know'},
+    {id:'limits', t:'Limits & plans'},
+    {id:'rules', t:'Allowed / blocked'},
+    {id:'enforcement', t:'If something breaks'},
+    {id:'legal', t:'Legal status'},
+    {id:'contact', t:'Support & contact'}
+  ],
+  about: {
+    title:'What VOLYA is',
+    p1:'VOLYA is a **gateway to a free internet**, not just another “VPN app”. We give you a secure channel to the sites and services that are blocked, throttled or monitored in your country — and do it so that neither your ISP nor DPI systems can even notice you’re using VOLYA.',
+    p2:'The service is currently in beta and **completely free**. It’s managed through the Telegram bot [@volya_gate_bot](https://t.me/volya_gate_bot). A web dashboard and native apps with a single VOLYA ID account are coming next.',
+    tip:'VOLYA is built for **ordinary people** who need reliable access to the global internet without setup pain. If you’re after industrial tools for covert commercial activity — this isn’t that service.'
+  },
+  how: {
+    title:'How it works',
+    p1:'VOLYA is built on the **VLESS + Reality** protocol — one of the most advanced traffic-masking technologies. An ordinary VPN can be spotted by “fingerprints” in the first bytes of a connection. Reality removes those: your traffic looks like an ordinary visit to a real, legitimate website.',
+    seesTitle:'👁 What your ISP sees',
+    sees: ['That you connected to some server in the US', 'How many bytes went back and forth'],
+    blindTitle:'🛡 What your ISP does NOT see',
+    blind: ['That it’s a VPN or VOLYA', 'Which sites you visit', 'Which apps you use', 'The content of your messages and requests'],
+    note:'**Plans live “inside” the server.** The three plans — 10, 20 and 30 Mbps — are separate “entrances” on different ports, with the speed cap enforced by the Xray core at the network level. Switching plans is instant and requires no reinstall.'
+  },
+  privacy: {
+    title:'What we know and do NOT know',
+    intro:'The most important section. No sugar-coating — what we store, we name directly. What we don’t store, too.',
+    knowTitle:'We know — the bare minimum',
+    know: ['Your Telegram ID — to know whose key it is', 'Telegram username, if any — for easier support', 'When the key was created and on which plan', 'Total bytes transferred — for limit accounting', 'Account events: creation, plan change, appeals'],
+    dontTitle:'We do NOT know — by design',
+    dont: ['Your real IP address', 'Which sites you visit', 'Your DNS requests', 'The content of messages, posts, requests', 'Which apps you use', 'Your location', 'Your passwords, tokens, cookies'],
+    promise:'**This is a technical promise, not a declarative one.** The server is configured so that URLs, DNS requests and your real IP are written nowhere — not even temporarily, not even to memory. If someone asks us tomorrow for your activity history, we physically cannot provide it, because it never existed.'
+  },
+  limits: {
+    title:'Limits & plans',
+    items: [
+      {icon:'⚡', value:'10 / 20 / 30', label:'Mbps', note:'Choose and switch in the bot any time.'},
+      {icon:'📱', value:'up to 5', label:'devices', note:'Phone, tablet, PC and TV. Speed is a shared pool.'},
+      {icon:'📊', value:'50 GB', label:'per month', note:'Enough for daily use. Run out — we’ll top you up.'},
+      {icon:'📅', value:'30 days', label:'key validity', note:'Renew via the bot — free during beta.'}
+    ],
+    note:'**Speed is a shared pool per key, not per device.** All 5 devices split the cap. In practice it’s seamless: traffic is bursty, and 30 Mbps is plenty for five. Need more for a task — message the bot and we’ll consider a custom plan.'
+  },
+  rules: {
+    title:'What’s allowed and what’s blocked',
+    intro:'Most restrictions aren’t censorship — they protect a shared service: we have a single IP, and if someone spams or torrents from it, the consequences hit everyone at once.',
+    allowedTitle:'✓ Allowed',
+    allowed: ['Personal VPN, bypassing geo-blocks (social, YouTube, Netflix)', 'Private browsing and protection on public Wi-Fi', 'Any legal content — including adult', 'Any messengers and calls', 'Work, study, entertainment'],
+    prohibitedTitle:'✗ Prohibited',
+    prohibited: ['DDoS attacks, port scanning, hacking attempts', 'Spam and phishing campaigns', 'CSAM (child sexual abuse material)', 'Terrorism-related activity', 'Use under US sanctions (OFAC)'],
+    blockedTitle:'🔧 Technically blocked at the server level',
+    blocked: [
+      {what:'Torrents & P2P', why:'The main source of DMCA complaints. We share one IP — a single complaint could take the service down for everyone. A blocked torrent generates no complaints.'},
+      {what:'Port 25 (SMTP)', why:'A channel for direct mail and spam. Blocking it keeps our IP off blacklists. Normal email via 465/587 (Gmail, Outlook) works fine.'}
+    ],
+    warn:'If a torrent client “won’t download” through VOLYA — that’s **not a bug**, it’s expected behaviour. Torrent over your regular internet: VOLYA isn’t made for it.'
+  },
+  enforcement: {
+    title:'If something goes wrong',
+    intro:'We don’t ban “on first suspicion”. A transparent, multi-step ladder — so anyone who accidentally broke a rule has time to sort it out and lose nothing.',
+    help1:'**Most people don’t want to break anything.** The service is designed to make you comfortable, not to catch you. Every message has a **“🛡 Dispute / Explain”** button — describe the situation by text, voice or photo, and an admin reviews it by hand.',
+    help2:'Key deleted or “lost”? Open the bot and tap “Get key” — the system issues a fresh one from scratch.'
+  },
+  ladder: [
+    {step:'1', trigger:'80% of traffic used', action:'A gentle Telegram notification. Nothing is blocked — just a heads-up.'},
+    {step:'2', trigger:'Sharp spike (≥25 GB between checks)', action:'A strike and a message with a “Dispute if it’s an error” button. The key keeps working.'},
+    {step:'3', trigger:'Hard limit or a second strike in a row', action:'The key is suspended and an appeal opens. An admin reviews it by hand and restores the key if it was a mistake.'}
+  ],
+  legal: {
+    title:'Legal status',
+    p1:'VOLYA runs on servers in the US, so the service falls under US jurisdiction. We qualify as a **provider of transitory digital network communications** (17 U.S.C. § 512(a)) — simply a transit channel that doesn’t control or store the content of traffic.',
+    forUsTitle:'For us',
+    forUs:'We are **not required** to filter or censor content and **bear no secondary liability** for users’ actions — because we don’t control and don’t know what exactly they do.',
+    forYouTitle:'For you',
+    forYou:'Whether VPN use is permitted is determined by **the law of your country**. If you face restrictions on VPNs or specific sites, that’s your area of responsibility.',
+    dmca:'Our reply to DMCA complaints is simple: “We are a transitory network service. We do not store, log or have access to user content.” There’s nothing to take from us — and that’s not a trick, it’s technical reality.',
+    noPromiseTitle:'What we do NOT promise',
+    noPromise: ['VOLYA is a beta project: the service may be temporarily unavailable due to maintenance or hosting issues.', 'We are not liable for losses caused by service downtime.', 'Bypassing every block isn’t guaranteed — some sites use extra restrictions (e.g. card geolocation) that a VPN doesn’t solve.']
+  },
+  contact: {
+    title:'Support & contact',
+    p1:'The only channel is the Telegram bot [@volya_gate_bot](https://t.me/volya_gate_bot), the “💬 Feedback” button. Renewals, plan changes, technical issues, ideas — all here.',
+    chips: ['⏱ Usually answered within a day', '🔧 Bugs — prioritised', '🛡 Appeals — same day'],
+    cta:'Open VOLYA in Telegram'
+  },
+  footer: {rights:'© 2026 VOLYA. All rights reserved.', home:'Back to home'}
+};
+
+// ── Rich-text helper: **bold** and [text](url) → HTML ──────────────────────
+function rt(s, boldColor){
+  boldColor = boldColor || '#1A0F3D';
+  let out = s
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g,
+      (_, text, url) => `<a href="${url}" target="_blank" rel="noopener" style="color:#7C3AED;font-weight:700">${text}</a>`)
+    .replace(/\*\*([^*]+)\*\*/g,
+      (_, text) => `<b style="color:${boldColor}">${text}</b>`);
+  return out;
+}
+
+// ── Render ─────────────────────────────────────────────────────────────────
+function renderAll(L){
+  // hero meta chips
+  document.getElementById('hero-meta').innerHTML = L.hero.meta.map(m =>
+    m.green
+      ? `<span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#16A34A;padding:8px 14px;border-radius:999px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.22)">${m.text}</span>`
+      : `<span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#5E5478;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid rgba(46,26,102,.08)">${m.text}</span>`
+  ).join('');
+
+  // philosophy values
+  document.getElementById('values-grid').innerHTML = L.values.map((v,i) =>
+    `<div class="hov hov-value" data-reveal data-delay="${i*60}" style="padding:22px;border-radius:18px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)">
+      <div style="font-size:26px;margin-bottom:12px">${v.icon}</div>
+      <div class="shdisplay" style="font-weight:600;font-size:17px;margin-bottom:6px">${v.t}</div>
+      <div style="font-size:13.5px;line-height:1.5;color:#BFB5E0">${v.d}</div>
+    </div>`
+  ).join('');
+
+  // TOC
+  document.getElementById('toc-nav').innerHTML = L.toc.map(i =>
+    `<a class="hov hov-toc" href="#${i.id}" data-toclink="${i.id}" style="display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:10px;font-size:14px;font-weight:600;color:#8A82A0">
+      <span style="width:7px;height:7px;border-radius:50%;background:rgba(46,26,102,.18);flex-shrink:0;transition:transform .25s,background .25s"></span>${i.t}
+    </a>`
+  ).join('');
+
+  // about
+  document.getElementById('about-p1').innerHTML = rt(L.about.p1);
+  document.getElementById('about-p2').innerHTML = rt(L.about.p2);
+  document.getElementById('about-tip').innerHTML = rt(L.about.tip);
+
+  // how
+  document.getElementById('how-p1').innerHTML = rt(L.how.p1);
+  document.getElementById('how-sees').innerHTML = L.how.sees.map(x => `<div style="font-size:14.5px;color:#6B5B3E">— ${x}</div>`).join('');
+  document.getElementById('how-blind').innerHTML = L.how.blind.map(x => `<div style="font-size:14.5px;color:#3F6B4E">— ${x}</div>`).join('');
+  document.getElementById('how-note').innerHTML = rt(L.how.note);
+
+  // privacy
+  document.getElementById('privacy-intro').textContent = L.privacy.intro;
+  document.getElementById('privacy-know').innerHTML = L.privacy.know.map(k => `<div style="display:flex;gap:10px;font-size:14.5px;line-height:1.45;color:#3F6B4E"><span style="color:#16A34A;flex-shrink:0">●</span>${k}</div>`).join('');
+  document.getElementById('privacy-dont').innerHTML = L.privacy.dont.map(k => `<div style="display:flex;gap:10px;font-size:14.5px;line-height:1.45;color:#8A4B4B"><span style="color:#DC2626;flex-shrink:0">●</span>${k}</div>`).join('');
+  document.getElementById('privacy-promise').innerHTML = rt(L.privacy.promise, '#fff');
+
+  // limits
+  document.getElementById('limits-grid').innerHTML = L.limits.items.map(l =>
+    `<div style="padding:22px;border-radius:18px;background:linear-gradient(160deg,#F7F5FC,#F0ECFA);border:1px solid rgba(46,26,102,.07)">
+      <div style="font-size:22px;margin-bottom:12px">${l.icon}</div>
+      <div class="shdisplay" style="font-weight:700;font-size:19px;color:#1A0F3D;margin-bottom:4px">${l.value}</div>
+      <div style="font-size:13px;font-weight:700;color:#7C3AED;margin-bottom:10px">${l.label}</div>
+      <div style="font-size:13px;line-height:1.5;color:#6B6088">${l.note}</div>
+    </div>`
+  ).join('');
+  document.getElementById('limits-note').innerHTML = rt(L.limits.note);
+
+  // rules
+  document.getElementById('rules-intro').textContent = L.rules.intro;
+  document.getElementById('rules-allowed').innerHTML = L.rules.allowed.map(a => `<div style="display:flex;gap:9px;font-size:14px;line-height:1.45;color:#3F6B4E"><span style="color:#16A34A;flex-shrink:0">✓</span>${a}</div>`).join('');
+  document.getElementById('rules-prohibited').innerHTML = L.rules.prohibited.map(p => `<div style="display:flex;gap:9px;font-size:14px;line-height:1.45;color:#8A4B4B"><span style="color:#DC2626;flex-shrink:0">✗</span>${p}</div>`).join('');
+  document.getElementById('rules-blocked').innerHTML = L.rules.blocked.map(b =>
+    `<div class="blocked-row" style="display:grid;grid-template-columns:200px 1fr;gap:16px;padding:18px 20px;border-radius:14px;background:#F7F5FC;border:1px solid rgba(46,26,102,.07)">
+      <div class="shdisplay" style="font-weight:600;font-size:15px;color:#7C3AED">${b.what}</div>
+      <div style="font-size:14px;line-height:1.55;color:#5E5478">${b.why}</div>
+    </div>`
+  ).join('');
+  document.getElementById('rules-warn').innerHTML = rt(L.rules.warn);
+
+  // enforcement
+  document.getElementById('enforcement-intro').textContent = L.enforcement.intro;
+  document.getElementById('ladder').innerHTML = L.ladder.map((r,i) => {
+    const s = LADDER_STYLE[i];
+    return `<div style="display:grid;grid-template-columns:64px 1fr;gap:18px;align-items:stretch">
+      <div style="display:flex;flex-direction:column;align-items:center">
+        <div class="shdisplay" style="width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;color:#fff;background:${s.color};box-shadow:0 10px 24px -10px ${s.color}">${r.step}</div>
+        <div style="${s.lineStyle}"></div>
+      </div>
+      <div style="padding-bottom:16px">
+        <div style="padding:20px 22px;border-radius:16px;background:${s.bg};border:1px solid ${s.border}">
+          <div style="font-weight:800;font-size:15px;color:${s.titleColor};margin-bottom:6px">${r.trigger}</div>
+          <div style="font-size:14.5px;line-height:1.55;color:#5E5478">${r.action}</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('enforcement-help1').innerHTML = rt(L.enforcement.help1);
+  document.getElementById('enforcement-help2').innerHTML = rt(L.enforcement.help2);
+
+  // legal
+  document.getElementById('legal-p1').innerHTML = rt(L.legal.p1);
+  document.getElementById('legal-forUs').innerHTML = rt(L.legal.forUs);
+  document.getElementById('legal-forYou').innerHTML = rt(L.legal.forYou);
+  document.getElementById('legal-dmca').innerHTML = rt(L.legal.dmca, '#fff');
+  document.getElementById('legal-noPromise').innerHTML = L.legal.noPromise.map(n => `<div style="display:flex;gap:9px;font-size:14px;line-height:1.5;color:#6B5B3E"><span style="flex-shrink:0">—</span>${n}</div>`).join('');
+
+  // contact
+  document.getElementById('contact-p1').innerHTML = rt(L.contact.p1, '#fff');
+  document.getElementById('contact-chips').innerHTML = L.contact.chips.map(c => `<span style="font-size:13.5px;font-weight:600;color:#E2DAF6;padding:9px 15px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12)">${c}</span>`).join('');
+
+  // i18n text-only labels
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const path = el.getAttribute('data-i18n').split('.');
+    let v = L;
+    for (const p of path) v = v && v[p];
+    if (typeof v === 'string') el.textContent = v;
+  });
+
+  setupReveals();
+  syncTocActive();
+}
+
+// ── Language ────────────────────────────────────────────────────────────────
+let currentLang = localStorage.getItem('volya_lang') || 'ru';
+function applyLang(lang){
+  currentLang = lang;
+  localStorage.setItem('volya_lang', lang);
+  document.documentElement.lang = lang;
+  document.getElementById('lang-ru').style.cssText = lang==='ru' ? 'color:#221544' : 'opacity:.4';
+  document.getElementById('lang-en').style.cssText = lang==='en' ? 'color:#221544' : 'opacity:.4';
+  renderAll(lang==='en' ? EN : RU);
+}
+function toggleLang(){ applyLang(currentLang === 'ru' ? 'en' : 'ru'); }
+
+// ── Mobile menu ─────────────────────────────────────────────────────────────
+function toggleMenu(){
+  const m = document.getElementById('mobileMenu');
+  const open = m.style.display === 'flex';
+  m.style.display = open ? 'none' : 'flex';
+  document.body.style.overflow = open ? '' : 'hidden';
+}
+addEventListener('resize', () => {
+  if(innerWidth > 920){
+    const m = document.getElementById('mobileMenu');
+    if(m){ m.style.display = 'none'; document.body.style.overflow = ''; }
+  }
+}, {passive:true});
+
+// ── Reveal on scroll ────────────────────────────────────────────────────────
+const _reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let _io;
+function setupReveals(){
+  if(_reduceMotion){
+    document.querySelectorAll('[data-reveal]:not([data-revealed])').forEach(el => {
+      el.style.opacity='1'; el.style.transform='none'; el.setAttribute('data-revealed','1');
+    });
+    return;
+  }
+  if(!_io){
+    _io = new IntersectionObserver(es => es.forEach(e => {
+      if(e.isIntersecting){
+        e.target.style.opacity='1'; e.target.style.transform='none';
+        e.target.setAttribute('data-revealed','1');
+        _io.unobserve(e.target);
+      }
+    }), {threshold:.08, rootMargin:'0px 0px -6% 0px'});
+  }
+  document.querySelectorAll('[data-reveal]:not([data-revealed])').forEach(el => {
+    const d = parseInt(el.getAttribute('data-delay')||'0', 10);
+    el.style.transition = `opacity .7s cubic-bezier(.22,1,.36,1) ${d}ms, transform .8s cubic-bezier(.22,1,.36,1) ${d}ms`;
+    el.style.opacity='0'; el.style.transform='translateY(22px)';
+    const r = el.getBoundingClientRect();
+    if(r.top < innerHeight*.94 && r.bottom > 0){
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        el.style.opacity='1'; el.style.transform='none';
+        el.setAttribute('data-revealed','1');
+      }));
+    } else {
+      _io.observe(el);
+    }
+  });
+}
+
+// ── Scroll progress + active TOC link ───────────────────────────────────────
+const readbar = document.getElementById('readbar');
+function syncTocActive(){
+  const se = document.scrollingElement || document.documentElement;
+  const sc = se.scrollTop || document.body.scrollTop || scrollY || 0;
+  const h = (se.scrollHeight || document.body.scrollHeight) - (se.clientHeight || innerHeight);
+  if(readbar) readbar.style.width = (h > 0 ? Math.min(100, sc/h*100) : 0) + '%';
+  let active = null;
+  document.querySelectorAll('[data-sec]').forEach(s => {
+    if(s.getBoundingClientRect().top < 180) active = s.getAttribute('data-sec');
+  });
+  document.querySelectorAll('[data-toclink]').forEach(a => {
+    const on = a.getAttribute('data-toclink') === active;
+    a.style.color = on ? '#7C3AED' : '#8A82A0';
+    a.style.fontWeight = on ? '800' : '600';
+    a.style.background = on ? 'rgba(124,58,237,.07)' : 'transparent';
+    const dot = a.querySelector('span');
+    if(dot){
+      dot.style.background = on ? 'linear-gradient(#7C3AED,#2A8FE0)' : 'rgba(46,26,102,.18)';
+      dot.style.transform = on ? 'scale(1.5)' : 'scale(1)';
+    }
+  });
+}
+let _tocTick = false;
+addEventListener('scroll', () => {
+  if(_tocTick) return;
+  _tocTick = true;
+  requestAnimationFrame(() => { _tocTick = false; syncTocActive(); });
+}, {passive:true});
+
+// ── Cosmos canvas ───────────────────────────────────────────────────────────
+(function initCosmos(){
+  const cv = document.getElementById('cosmosCanvas');
+  if(!cv) return;
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobile = innerWidth < 760 || matchMedia('(pointer:coarse)').matches;
+  const DPR = Math.min(isMobile ? 1 : 1.5, window.devicePixelRatio || 1);
+  const ctx = cv.getContext('2d');
+  const rnd = (a,b) => a + Math.random()*(b-a);
+  let stars = [], W = 0, H = 0;
+  const mouse = {x:-9999, y:-9999, on:false};
+  if(!isMobile && !reduceMotion){
+    addEventListener('mousemove', e => {mouse.x = e.clientX*DPR; mouse.y = e.clientY*DPR; mouse.on = true;}, {passive:true});
+    addEventListener('mouseout', () => {mouse.on = false; mouse.x = mouse.y = -9999;}, {passive:true});
+  }
+  const STOPS = [[124,58,237],[42,143,224],[192,38,211]];
+  const mix = p => {
+    const tt = p*(STOPS.length-1), i = Math.min(STOPS.length-2, Math.floor(tt)), f = tt-i;
+    const a = STOPS[i], b = STOPS[i+1];
+    return [Math.round(a[0]+(b[0]-a[0])*f), Math.round(a[1]+(b[1]-a[1])*f), Math.round(a[2]+(b[2]-a[2])*f)];
+  };
+  let scrollP = 0;
+  function updateScroll(){
+    const se = document.scrollingElement || document.documentElement;
+    const top = se.scrollTop || scrollY || 0;
+    const h = (se.scrollHeight || 0) - (se.clientHeight || innerHeight);
+    scrollP = h > 0 ? Math.min(1, Math.max(0, top/h)) : 0;
+  }
+  function resize(){
+    W = Math.floor(innerWidth*DPR); H = Math.floor(innerHeight*DPR);
+    cv.width = W; cv.height = H;
+    cv.style.width = innerWidth + 'px'; cv.style.height = innerHeight + 'px';
+    const COUNT = isMobile ? 24 : Math.max(36, Math.min(60, Math.floor(innerWidth/22)));
+    stars = [];
+    for(let i=0; i<COUNT; i++){
+      const z = rnd(.25, 1);
+      stars.push({x:Math.random()*W, y:Math.random()*H, z,
+        vx:rnd(-.24,.24)*z*DPR, vy:rnd(-.32,-.08)*z*DPR,
+        r:(rnd(.6,1.8)*z+.4)*DPR, tw:Math.random()*6.28});
+    }
+  }
+  function paint(step){
+    const p = scrollP, col = mix(p), cR = col[0], cG = col[1], cB = col[2];
+    const dive = Math.sin(p*Math.PI), intensity = .7 + .5*dive;
+    ctx.clearRect(0,0,W,H);
+    const ng = ctx.createRadialGradient(W*(.25+.5*p), H*(.2+.6*dive), 0, W*.5, H*.5, Math.max(W,H)*.75);
+    ng.addColorStop(0, `rgba(${cR},${cG},${cB},${.09*intensity})`);
+    ng.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = ng; ctx.fillRect(0,0,W,H);
+    const pull = p*H*.6;
+    for(const s of stars){
+      if(step){
+        s.x += s.vx; s.y += s.vy; s.tw += .06;
+        if(s.x < -10) s.x = W+10; else if(s.x > W+10) s.x = -10;
+        if(s.y < -10) s.y = H+10; else if(s.y > H+10) s.y = -10;
+      }
+      let px = s.x, py = s.y - pull*s.z; py = ((py % H) + H) % H;
+      if(mouse.on){
+        const dx = px-mouse.x, dy = py-mouse.y, d2 = dx*dx+dy*dy, R = 150*DPR;
+        if(d2 < R*R){ const d = Math.sqrt(d2)||1, f = (1-d/R)*18*DPR; px += dx/d*f; py += dy/d*f; }
+      }
+      s._px = px; s._py = py;
+      const tw = .55 + .45*Math.sin(s.tw);
+      ctx.beginPath(); ctx.arc(px, py, s.r, 0, 6.2832);
+      ctx.fillStyle = `rgba(${cR},${cG},${cB},${(.42+.55*s.z)*tw*intensity})`; ctx.fill();
+    }
+    const LINK = 120*DPR, LINK2 = LINK*LINK;
+    for(let i=0; i<stars.length; i++){
+      const a = stars[i];
+      for(let j=i+1; j<stars.length; j++){
+        const b = stars[j], dx = a._px-b._px, dy = a._py-b._py, d2 = dx*dx+dy*dy;
+        if(d2 < LINK2){
+          const al = (1-d2/LINK2)*.24*intensity;
+          ctx.strokeStyle = `rgba(${cR},${cG},${cB},${al})`;
+          ctx.lineWidth = DPR*.7;
+          ctx.beginPath(); ctx.moveTo(a._px, a._py); ctx.lineTo(b._px, b._py); ctx.stroke();
+        }
+      }
+      if(mouse.on){
+        const dx = a._px-mouse.x, dy = a._py-mouse.y, d2 = dx*dx+dy*dy;
+        if(d2 < LINK2*1.7){
+          const al = (1 - d2/(LINK2*1.7))*.34;
+          ctx.strokeStyle = `rgba(${cR},${cG},${cB},${al})`;
+          ctx.lineWidth = DPR*.8;
+          ctx.beginPath(); ctx.moveTo(a._px, a._py); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
+        }
+      }
+    }
+  }
+  resize(); updateScroll();
+  let rT;
+  addEventListener('resize', () => { cancelAnimationFrame(rT); rT = requestAnimationFrame(resize); }, {passive:true});
+
+  // Mobile / reduced-motion: static field, repaint only on scroll (rAF-throttled). No animation loop.
+  if(isMobile || reduceMotion){
+    let sT = false;
+    addEventListener('scroll', () => {
+      if(sT) return; sT = true;
+      requestAnimationFrame(() => { sT = false; updateScroll(); paint(false); });
+    }, {passive:true});
+    paint(false);
+    return;
+  }
+
+  // Desktop: ~30fps animation loop, paused when tab hidden.
+  addEventListener('scroll', updateScroll, {passive:true});
+  let last = 0;
+  function loop(ts){
+    if(document.hidden) return;
+    if(ts - last >= 33){ last = ts; paint(true); }
+    requestAnimationFrame(loop);
+  }
+  document.addEventListener('visibilitychange', () => { if(!document.hidden) requestAnimationFrame(loop); });
+  requestAnimationFrame(loop);
+})();
+
+// ── Init ────────────────────────────────────────────────────────────────────
+applyLang(currentLang);
+</script>
+</body>
+</html>
