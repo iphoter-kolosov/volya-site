@@ -91,9 +91,13 @@ code,.mono{font-family:'JetBrains Mono',monospace}
       <a class="hov hov-nav" href="/terms.html" style="font-size:14.5px;font-weight:600;color:#5E5478" data-i18n="nav.terms">Условия</a>
       <a class="hov hov-nav" href="/#faq" style="font-size:14.5px;font-weight:600;color:#5E5478" data-i18n="nav.faq">FAQ</a>
     </div>
-    <button class="lang-btn" onclick="toggleLang()" style="display:flex;align-items:center;gap:6px;background:#fff;border:1px solid rgba(46,26,102,.12);color:#5E5478;font-weight:700;font-size:13px;padding:8px 12px;border-radius:999px">
-      <span id="lang-ru" style="color:#221544">RU</span><span style="opacity:.3">/</span><span id="lang-en" style="opacity:.4">EN</span>
-    </button>
+    <div class="lang-btn" style="display:flex;align-items:center;gap:1px;background:#fff;border:1px solid rgba(46,26,102,.12);font-weight:700;font-size:12.5px;padding:4px 5px;border-radius:999px">
+      <span id="lang-ru" onclick="applyLang('ru')" style="cursor:pointer;padding:3px 7px;border-radius:999px">RU</span>
+      <span id="lang-en" onclick="applyLang('en')" style="cursor:pointer;padding:3px 7px;border-radius:999px">EN</span>
+      <span id="lang-uk" onclick="applyLang('uk')" style="cursor:pointer;padding:3px 7px;border-radius:999px">UA</span>
+      <span id="lang-kk" onclick="applyLang('kk')" style="cursor:pointer;padding:3px 7px;border-radius:999px">KZ</span>
+      <span id="lang-zh" onclick="applyLang('zh')" style="cursor:pointer;padding:3px 7px;border-radius:999px">中文</span>
+    </div>
     <a class="hov hov-btn nav-cta-mobile-hide" href="https://t.me/volya_gate_bot" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14px;color:#fff;padding:10px 20px;border-radius:999px;background:linear-gradient(100deg,#7C3AED,#5B2BD6);box-shadow:0 8px 22px -8px rgba(124,58,237,.6)" data-i18n="nav.connect">Подключить</a>
     <button class="burger" onclick="toggleMenu()" aria-label="Меню"><span></span><span></span><span></span></button>
   </div>
@@ -120,7 +124,7 @@ code,.mono{font-family:'JetBrains Mono',monospace}
       <span data-i18n="hero.title1">Проверь, не</span> <span class="shimmer" data-i18n="hero.title2">«дырявый» ли</span> <span data-i18n="hero.title3">твой VPN</span>
     </h1>
     <p data-reveal data-delay="160" style="font-size:clamp(15.5px,1.5vw,18.5px);line-height:1.6;color:#5E5478;max-width:680px;margin-bottom:30px" data-i18n="hero.sub">
-      Хороший VPN на рекламной страничке — это слова. Хороший VPN на тесте — это факт. VOLYA построен на VLESS + Reality + Vision и проходит все стандартные leak-тесты по архитектуре, а не «благодаря удаче». Ниже — что эти тесты проверяют, почему это важно, и как сравнивает VOLYA с известными платными конкурентами.
+      Хороший VPN на рекламной страничке — это слова. Хороший VPN на тесте — это факт. VOLYA построен на технологии Вуаль и проходит все стандартные leak-тесты по архитектуре, а не «благодаря удаче». Ниже — что эти тесты проверяют, почему это важно, и как сравнивает VOLYA с известными платными конкурентами.
     </p>
     <div data-reveal data-delay="240" style="display:flex;gap:13px;flex-wrap:wrap;margin-bottom:36px">
       <a class="hov hov-cta" href="#tests" style="display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:16px;color:#fff;padding:16px 30px;border-radius:14px;background:linear-gradient(100deg,#7C3AED,#5B2BD6);box-shadow:0 16px 36px -12px rgba(124,58,237,.6)"><span data-i18n="hero.cta1">К тестам</span> →</a>
@@ -144,20 +148,20 @@ code,.mono{font-family:'JetBrains Mono',monospace}
   <div class="arch-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
     <div class="hov hov-card-feat" data-reveal style="padding:24px;border-radius:22px;background:#fff;border:1px solid rgba(46,26,102,.07);box-shadow:0 8px 30px -20px rgba(46,26,102,.3)">
       <div style="font-size:22px;width:50px;height:50px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:linear-gradient(160deg,#F3EEFD,#EAF4FD);margin-bottom:14px">🛡</div>
-      <h3 class="shdisplay" style="font-weight:600;font-size:16.5px;color:#1A0F3D;margin-bottom:10px" data-i18n="arch.c1.t">Reality protocol</h3>
+      <h3 class="shdisplay" style="font-weight:600;font-size:16.5px;color:#1A0F3D;margin-bottom:10px" data-i18n="arch.c1.t">Протокол Вуаль</h3>
       <p style="font-size:13.5px;line-height:1.55;color:#6B6088;margin-bottom:10px" data-i18n="arch.c1.p">Маскирует TLS-handshake под реальный сайт (yahoo.com, microsoft.com). DPI не отличает от обычного HTTPS — работает в Иране, Китае, Туркменистане.</p>
-      <div class="mono" style="font-size:11.5px;color:#7C3AED">VLESS + Reality + Vision</div>
+      <div class="mono" style="font-size:11.5px;color:#7C3AED">Veil · DPI-resistant</div>
     </div>
     <div class="hov hov-card-feat" data-reveal data-delay="100" style="padding:24px;border-radius:22px;background:#fff;border:1px solid rgba(46,26,102,.07);box-shadow:0 8px 30px -20px rgba(46,26,102,.3)">
       <div style="font-size:22px;width:50px;height:50px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:linear-gradient(160deg,#F3EEFD,#EAF4FD);margin-bottom:14px">🌐</div>
       <h3 class="shdisplay" style="font-weight:600;font-size:16.5px;color:#1A0F3D;margin-bottom:10px" data-i18n="arch.c2.t">DNS-туннелирование</h3>
-      <p style="font-size:13.5px;line-height:1.55;color:#6B6088;margin-bottom:10px" data-i18n="arch.c2.p">Все DNS-запросы принудительно идут через Xray до Cloudflare. ISP не видит, на какие сайты ты заходишь — даже доменные имена скрыты.</p>
+      <p style="font-size:13.5px;line-height:1.55;color:#6B6088;margin-bottom:10px" data-i18n="arch.c2.p">Все DNS-запросы принудительно идут через туннель Вуаль до Cloudflare. ISP не видит, на какие сайты ты заходишь — даже доменные имена скрыты.</p>
       <div class="mono" style="font-size:11.5px;color:#7C3AED">1.1.1.1 · 9.9.9.9 (резерв)</div>
     </div>
     <div class="hov hov-card-feat" data-reveal data-delay="200" style="padding:24px;border-radius:22px;background:#fff;border:1px solid rgba(46,26,102,.07);box-shadow:0 8px 30px -20px rgba(46,26,102,.3)">
       <div style="font-size:22px;width:50px;height:50px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:linear-gradient(160deg,#F3EEFD,#EAF4FD);margin-bottom:14px">🔒</div>
       <h3 class="shdisplay" style="font-weight:600;font-size:16.5px;color:#1A0F3D;margin-bottom:10px" data-i18n="arch.c3.t">WebRTC + IPv6</h3>
-      <p style="font-size:13.5px;line-height:1.55;color:#6B6088;margin-bottom:10px" data-i18n="arch.c3.p">Xray туннелирует и TCP, и UDP — STUN-запросы WebRTC не выдают реальный IP. IPv6 отключён архитектурно — leak невозможен.</p>
+      <p style="font-size:13.5px;line-height:1.55;color:#6B6088;margin-bottom:10px" data-i18n="arch.c3.p">Вуаль туннелирует и TCP, и UDP — STUN-запросы WebRTC не выдают реальный IP. IPv6 отключён архитектурно — leak невозможен.</p>
       <div class="mono" style="font-size:11.5px;color:#7C3AED">IPv4 only · STUN tunneled</div>
     </div>
     <div class="hov hov-card-feat" data-reveal data-delay="300" style="padding:24px;border-radius:22px;background:#fff;border:1px solid rgba(46,26,102,.07);box-shadow:0 8px 30px -20px rgba(46,26,102,.3)">
@@ -216,7 +220,7 @@ code,.mono{font-family:'JetBrains Mono',monospace}
     <strong style="color:#221544">Источники:</strong>
     <sup>1</sup> Hola продаёт трафик юзеров как exit-nodes сети Bright Data (Luminati) — Vectra Networks 2015, подтверждение Trend Micro 2019.
     <sup>2</sup> Windscribe Free: WebRTC leak в Chrome без расширений — тест PCMag 2024.
-    <sup>3</sup> NordVPN/ExpressVPN/Proton имеют obfuscated servers, но не Reality. JA3-сигнатура их обфускации известна Iran DPI с 2023, в Китае — с 2021 (OONI Probe, NetBlocks).
+    <sup>3</sup> NordVPN/ExpressVPN/Proton имеют obfuscated servers, но не уровня Вуаль. Их обфускация опознаётся DPI Ирана с 2023, в Китае — с 2021 (OONI Probe, NetBlocks).
     <sup>4</sup> TunnelBear прошёл audit Cure53 (2021/2023), но принадлежит McAfee — корпоративная политика данных.
     <sup>5</sup> NordVPN 2018 — один из exit-nodes в Финляндии (через Creanova) был скомпрометирован; официально признано в октябре 2019.
   </div>
@@ -257,11 +261,11 @@ code,.mono{font-family:'JetBrains Mono',monospace}
 // ── i18n ────────────────────────────────────────────────────────────────────
 const RU = {
   nav:{services:'Сервисы',features:'Возможности',tariffs:'Тарифы',terms:'Условия',faq:'FAQ',connect:'Подключить'},
-  hero:{badge:'Доказательно · 8 объективных тестов',title1:'Проверь, не',title2:'«дырявый» ли',title3:'твой VPN',sub:'Хороший VPN на рекламной страничке — это слова. Хороший VPN на тесте — это факт. VOLYA построен на VLESS + Reality + Vision и проходит все стандартные leak-тесты по архитектуре, а не «благодаря удаче». Ниже — что эти тесты проверяют, почему это важно, и как сравнивает VOLYA с известными платными конкурентами.',cta1:'К тестам',cta2:'Сравнение с конкурентами',stat1:'сетевых тестов',stat2:'DNS-логов',stat3:'бесплатно'},
+  hero:{badge:'Доказательно · 8 объективных тестов',title1:'Проверь, не',title2:'«дырявый» ли',title3:'твой VPN',sub:'Хороший VPN на рекламной страничке — это слова. Хороший VPN на тесте — это факт. VOLYA построен на технологии Вуаль и проходит все стандартные leak-тесты по архитектуре, а не «благодаря удаче». Ниже — что эти тесты проверяют, почему это важно, и как сравнивает VOLYA с известными платными конкурентами.',cta1:'К тестам',cta2:'Сравнение с конкурентами',stat1:'сетевых тестов',stat2:'DNS-логов',stat3:'бесплатно'},
   arch:{kicker:'Архитектура',title:'Почему VOLYA проходит, а другие — нет',sub:'Это не магия. Конкретные технические решения, которые большинство платных VPN либо не используют, либо реализуют наспех.',
-    c1:{t:'Reality protocol',p:'Маскирует TLS-handshake под реальный сайт (yahoo.com, microsoft.com). DPI не отличает от обычного HTTPS — работает в Иране, Китае, Туркменистане.'},
-    c2:{t:'DNS-туннелирование',p:'Все DNS-запросы принудительно идут через Xray до Cloudflare. ISP не видит, на какие сайты ты заходишь — даже доменные имена скрыты.'},
-    c3:{t:'WebRTC + IPv6',p:'Xray туннелирует и TCP, и UDP — STUN-запросы WebRTC не выдают реальный IP. IPv6 отключён архитектурно — leak невозможен.'},
+    c1:{t:'Протокол Вуаль',p:'Маскирует TLS-handshake под реальный сайт (yahoo.com, microsoft.com). DPI не отличает от обычного HTTPS — работает в Иране, Китае, Туркменистане.'},
+    c2:{t:'DNS-туннелирование',p:'Все DNS-запросы принудительно идут через туннель Вуаль до Cloudflare. ISP не видит, на какие сайты ты заходишь — даже доменные имена скрыты.'},
+    c3:{t:'WebRTC + IPv6',p:'Вуаль туннелирует и TCP, и UDP — STUN-запросы WebRTC не выдают реальный IP. IPv6 отключён архитектурно — leak невозможен.'},
     c4:{t:'No-log архитектура',p:'Только uptime и суммарный bandwidth для антиабьюза. Контент и DNS-запросы нигде не записываются — даже в RAM.'}},
   tests:{kicker:'8 тестов · 5–10 минут',title:'Проверь свой VPN сам',sub:'Каждый тест — конкретный угрозовой вектор. Если VPN не проходит хотя бы один — приватность фиктивна.',
     list:[
@@ -276,19 +280,19 @@ const RU = {
         why:'Главная скрытая угроза. VPN может шифровать трафик, но если DNS идут через DNS-сервер провайдера — ISP видит каждый сайт, на который ты заходишь. Содержимое скрыто, но «кому ты звонишь» — видно.',
         how:['Нажми Extended Test (не Standard)','Жди 20–40 секунд — система делает 6+ запросов','Смотри список DNS-серверов','Все должны быть Cloudflare/Google/наши, ни одного — от ISP'],
         exp:'1–4 DNS-сервера от Cloudflare (AS13335) или Google (AS15169). Геолокация — США или EU. Никаких Magyar Telekom / Vodafone HU / Beeline / МТС / Ростелеком.',
-        volya:'DNS-трафик принудительно туннелируется через Xray до Cloudflare 1.1.1.1. 0 leaks в Extended Test, проверено в Венгрии, России, Турции, ОАЭ, Иране.'},
+        volya:'DNS-трафик принудительно туннелируется через Вуаль до Cloudflare 1.1.1.1. 0 leaks в Extended Test, проверено в Венгрии, России, Турции, ОАЭ, Иране.'},
       {n:3,t:'WebRTC Leak',d:'browserleaks.com/webrtc',u:'https://browserleaks.com/webrtc',badge:'Скрытый killer',badgeColor:'#DC2626',badgeBg:'rgba(220,38,38,.1)',
         what:'WebRTC — технология P2P-связи в браузере (Zoom, Discord-веб). Для P2P делает STUN-запросы, которые могут раскрыть реальный IP даже за VPN.',
         why:'Самая известная и распространённая дыра VPN-индустрии. Юзер уверен, что защищён, IP-тест показывает VPN-адрес, но WebRTC палит реальный IP через STUN — и любой сайт с одной строкой JS получает твой реальный адрес.',
         how:['Открой страницу с VPN','Смотри «Public IP Address (WebRTC)»','Должен совпадать с твоим VPN-IP, не реальным','«Local IP Address» — окей если приватный (192.168 или 10.0)'],
         exp:'Public IP via WebRTC — тот же что в тесте 1 (Oracle Ashburn). Если видишь там реальный IP (Magyar Telekom) — VPN дырявый. Local IP скрывается через chrome://flags → WebRTC IP handling.',
-        volya:'Xray туннелирует ВСЕ TCP/UDP-соединения включая STUN. WebRTC видит только Oracle-IP. Реальный IP не утекает ни при каких настройках браузера.'},
+        volya:'Вуаль туннелирует ВСЕ TCP/UDP-соединения включая STUN. WebRTC видит только Oracle-IP. Реальный IP не утекает ни при каких настройках браузера.'},
       {n:4,t:'IPv6 Leak',d:'ipv6-test.com',u:'https://ipv6-test.com',badge:'Важно',badgeColor:'#D97706',badgeBg:'rgba(217,119,6,.1)',
         what:'Виден ли твой IPv6 — следующее поколение интернет-адресации. У многих провайдеров IPv6 включён по умолчанию, и если VPN туннелирует только IPv4, IPv6 уходит вне туннеля.',
         why:'Сайт может использовать обе версии протокола. Если IPv4 идёт через VPN, а IPv6 — нет, сайт получает оба адреса. Твой реальный IPv6 палит провайдера и регион. WireGuard-конфиги без IPv6-туннеля страдают этим по умолчанию.',
         how:['Открой страницу с VPN','Смотри «IPv6: Not supported by your browser»','Или IPv6 показывает адрес VPN-сервера','Если показывает 2a02:… с твоего ISP — leak'],
         exp:'Либо «IPv6 not detected», либо адрес Oracle. Никаких 2a02:8388: (DT-HU) / 2001:4860: (твой ISP). Score — IPv4 only (10/10) ИЛИ dual-stack с VPN-адресом.',
-        volya:'IPv6 отключён на уровне Xray-config (только IPv4 через туннель). IPv6-leak архитектурно невозможен.'},
+        volya:'IPv6 отключён на уровне нашей архитектуры (только IPv4 через туннель). IPv6-leak архитектурно невозможен.'},
       {n:5,t:'Comprehensive Leak Check',d:'ipleak.net',u:'https://ipleak.net',badge:'All-in-one',badgeColor:'#D97706',badgeBg:'rgba(217,119,6,.1)',
         what:'Удобный all-in-one от AirVPN: IP, DNS, WebRTC, geolocation, торрент-IP, mDNS. За одну страницу проверяет 6+ векторов утечки.',
         why:'Один экран — все основные угрозы. Удобно для быстрой проверки после смены настроек или переподключения. Также показывает torrent-leak — отдельный IP, видимый торрент-трекерам.',
@@ -302,11 +306,11 @@ const RU = {
         exp:'WebRTC, DNS, IPv6 — все зелёные. Browser Headers — частично жёлтые (timezone браузера может не совпадать с IP-страной — это норма, см. тест 8).',
         volya:'Сетевые тесты все зелёные. Браузерные warnings (timezone) — нормальны, fixятся отдельным инструментом.'},
       {n:7,t:'TLS Fingerprint (JA3)',d:'browserleaks.com/tls',u:'https://browserleaks.com/tls',badge:'Продвинутый',badgeColor:'#7C3AED',badgeBg:'rgba(124,58,237,.1)',
-        what:'JA3 — хеш твоего TLS handshake. Каждый клиент (Chrome, Firefox, специфический VPN) имеет уникальную TLS-подпись. Системы цензуры в странах с блокировками используют JA3 для блокировки VPN-протоколов.',
-        why:'Если VPN использует OpenVPN или WireGuard — JA3 палит «это VPN». Государство видит TLS-подпись и блокирует. Reality (наш протокол) маскирует TLS-handshake под обычный Chrome — JA3 идентичен любому браузеру.',
+        what:'JA3 — хеш твоего TLS handshake. Каждый клиент (Chrome, Firefox, специфический VPN) имеет уникальную TLS-подпись. Censorship-системы Iran, China, Russia используют JA3 для блокировки VPN-протоколов.',
+        why:'Если VPN использует OpenVPN или WireGuard — JA3 палит «это VPN». Государство видит TLS-подпись и блокирует. Вуаль (наш протокол) маскирует TLS-handshake под обычный Chrome — JA3 идентичен любому браузеру.',
         how:['Открой с VPN','Смотри JA3 hash и fingerprint','Сравни с Chrome без VPN — должно быть похоже','Никаких «OpenVPN» / «WireGuard» / «known VPN» меток'],
         exp:'JA3 hash совпадает с обычным Chrome. Никаких «VPN signature detected». User-Agent — Chrome/Firefox.',
-        volya:'Reality маскирует TLS под Chrome через fp=chrome параметр. JA3 идентичен обычному браузеру — критично для работы в Иране/Китае/Туркменистане.'},
+        volya:'Вуаль маскирует соединение под обычный браузер, поэтому JA3 неотличим от настоящего Chrome — критично для работы в Иране/Китае/Туркменистане.'},
       {n:8,t:'Browser Fingerprint',d:'coveryourtracks.eff.org',u:'https://coveryourtracks.eff.org',badge:'Не про VPN',badgeColor:'#7C3AED',badgeBg:'rgba(124,58,237,.1)',
         what:'Уникальная «подпись» браузера: User-Agent + fonts + canvas-rendering + screen + timezone + audio context + plugins. Каждый юзер почти уникален среди миллионов.',
         why:'Это не уровень VPN, а уровень браузера. Любой VPN провалит этот тест в обычном Chrome. Браузер выдаёт fingerprint напрямую через JavaScript, минуя сеть. Решение — Tor Browser или Mullvad Browser.',
@@ -320,7 +324,7 @@ const RU = {
   cmp:{kicker:'Сравнение',title:'VOLYA vs известные VPN',sub:'По результатам публичных независимых тестов и аудитов (источники в сносках). VOLYA — единственный бесплатный VPN в таблице, проходящий все network-level тесты.',
     th0:'Тест',free:'бесплатно',
     r1:'1. IP скрыт',r2:'2. DNS leak',r3:'3. WebRTC leak',r4:'4. IPv6 leak',r5:'5. Comprehensive (ipleak.net)',r6:'6. Multi-leak snapshot',r7:'7. TLS fingerprint (JA3)',r8:'Работает в Иране / Китае',r9:'No-log policy (audited)',r10:'Цена',
-    notes:'<strong style="color:#221544">Источники:</strong> <sup>1</sup> Hola продаёт трафик юзеров как exit-nodes сети Bright Data (Luminati) — Vectra Networks 2015, подтверждение Trend Micro 2019. <sup>2</sup> Windscribe Free: WebRTC leak в Chrome без расширений — тест PCMag 2024. <sup>3</sup> NordVPN/ExpressVPN/Proton имеют obfuscated servers, но не Reality. JA3-сигнатура их обфускации известна Iran DPI с 2023, в Китае — с 2021 (OONI Probe, NetBlocks). <sup>4</sup> TunnelBear прошёл audit Cure53 (2021/2023), но принадлежит McAfee — корпоративная политика данных. <sup>5</sup> NordVPN 2018 — один из exit-nodes в Финляндии (через Creanova) был скомпрометирован; официально признано в октябре 2019.'},
+    notes:'<strong style="color:#221544">Источники:</strong> <sup>1</sup> Hola продаёт трафик юзеров как exit-nodes сети Bright Data (Luminati) — Vectra Networks 2015, подтверждение Trend Micro 2019. <sup>2</sup> Windscribe Free: WebRTC leak в Chrome без расширений — тест PCMag 2024. <sup>3</sup> NordVPN/ExpressVPN/Proton имеют obfuscated servers, но не уровня Вуаль. Их обфускация опознаётся DPI Ирана с 2023, в Китае — с 2021 (OONI Probe, NetBlocks). <sup>4</sup> TunnelBear прошёл audit Cure53 (2021/2023), но принадлежит McAfee — корпоративная политика данных. <sup>5</sup> NordVPN 2018 — один из exit-nodes в Финляндии (через Creanova) был скомпрометирован; официально признано в октябре 2019.'},
   disc:{kicker:'Честный disclaimer',title:'Browser fingerprinting — почему VPN не панацея',
     p1:'Network-level privacy (тесты 1–7) — это то, что VPN <strong style="color:#fff">должен</strong> делать. Browser-level privacy (тест 8) — это уровень браузера. Если ты в Chrome с включённым VPN, сайт всё равно знает: какие fonts, какой canvas-рендеринг, какие плагины, какое разрешение экрана. Это уникальная подпись, идентифицирующая тебя среди миллионов.',
     p2:'<strong style="color:#fff">Решение в 2 шага:</strong> (1) VOLYA закрывает network-уровень. (2) <a href="https://mullvad.net/en/browser" target="_blank" rel="noopener" style="color:#9FE0FF;font-weight:700;border-bottom:1px solid rgba(159,224,255,.4)">Mullvad Browser</a> (бесплатный, open-source) закрывает browser-уровень. Сделан как Tor Browser без Tor-сети — для использования с любым VPN.',
@@ -330,11 +334,11 @@ const RU = {
 
 const EN = {
   nav:{services:'Services',features:'Features',tariffs:'Plans',terms:'Terms',faq:'FAQ',connect:'Connect'},
-  hero:{badge:'Evidence-based · 8 objective tests',title1:'Check if your',title2:'VPN is leaking',title3:'',sub:'A good VPN on a landing page is words. A good VPN under test is fact. VOLYA is built on VLESS + Reality + Vision and passes every standard leak test by architecture, not by luck. Below — what each test checks, why it matters, and how VOLYA compares to known paid competitors.',cta1:'To the tests',cta2:'Competitor comparison',stat1:'network tests',stat2:'DNS logs',stat3:'free'},
+  hero:{badge:'Evidence-based · 8 objective tests',title1:'Check if your',title2:'VPN is leaking',title3:'',sub:'A good VPN on a landing page is words. A good VPN under test is fact. VOLYA is built on the Veil protocol and passes every standard leak test by architecture, not by luck. Below — what each test checks, why it matters, and how VOLYA compares to known paid competitors.',cta1:'To the tests',cta2:'Competitor comparison',stat1:'network tests',stat2:'DNS logs',stat3:'free'},
   arch:{kicker:'Architecture',title:'Why VOLYA passes and others don’t',sub:'Not magic. Specific technical choices that most paid VPNs either don’t use or implement in haste.',
-    c1:{t:'Reality protocol',p:'Masks the TLS handshake as a real site (yahoo.com, microsoft.com). DPI cannot distinguish it from normal HTTPS — works in Iran, China, Turkmenistan.'},
-    c2:{t:'DNS tunneling',p:'All DNS requests are forced through Xray to Cloudflare. Your ISP cannot see which sites you visit — even domain names are hidden.'},
-    c3:{t:'WebRTC + IPv6',p:'Xray tunnels both TCP and UDP — WebRTC STUN requests do not reveal the real IP. IPv6 is disabled architecturally — leak impossible.'},
+    c1:{t:'The Veil protocol',p:'Masks the TLS handshake as a real site (yahoo.com, microsoft.com). DPI cannot distinguish it from normal HTTPS — works in Iran, China, Turkmenistan.'},
+    c2:{t:'DNS tunneling',p:'All DNS requests are forced through the Veil tunnel to Cloudflare. Your ISP cannot see which sites you visit — even domain names are hidden.'},
+    c3:{t:'WebRTC + IPv6',p:'Veil tunnels both TCP and UDP — WebRTC STUN requests do not reveal the real IP. IPv6 is disabled architecturally — leak impossible.'},
     c4:{t:'No-log architecture',p:'Only uptime and total bandwidth for abuse prevention. Content and DNS queries are never recorded — not even in RAM.'}},
   tests:{kicker:'8 tests · 5–10 minutes',title:'Test your VPN yourself',sub:'Each test is a concrete threat vector. If a VPN fails even one — its privacy is fictional. Run the tests with VPN enabled. No key yet? Open <a href="https://t.me/volya_gate_bot" style="color:#7C3AED;font-weight:700">@volya_gate_bot</a>.',
     list:[
@@ -349,19 +353,19 @@ const EN = {
         why:'The main hidden threat. VPN can encrypt traffic, but if DNS goes through your ISP DNS server — the ISP sees every site you visit. Content is hidden, but "who you call" is visible.',
         how:['Click Extended Test (not Standard)','Wait 20–40 seconds — system makes 6+ queries','Look at the DNS server list','All must be Cloudflare/Google/ours, none from ISP'],
         exp:'1–4 DNS servers from Cloudflare (AS13335) or Google (AS15169). Server geolocation — US or EU. No Magyar Telekom / Vodafone / Beeline / MTS / Rostelecom.',
-        volya:'DNS traffic is forced through Xray to Cloudflare 1.1.1.1. 0 leaks in Extended Test, verified across multiple restricted regions.'},
+        volya:'DNS traffic is forced through Veil to Cloudflare 1.1.1.1. 0 leaks in Extended Test, verified in Hungary, Russia, Turkey, UAE, Iran.'},
       {n:3,t:'WebRTC Leak',d:'browserleaks.com/webrtc',u:'https://browserleaks.com/webrtc',badge:'Hidden killer',badgeColor:'#DC2626',badgeBg:'rgba(220,38,38,.1)',
         what:'WebRTC — browser P2P technology (Zoom, Discord web). For P2P it makes STUN requests, which can reveal the real IP even behind a VPN.',
         why:'The most famous and widespread leak in the VPN industry. User thinks they\'re safe, IP test shows VPN address, but WebRTC leaks real IP via STUN — any site with one line of JS gets your real address.',
         how:['Open the page with VPN','Look at "Public IP Address (WebRTC)"','Must match your VPN IP, not real','"Local IP Address" — OK if private (192.168 or 10.0)'],
         exp:'Public IP via WebRTC — same as test 1 (Oracle Ashburn). If you see real IP (Magyar Telekom) there — VPN is leaky. Local IP can be hidden via chrome://flags → WebRTC IP handling.',
-        volya:'Xray tunnels ALL TCP/UDP connections including STUN. WebRTC sees only Oracle IP. Real IP doesn\'t leak under any browser settings.'},
+        volya:'Veil tunnels ALL TCP/UDP connections including STUN. WebRTC sees only Oracle IP. Real IP doesn\'t leak under any browser settings.'},
       {n:4,t:'IPv6 Leak',d:'ipv6-test.com',u:'https://ipv6-test.com',badge:'Important',badgeColor:'#D97706',badgeBg:'rgba(217,119,6,.1)',
         what:'Whether your IPv6 is visible — next generation internet addressing. Many ISPs have IPv6 on by default, and if VPN tunnels only IPv4, your IPv6 escapes outside the tunnel.',
         why:'A site can use both protocol versions. If IPv4 goes through VPN but IPv6 doesn\'t, the site gets both addresses. Your real IPv6 leaks provider and region. WireGuard configs without IPv6 tunneling suffer this by default.',
         how:['Open with VPN','Look for "IPv6: Not supported by your browser"','Or IPv6 shows VPN server address','If it shows 2a02:… from your ISP — leak'],
         exp:'Either "IPv6 not detected" or Oracle address. No 2a02:8388: (DT-HU) / 2001:4860: (your ISP). Score — IPv4 only (10/10) OR dual-stack with VPN address.',
-        volya:'IPv6 disabled at Xray config level (IPv4 only through tunnel). IPv6 leak architecturally impossible.'},
+        volya:'IPv6 disabled at our architecture level (IPv4 only through tunnel). IPv6 leak architecturally impossible.'},
       {n:5,t:'Comprehensive Leak Check',d:'ipleak.net',u:'https://ipleak.net',badge:'All-in-one',badgeColor:'#D97706',badgeBg:'rgba(217,119,6,.1)',
         what:'Convenient all-in-one from AirVPN: IP, DNS, WebRTC, geolocation, torrent IP, mDNS. Tests 6+ leak vectors in one page.',
         why:'One screen — all major threats. Convenient for quick checks after settings change or reconnect. Also shows torrent leak — separate IP visible to torrent trackers.',
@@ -375,11 +379,11 @@ const EN = {
         exp:'WebRTC, DNS, IPv6 — all green. Browser Headers — partially yellow (browser timezone may not match IP country — that\'s normal, see test 8).',
         volya:'Network tests all green. Browser warnings (timezone) are normal, fixed by a separate tool.'},
       {n:7,t:'TLS Fingerprint (JA3)',d:'browserleaks.com/tls',u:'https://browserleaks.com/tls',badge:'Advanced',badgeColor:'#7C3AED',badgeBg:'rgba(124,58,237,.1)',
-        what:'JA3 — hash of your TLS handshake. Every client (Chrome, Firefox, specific VPN) has a unique TLS signature. Censorship systems in restrictive regions use JA3 to block VPN protocols.',
-        why:'If your VPN uses OpenVPN or WireGuard — JA3 reveals "this is a VPN". State sees TLS signature and blocks. Reality (our protocol) masks the TLS handshake as ordinary Chrome — JA3 is identical to any browser.',
+        what:'JA3 — hash of your TLS handshake. Every client (Chrome, Firefox, specific VPN) has a unique TLS signature. Censorship systems in Iran, China, Russia use JA3 to block VPN protocols.',
+        why:'If your VPN uses OpenVPN or WireGuard — JA3 reveals "this is a VPN". State sees TLS signature and blocks. Veil (our protocol) masks the TLS handshake as an ordinary browser — JA3 is identical to any browser.',
         how:['Open with VPN','Look at JA3 hash and fingerprint','Compare with Chrome without VPN — should be similar','No "OpenVPN" / "WireGuard" / "known VPN" markers'],
         exp:'JA3 hash matches ordinary Chrome. No "VPN signature detected". User-Agent — Chrome/Firefox.',
-        volya:'Reality masks TLS as Chrome via the fp=chrome parameter. JA3 is identical to an ordinary browser — critical for working in Iran/China/Turkmenistan.'},
+        volya:'Veil masks the connection as an ordinary browser, so JA3 is indistinguishable from real Chrome — critical for working in Iran/China/Turkmenistan.'},
       {n:8,t:'Browser Fingerprint',d:'coveryourtracks.eff.org',u:'https://coveryourtracks.eff.org',badge:'Not about VPN',badgeColor:'#7C3AED',badgeBg:'rgba(124,58,237,.1)',
         what:'Unique browser "signature": User-Agent + fonts + canvas rendering + screen + timezone + audio context + plugins. Every user is almost unique among millions.',
         why:'This is not a VPN layer, it\'s a browser layer. Any VPN will fail this test in regular Chrome. The browser reveals the fingerprint directly via JavaScript, bypassing the network. Solution — Tor Browser or Mullvad Browser.',
@@ -393,13 +397,235 @@ const EN = {
   cmp:{kicker:'Comparison',title:'VOLYA vs known VPNs',sub:'Based on public independent tests and audits (sources in footnotes). VOLYA is the only free VPN in this table that passes all network-level tests.',
     th0:'Test',free:'free',
     r1:'1. IP hidden',r2:'2. DNS leak',r3:'3. WebRTC leak',r4:'4. IPv6 leak',r5:'5. Comprehensive (ipleak.net)',r6:'6. Multi-leak snapshot',r7:'7. TLS fingerprint (JA3)',r8:'Works in Iran / China',r9:'No-log policy (audited)',r10:'Price',
-    notes:'<strong style="color:#221544">Sources:</strong> <sup>1</sup> Hola sells user traffic as exit-nodes of Bright Data (Luminati) — Vectra Networks 2015, confirmed by Trend Micro 2019. <sup>2</sup> Windscribe Free: WebRTC leak in Chrome without extensions — PCMag test 2024. <sup>3</sup> NordVPN/ExpressVPN/Proton have obfuscated servers, but not Reality. The JA3 signature of their obfuscation is known to Iran DPI since 2023, China since 2021 (OONI Probe, NetBlocks). <sup>4</sup> TunnelBear passed Cure53 audit (2021/2023), but owned by McAfee — corporate data policy. <sup>5</sup> NordVPN 2018 — one exit-node in Finland (via Creanova) was compromised; officially acknowledged in October 2019.'},
+    notes:'<strong style="color:#221544">Sources:</strong> <sup>1</sup> Hola sells user traffic as exit-nodes of Bright Data (Luminati) — Vectra Networks 2015, confirmed by Trend Micro 2019. <sup>2</sup> Windscribe Free: WebRTC leak in Chrome without extensions — PCMag test 2024. <sup>3</sup> NordVPN/ExpressVPN/Proton have obfuscated servers, but not at the Veil level. Their obfuscation is detectable by DPI in Iran since 2023, China since 2021 (OONI Probe, NetBlocks). <sup>4</sup> TunnelBear passed Cure53 audit (2021/2023), but owned by McAfee — corporate data policy. <sup>5</sup> NordVPN 2018 — one exit-node in Finland (via Creanova) was compromised; officially acknowledged in October 2019.'},
   disc:{kicker:'Honest disclaimer',title:'Browser fingerprinting — why VPN is not a silver bullet',
     p1:'Network-level privacy (tests 1–7) is what a VPN <strong style="color:#fff">should</strong> do. Browser-level privacy (test 8) is browser-level. In Chrome with a VPN, the site still knows your fonts, canvas rendering, plugins, screen resolution. A unique signature identifying you among millions.',
     p2:'<strong style="color:#fff">Two-step solution:</strong> (1) VOLYA covers the network layer. (2) <a href="https://mullvad.net/en/browser" target="_blank" rel="noopener" style="color:#9FE0FF;font-weight:700;border-bottom:1px solid rgba(159,224,255,.4)">Mullvad Browser</a> (free, open-source) covers the browser layer. Built like Tor Browser without Tor network — for use with any VPN.',
     p3:'Together they cover <strong style="color:#fff">all 8 tests</strong>. Separately — partially. This is honest: no VPN alone solves fingerprinting, and vendors promising "100% anonymity" lie.'},
   footer:{rights:'© 2026 VOLYA. All rights reserved.',terms:'Terms & privacy',contact:'Contact'}
 };
+
+const UK = {
+  nav:{services:'Сервіси',features:'Можливості',tariffs:'Тарифи',terms:'Умови',faq:'FAQ',connect:'Підключити'},
+  hero:{badge:'Доказово · 8 обʼєктивних тестів',title1:'Перевір, чи не',title2:'«дірявий»',title3:'твій VPN',sub:'Хороший VPN на рекламній сторінці — це слова. Хороший VPN на тесті — це факт. VOLYA побудований на технології Вуаль і проходить усі стандартні leak-тести за архітектурою, а не «завдяки удачі». Нижче — що ці тести перевіряють, чому це важливо, і як VOLYA порівнюється з відомими платними конкурентами.',cta1:'До тестів',cta2:'Порівняння з конкурентами',stat1:'мережевих тестів',stat2:'DNS-логів',stat3:'безкоштовно'},
+  arch:{kicker:'Архітектура',title:'Чому VOLYA проходить, а інші — ні',sub:'Це не магія. Конкретні технічні рішення, які більшість платних VPN або не використовують, або реалізують наспіх.',
+    c1:{t:'Протокол Вуаль',p:'Маскує TLS-handshake під справжній сайт (yahoo.com, microsoft.com). DPI не відрізняє від звичайного HTTPS — працює в Ірані, Китаї, Туркменістані.'},
+    c2:{t:'DNS-тунелювання',p:'Усі DNS-запити примусово йдуть через тунель Вуаль до Cloudflare. ISP не бачить, на які сайти ти заходиш — навіть доменні імена приховані.'},
+    c3:{t:'WebRTC + IPv6',p:'Вуаль тунелює і TCP, і UDP — STUN-запити WebRTC не видають справжній IP. IPv6 вимкнено архітектурно — leak неможливий.'},
+    c4:{t:'No-log архітектура',p:'Лише uptime і сумарний bandwidth для антиабʼюзу. Контент і DNS-запити ніде не записуються — навіть у RAM.'}},
+  tests:{kicker:'8 тестів · 5–10 хвилин',title:'Перевір свій VPN сам',sub:'Кожен тест — конкретний вектор загрози. Якщо VPN не проходить хоча б один — приватність фіктивна.',
+    list:[
+      {n:1,t:'IP & Geolocation',d:'whatismyipaddress.com',u:'https://whatismyipaddress.com',badge:'Базовий',badgeColor:'#DC2626',badgeBg:'rgba(220,38,38,.1)',
+        what:'Видимий зовнішній IP, його геолокація за базами MaxMind, ISP/ASN і часовий пояс. Найбазовіший тест: «чи бачить світ мій справжній IP».',
+        why:'Якщо VPN зламаний або тунель обірвався — бачиш свій справжній IP. Будь-який сайт за цим IP знає країну, місто, ISP, і часто приблизний район.',
+        how:['Зайди БЕЗ VPN — запиши справжній IP і країну','Увімкни VOLYA, онови сторінку','Має показати інший IP та іншу країну','Звір ASN — має бути Oracle / Cloudflare / Hetzner, не твій провайдер'],
+        exp:'IP належить Oracle Cloud (Ashburn, Virginia, US). ASN AS31898 (Oracle). Часовий пояс може лишитися твоїм (це рівень браузера, див. тест 8).',
+        volya:'Exit-нода в Ashburn (US), справжній IP повністю прихований. ASN завжди Oracle, не локального провайдера.'},
+      {n:2,t:'DNS Leak (Standard + Extended)',d:'dnsleaktest.com',u:'https://dnsleaktest.com',badge:'Критично',badgeColor:'#DC2626',badgeBg:'rgba(220,38,38,.1)',
+        what:'Куди йдуть твої DNS-запити (перетворення доменних імен на IP). «Коли ти заходиш на habr.com, який DNS-сервер бачить цей запит?»',
+        why:'Головна прихована загроза. VPN може шифрувати трафік, але якщо DNS ідуть через DNS-сервер провайдера — ISP бачить кожен сайт, на який ти заходиш. Вміст прихований, але «кому ти телефонуєш» — видно.',
+        how:['Натисни Extended Test (не Standard)','Чекай 20–40 секунд — система робить 6+ запитів','Дивись список DNS-серверів','Усі мають бути Cloudflare/Google/наші, жодного — від ISP'],
+        exp:'1–4 DNS-сервери від Cloudflare (AS13335) або Google (AS15169). Геолокація — США або EU. Жодних Magyar Telekom / Vodafone HU / Beeline / МТС / Ростелеком.',
+        volya:'DNS-трафік примусово тунелюється через Вуаль до Cloudflare 1.1.1.1. 0 leaks в Extended Test, перевірено в Угорщині, Росії, Туреччині, ОАЕ, Ірані.'},
+      {n:3,t:'WebRTC Leak',d:'browserleaks.com/webrtc',u:'https://browserleaks.com/webrtc',badge:'Прихований killer',badgeColor:'#DC2626',badgeBg:'rgba(220,38,38,.1)',
+        what:'WebRTC — технологія P2P-звʼязку в браузері (Zoom, Discord-веб). Для P2P робить STUN-запити, які можуть розкрити справжній IP навіть за VPN.',
+        why:'Найвідоміша й найпоширеніша діра VPN-індустрії. Юзер упевнений, що захищений, IP-тест показує VPN-адресу, але WebRTC видає справжній IP через STUN — і будь-який сайт з одним рядком JS отримує твою справжню адресу.',
+        how:['Відкрий сторінку з VPN','Дивись «Public IP Address (WebRTC)»','Має збігатися з твоїм VPN-IP, не справжнім','«Local IP Address» — окей, якщо приватний (192.168 або 10.0)'],
+        exp:'Public IP via WebRTC — той самий, що в тесті 1 (Oracle Ashburn). Якщо бачиш там справжній IP (Magyar Telekom) — VPN дірявий. Local IP приховується через chrome://flags → WebRTC IP handling.',
+        volya:'Вуаль тунелює ВСІ TCP/UDP-зʼєднання включно зі STUN. WebRTC бачить лише Oracle-IP. Справжній IP не витікає за жодних налаштувань браузера.'},
+      {n:4,t:'IPv6 Leak',d:'ipv6-test.com',u:'https://ipv6-test.com',badge:'Важливо',badgeColor:'#D97706',badgeBg:'rgba(217,119,6,.1)',
+        what:'Чи видно твій IPv6 — наступне покоління інтернет-адресації. У багатьох провайдерів IPv6 увімкнено за замовчуванням, і якщо VPN тунелює лише IPv4, IPv6 виходить поза тунелем.',
+        why:'Сайт може використовувати обидві версії протоколу. Якщо IPv4 іде через VPN, а IPv6 — ні, сайт отримує обидві адреси. Твій справжній IPv6 видає провайдера і регіон. WireGuard-конфіги без IPv6-тунелю страждають від цього за замовчуванням.',
+        how:['Відкрий сторінку з VPN','Дивись «IPv6: Not supported by your browser»','Або IPv6 показує адресу VPN-сервера','Якщо показує 2a02:… з твого ISP — leak'],
+        exp:'Або «IPv6 not detected», або адреса Oracle. Жодних 2a02:8388: (DT-HU) / 2001:4860: (твій ISP). Score — IPv4 only (10/10) АБО dual-stack з VPN-адресою.',
+        volya:'IPv6 вимкнено на рівні нашої архітектури (лише IPv4 через тунель). IPv6-leak архітектурно неможливий.'},
+      {n:5,t:'Comprehensive Leak Check',d:'ipleak.net',u:'https://ipleak.net',badge:'All-in-one',badgeColor:'#D97706',badgeBg:'rgba(217,119,6,.1)',
+        what:'Зручний all-in-one від AirVPN: IP, DNS, WebRTC, geolocation, торент-IP, mDNS. За одну сторінку перевіряє 6+ векторів витоку.',
+        why:'Один екран — усі основні загрози. Зручно для швидкої перевірки після зміни налаштувань або перепідключення. Також показує torrent-leak — окрему IP, видиму торент-трекерам.',
+        how:['Зайди з увімкненим VPN','Усі секції мають показати VPN-IP','Geolocation Coordinates — точка в Ashburn','Torrent Address Detection — натисни «Activate» і звір'],
+        exp:'Головний IP, DNS, WebRTC, Torrent — усі однакові, усі Oracle. Geolocation — Ashburn (38.7°, -77.5°). mDNS — відсутній або приватний.',
+        volya:'Усі 6 секцій показують Oracle Ashburn. Справжній IP прихований у всіх векторах.'},
+      {n:6,t:'Multi-Leak Snapshot',d:'doileak.com',u:'https://doileak.com',badge:'Швидко',badgeColor:'#D97706',badgeBg:'rgba(217,119,6,.1)',
+        what:'Швидка миттєва перевірка більшості leak-векторів з кольоровою індикацією: червоний/жовтий/зелений. За 5 секунд — загальна картина.',
+        why:'Зручно для регулярного контролю. Робити раз на тиждень або після кожного major update. Сторінка вся зелена — спокійний. Жовте/червоне — копай глибше через ipleak.net.',
+        how:['Відкрий з VPN — авто-сканує','Скрол униз, читай блоки','Усі індикатори мають бути зеленими','Якщо жовтий — зазвичай false positive timezone/lang'],
+        exp:'WebRTC, DNS, IPv6 — усі зелені. Browser Headers — частково жовті (timezone браузера може не збігатися з IP-країною — це норма, див. тест 8).',
+        volya:'Мережеві тести всі зелені. Браузерні warnings (timezone) — нормальні, fixяться окремим інструментом.'},
+      {n:7,t:'TLS Fingerprint (JA3)',d:'browserleaks.com/tls',u:'https://browserleaks.com/tls',badge:'Просунутий',badgeColor:'#7C3AED',badgeBg:'rgba(124,58,237,.1)',
+        what:'JA3 — хеш твого TLS handshake. Кожен клієнт (Chrome, Firefox, специфічний VPN) має унікальний TLS-підпис. Censorship-системи Iran, China, Russia використовують JA3 для блокування VPN-протоколів.',
+        why:'Якщо VPN використовує OpenVPN або WireGuard — JA3 видає «це VPN». Держава бачить TLS-підпис і блокує. Вуаль (наш протокол) маскує TLS-handshake під звичайний Chrome — JA3 ідентичний будь-якому браузеру.',
+        how:['Відкрий з VPN','Дивись JA3 hash і fingerprint','Порівняй з Chrome без VPN — має бути схоже','Жодних «OpenVPN» / «WireGuard» / «known VPN» міток'],
+        exp:'JA3 hash збігається зі звичайним Chrome. Жодних «VPN signature detected». User-Agent — Chrome/Firefox.',
+        volya:'Вуаль маскує зʼєднання під звичайний браузер, тому JA3 невідрізнний від справжнього Chrome — критично для роботи в Ірані/Китаї/Туркменістані.'},
+      {n:8,t:'Browser Fingerprint',d:'coveryourtracks.eff.org',u:'https://coveryourtracks.eff.org',badge:'Не про VPN',badgeColor:'#7C3AED',badgeBg:'rgba(124,58,237,.1)',
+        what:'Унікальний «підпис» браузера: User-Agent + fonts + canvas-rendering + screen + timezone + audio context + plugins. Кожен юзер майже унікальний серед мільйонів.',
+        why:'Це не рівень VPN, а рівень браузера. Будь-який VPN провалить цей тест у звичайному Chrome. Браузер видає fingerprint напряму через JavaScript, минаючи мережу. Рішення — Tor Browser або Mullvad Browser.',
+        how:['Відкрий — авто-сканує 60 секунд','Дивись «Tracking Protection» і «Fingerprint Uniqueness»','У Chrome — fingerprint унікальний серед millions','У Mullvad Browser — знеособлений'],
+        exp:'У Chrome: «Your browser has a unique fingerprint» — це правда, і VPN не допомагає. У Mullvad Browser: «nearly-identical fingerprint to others» — це мета.',
+        volya:'VOLYA дає network-level privacy (тести 1–7). Тест 8 — про браузер. Будь-який VPN провалить його в Chrome. Для повної анонімності — Mullvad Browser + VOLYA разом закривають усі 8.',
+        warn:true}
+    ],
+    lbl:{what:'Що перевіряє',why:'Чому важливо',how:'Як пройти',exp:'Що маєш побачити',volya:'VOLYA',honest:'Чесно'}
+  },
+  cmp:{kicker:'Порівняння',title:'VOLYA vs відомі VPN',sub:'За результатами публічних незалежних тестів і аудитів (джерела у виносках). VOLYA — єдиний безкоштовний VPN у таблиці, що проходить усі network-level тести.',
+    th0:'Тест',free:'безкоштовно',
+    r1:'1. IP прихований',r2:'2. DNS leak',r3:'3. WebRTC leak',r4:'4. IPv6 leak',r5:'5. Comprehensive (ipleak.net)',r6:'6. Multi-leak snapshot',r7:'7. TLS fingerprint (JA3)',r8:'Працює в Ірані / Китаї',r9:'No-log policy (audited)',r10:'Ціна',
+    notes:'<strong style="color:#221544">Джерела:</strong> <sup>1</sup> Hola продає трафік юзерів як exit-nodes мережі Bright Data (Luminati) — Vectra Networks 2015, підтвердження Trend Micro 2019. <sup>2</sup> Windscribe Free: WebRTC leak у Chrome без розширень — тест PCMag 2024. <sup>3</sup> NordVPN/ExpressVPN/Proton мають obfuscated servers, але не рівня Вуаль. Їхня обфускація розпізнається DPI Ірану з 2023, у Китаї — з 2021 (OONI Probe, NetBlocks). <sup>4</sup> TunnelBear пройшов audit Cure53 (2021/2023), але належить McAfee — корпоративна політика даних. <sup>5</sup> NordVPN 2018 — один з exit-nodes у Фінляндії (через Creanova) був скомпрометований; офіційно визнано в жовтні 2019.'},
+  disc:{kicker:'Чесний disclaimer',title:'Browser fingerprinting — чому VPN не панацея',
+    p1:'Network-level privacy (тести 1–7) — це те, що VPN <strong style="color:#fff">має</strong> робити. Browser-level privacy (тест 8) — це рівень браузера. Якщо ти в Chrome з увімкненим VPN, сайт усе одно знає: які fonts, який canvas-рендеринг, які плагіни, яка роздільна здатність екрана. Це унікальний підпис, що ідентифікує тебе серед мільйонів.',
+    p2:'<strong style="color:#fff">Рішення у 2 кроки:</strong> (1) VOLYA закриває network-рівень. (2) <a href="https://mullvad.net/en/browser" target="_blank" rel="noopener" style="color:#9FE0FF;font-weight:700;border-bottom:1px solid rgba(159,224,255,.4)">Mullvad Browser</a> (безкоштовний, open-source) закриває browser-рівень. Зроблений як Tor Browser без Tor-мережі — для використання з будь-яким VPN.',
+    p3:'Разом вони закривають <strong style="color:#fff">усі 8 тестів</strong>. Окремо — частково. Це чесно: жоден VPN сам по собі не вирішує fingerprint, і продавці, що обіцяють «100% анонімність» — брешуть.'},
+  footer:{rights:'© 2026 VOLYA. Усі права захищено.',terms:'Умови та приватність',contact:'Звʼязатися'}
+};
+
+const KK = {
+  nav:{services:'Сервистер',features:'Мүмкіндіктер',tariffs:'Тарифтер',terms:'Шарттар',faq:'FAQ',connect:'Қосылу'},
+  hero:{badge:'Дәлелді · 8 объективті тест',title1:'VPN-іңнің',title2:'«тесік»',title3:'еместігін тексер',sub:'Жарнама парақшасындағы жақсы VPN — бұл сөз. Тесттегі жақсы VPN — бұл факт. VOLYA Вуаль технологиясына құрылған және барлық стандартты leak-тесттерден архитектурасы арқасында өтеді, «сәттілік арқасында» емес. Төменде — бұл тесттер нені тексеретіні, неге маңызды екені, және VOLYA белгілі ақылы бәсекелестермен қалай салыстырылатыны.',cta1:'Тесттерге',cta2:'Бәсекелестермен салыстыру',stat1:'желілік тест',stat2:'DNS-лог',stat3:'тегін'},
+  arch:{kicker:'Архитектура',title:'Неге VOLYA өтеді, ал басқалары — жоқ',sub:'Бұл сиқыр емес. Көптеген ақылы VPN не қолданбайтын, не асығыс іске асыратын нақты техникалық шешімдер.',
+    c1:{t:'Вуаль протоколы',p:'TLS-handshake-ті нақты сайттың (yahoo.com, microsoft.com) астына бүркемелейді. DPI оны әдеттегі HTTPS-тен ажыратпайды — Иран, Қытай, Түрікменстанда жұмыс істейді.'},
+    c2:{t:'DNS-туннельдеу',p:'Барлық DNS-сұраулар мәжбүрлі түрде Вуаль туннелі арқылы Cloudflare-ге барады. ISP сенің қай сайттарға кіретініңді көрмейді — тіпті домен атаулары да жасырын.'},
+    c3:{t:'WebRTC + IPv6',p:'Вуаль TCP-ні де, UDP-ні де туннельдейді — WebRTC-тің STUN-сұраулары нақты IP-ды бермейді. IPv6 архитектуралық түрде өшірілген — leak мүмкін емес.'},
+    c4:{t:'No-log архитектура',p:'Тек uptime және антиабьюз үшін жиынтық bandwidth. Мазмұн мен DNS-сұраулар еш жерде жазылмайды — тіпті RAM-да да.'}},
+  tests:{kicker:'8 тест · 5–10 минут',title:'VPN-іңді өзің тексер',sub:'Әр тест — нақты қауіп векторы. Егер VPN тіпті біреуінен өтпесе — құпиялылық жалған.',
+    list:[
+      {n:1,t:'IP & Geolocation',d:'whatismyipaddress.com',u:'https://whatismyipaddress.com',badge:'Базалық',badgeColor:'#DC2626',badgeBg:'rgba(220,38,38,.1)',
+        what:'Көрінетін сыртқы IP, оның MaxMind базалары бойынша геолокациясы, ISP/ASN және сағаттық белдеу. Ең базалық тест: «әлем менің нақты IP-ымды көре ме».',
+        why:'Егер VPN бұзылса немесе туннель үзілсе — нақты IP-ыңды көресің. Кез келген сайт осы IP бойынша елді, қаланы, ISP-ті, көбіне шамамен ауданды біледі.',
+        how:['VPN-СІЗ кір — нақты IP мен елді жазып ал','VOLYA-ны қос, бетті жаңарт','Басқа IP мен басқа елді көрсетуі керек','ASN-ді салыстыр — Oracle / Cloudflare / Hetzner болуы керек, сенің провайдерің емес'],
+        exp:'IP Oracle Cloud-қа тиесілі (Ashburn, Virginia, US). ASN AS31898 (Oracle). Сағаттық белдеу сенікі болып қалуы мүмкін (бұл браузер деңгейі, 8-тестті қара).',
+        volya:'Ashburn-дегі (US) exit-нода, нақты IP толық жасырын. ASN әрқашан Oracle, жергілікті провайдер емес.'},
+      {n:2,t:'DNS Leak (Standard + Extended)',d:'dnsleaktest.com',u:'https://dnsleaktest.com',badge:'Критикалық',badgeColor:'#DC2626',badgeBg:'rgba(220,38,38,.1)',
+        what:'Сенің DNS-сұрауларың қайда барады (домен атауларын IP-ға түрлендіру). «habr.com-ға кіргенде осы сұрауды қай DNS-сервер көреді?»',
+        why:'Басты жасырын қауіп. VPN трафикті шифрлай алады, бірақ егер DNS провайдердің DNS-сервері арқылы жүрсе — ISP сен кіретін әр сайтты көреді. Мазмұн жасырын, бірақ «кімге қоңырау шалатының» — көрінеді.',
+        how:['Extended Test бас (Standard емес)','20–40 секунд күт — жүйе 6+ сұрау жасайды','DNS-серверлер тізімін қара','Барлығы Cloudflare/Google/біздікі болуы керек, ешқайсысы ISP-тен емес'],
+        exp:'Cloudflare-ден (AS13335) немесе Google-ден (AS15169) 1–4 DNS-сервер. Геолокация — АҚШ немесе EU. Ешқандай Magyar Telekom / Vodafone HU / Beeline / МТС / Ростелеком жоқ.',
+        volya:'DNS-трафик мәжбүрлі түрде Вуаль арқылы Cloudflare 1.1.1.1-ге туннельденеді. Extended Test-те 0 leaks, Венгрия, Ресей, Түркия, БАӘ, Иранда тексерілген.'},
+      {n:3,t:'WebRTC Leak',d:'browserleaks.com/webrtc',u:'https://browserleaks.com/webrtc',badge:'Жасырын killer',badgeColor:'#DC2626',badgeBg:'rgba(220,38,38,.1)',
+        what:'WebRTC — браузердегі P2P-байланыс технологиясы (Zoom, Discord-веб). P2P үшін STUN-сұраулар жасайды, олар VPN артында да нақты IP-ды аша алады.',
+        why:'VPN-индустриясының ең белгілі әрі кең тараған тесігі. Юзер қорғалғанына сенімді, IP-тест VPN-адресті көрсетеді, бірақ WebRTC STUN арқылы нақты IP-ды береді — және бір жол JS бар кез келген сайт сенің нақты адресіңді алады.',
+        how:['Бетті VPN-мен аш','«Public IP Address (WebRTC)»-ты қара','Сенің VPN-IP-ыңмен сәйкес келуі керек, нақтымен емес','«Local IP Address» — жеке болса жарайды (192.168 немесе 10.0)'],
+        exp:'Public IP via WebRTC — 1-тесттегідей (Oracle Ashburn). Егер сонда нақты IP-ды (Magyar Telekom) көрсең — VPN тесік. Local IP chrome://flags → WebRTC IP handling арқылы жасырылады.',
+        volya:'Вуаль STUN-ды қоса БАРЛЫҚ TCP/UDP-қосылымдарды туннельдейді. WebRTC тек Oracle-IP-ды көреді. Нақты IP браузердің ешбір баптауында ағып кетпейді.'},
+      {n:4,t:'IPv6 Leak',d:'ipv6-test.com',u:'https://ipv6-test.com',badge:'Маңызды',badgeColor:'#D97706',badgeBg:'rgba(217,119,6,.1)',
+        what:'Сенің IPv6-ң көріне ме — интернет-адрестеудің келесі буыны. Көптеген провайдерлерде IPv6 әдепкі бойынша қосулы, ал егер VPN тек IPv4-ті туннельдесе, IPv6 туннельден тыс шығады.',
+        why:'Сайт протоколдың екі нұсқасын да қолдана алады. Егер IPv4 VPN арқылы жүрсе, ал IPv6 — жоқ, сайт екі адресті де алады. Сенің нақты IPv6-ң провайдер мен аймақты береді. IPv6-туннелі жоқ WireGuard-конфигтер бұдан әдепкі бойынша зардап шегеді.',
+        how:['Бетті VPN-мен аш','«IPv6: Not supported by your browser»-ты қара','Немесе IPv6 VPN-сервердің адресін көрсетеді','Егер сенің ISP-теніңнен 2a02:… көрсетсе — leak'],
+        exp:'Не «IPv6 not detected», не Oracle адресі. Ешқандай 2a02:8388: (DT-HU) / 2001:4860: (сенің ISP) жоқ. Score — IPv4 only (10/10) НЕМЕСЕ VPN-адресімен dual-stack.',
+        volya:'IPv6 біздің архитектура деңгейінде өшірілген (тек IPv4 туннель арқылы). IPv6-leak архитектуралық түрде мүмкін емес.'},
+      {n:5,t:'Comprehensive Leak Check',d:'ipleak.net',u:'https://ipleak.net',badge:'All-in-one',badgeColor:'#D97706',badgeBg:'rgba(217,119,6,.1)',
+        what:'AirVPN-нен ыңғайлы all-in-one: IP, DNS, WebRTC, geolocation, торрент-IP, mDNS. Бір бетте 6+ ағу векторын тексереді.',
+        why:'Бір экран — барлық негізгі қауіптер. Баптауды өзгерткеннен немесе қайта қосылғаннан кейін жылдам тексеруге ыңғайлы. Сондай-ақ torrent-leak-ті көрсетеді — торрент-трекерлерге көрінетін бөлек IP.',
+        how:['Қосулы VPN-мен кір','Барлық секциялар VPN-IP-ды көрсетуі керек','Geolocation Coordinates — Ashburn-дегі нүкте','Torrent Address Detection — «Activate» бас та салыстыр'],
+        exp:'Басты IP, DNS, WebRTC, Torrent — барлығы бірдей, барлығы Oracle. Geolocation — Ashburn (38.7°, -77.5°). mDNS — жоқ немесе жеке.',
+        volya:'Барлық 6 секция Oracle Ashburn-ды көрсетеді. Нақты IP барлық векторда жасырын.'},
+      {n:6,t:'Multi-Leak Snapshot',d:'doileak.com',u:'https://doileak.com',badge:'Жылдам',badgeColor:'#D97706',badgeBg:'rgba(217,119,6,.1)',
+        what:'Ағудың көптеген векторларын түрлі-түсті индикациямен жылдам лезде тексеру: қызыл/сары/жасыл. 5 секундта — жалпы көрініс.',
+        why:'Тұрақты бақылауға ыңғайлы. Аптасына бір рет немесе әр major update-тен кейін жаса. Бет толық жасыл — тыныш. Сары/қызыл — ipleak.net арқылы тереңірек қаз.',
+        how:['VPN-мен аш — авто-сканерлейді','Төмен скролл жаса, блоктарды оқы','Барлық индикаторлар жасыл болуы керек','Егер сары болса — әдетте false positive timezone/lang'],
+        exp:'WebRTC, DNS, IPv6 — барлығы жасыл. Browser Headers — ішінара сары (браузердің timezone-і IP-елмен сәйкес келмеуі мүмкін — бұл қалыпты, 8-тестті қара).',
+        volya:'Желілік тесттер барлығы жасыл. Браузер warnings (timezone) — қалыпты, бөлек құралмен fixеледі.'},
+      {n:7,t:'TLS Fingerprint (JA3)',d:'browserleaks.com/tls',u:'https://browserleaks.com/tls',badge:'Кеңейтілген',badgeColor:'#7C3AED',badgeBg:'rgba(124,58,237,.1)',
+        what:'JA3 — сенің TLS handshake-іңнің хеші. Әр клиенттің (Chrome, Firefox, нақты бір VPN) бірегей TLS-қолтаңбасы бар. Iran, China, Russia censorship-жүйелері VPN-протоколдарды блоктау үшін JA3-ті қолданады.',
+        why:'Егер VPN OpenVPN немесе WireGuard қолданса — JA3 «бұл VPN» деп береді. Мемлекет TLS-қолтаңбаны көреді де блоктайды. Вуаль (біздің протокол) TLS-handshake-ті әдеттегі Chrome астына бүркемелейді — JA3 кез келген браузерге ұқсас.',
+        how:['VPN-мен аш','JA3 hash пен fingerprint-ті қара','VPN-сіз Chrome-мен салыстыр — ұқсас болуы керек','Ешқандай «OpenVPN» / «WireGuard» / «known VPN» белгілері жоқ'],
+        exp:'JA3 hash әдеттегі Chrome-мен сәйкес келеді. Ешқандай «VPN signature detected» жоқ. User-Agent — Chrome/Firefox.',
+        volya:'Вуаль қосылымды әдеттегі браузер астына бүркемелейді, сондықтан JA3 нақты Chrome-нан ажыратылмайды — Иран/Қытай/Түрікменстанда жұмыс істеу үшін критикалық.'},
+      {n:8,t:'Browser Fingerprint',d:'coveryourtracks.eff.org',u:'https://coveryourtracks.eff.org',badge:'VPN туралы емес',badgeColor:'#7C3AED',badgeBg:'rgba(124,58,237,.1)',
+        what:'Браузердің бірегей «қолтаңбасы»: User-Agent + fonts + canvas-rendering + screen + timezone + audio context + plugins. Әр юзер миллиондардың ішінде дерлік бірегей.',
+        why:'Бұл VPN деңгейі емес, браузер деңгейі. Кез келген VPN бұл тесттен әдеттегі Chrome-да құлайды. Браузер fingerprint-ті желіні айналып, тікелей JavaScript арқылы береді. Шешім — Tor Browser немесе Mullvad Browser.',
+        how:['Аш — 60 секунд авто-сканерлейді','«Tracking Protection» мен «Fingerprint Uniqueness»-ты қара','Chrome-да — fingerprint millions ішінде бірегей','Mullvad Browser-де — жасырынданған'],
+        exp:'Chrome-да: «Your browser has a unique fingerprint» — бұл рас, әрі VPN көмектеспейді. Mullvad Browser-де: «nearly-identical fingerprint to others» — бұл мақсат.',
+        volya:'VOLYA network-level privacy береді (1–7 тесттер). 8-тест — браузер туралы. Кез келген VPN оны Chrome-да құлатады. Толық анонимдік үшін — Mullvad Browser + VOLYA бірге 8-еуін де жабады.',
+        warn:true}
+    ],
+    lbl:{what:'Нені тексереді',why:'Неге маңызды',how:'Қалай өту',exp:'Нені көруің керек',volya:'VOLYA',honest:'Шыны керек'}
+  },
+  cmp:{kicker:'Салыстыру',title:'VOLYA vs белгілі VPN-дер',sub:'Публичті тәуелсіз тесттер мен аудиттердің нәтижелері бойынша (дереккөздер сілтемелерде). VOLYA — кестедегі барлық network-level тесттен өтетін жалғыз тегін VPN.',
+    th0:'Тест',free:'тегін',
+    r1:'1. IP жасырын',r2:'2. DNS leak',r3:'3. WebRTC leak',r4:'4. IPv6 leak',r5:'5. Comprehensive (ipleak.net)',r6:'6. Multi-leak snapshot',r7:'7. TLS fingerprint (JA3)',r8:'Иран / Қытайда жұмыс істейді',r9:'No-log policy (audited)',r10:'Баға',
+    notes:'<strong style="color:#221544">Дереккөздер:</strong> <sup>1</sup> Hola юзерлердің трафигін Bright Data (Luminati) желісінің exit-nodes ретінде сатады — Vectra Networks 2015, Trend Micro 2019 растауы. <sup>2</sup> Windscribe Free: кеңейтімсіз Chrome-дағы WebRTC leak — PCMag тесті 2024. <sup>3</sup> NordVPN/ExpressVPN/Proton-да obfuscated servers бар, бірақ Вуаль деңгейі емес. Олардың обфускациясы DPI-ге танылады: Иранда 2023-тен, Қытайда — 2021-ден (OONI Probe, NetBlocks). <sup>4</sup> TunnelBear audit Cure53-тен өтті (2021/2023), бірақ McAfee-ге тиесілі — корпоративтік деректер саясаты. <sup>5</sup> NordVPN 2018 — Финляндиядағы exit-nodes-тың бірі (Creanova арқылы) бұзылды; ресми түрде 2019 жылдың қазанында мойындалды.'},
+  disc:{kicker:'Шынайы disclaimer',title:'Browser fingerprinting — неге VPN панацея емес',
+    p1:'Network-level privacy (1–7 тесттер) — бұл VPN <strong style="color:#fff">істеуі тиіс</strong> нәрсе. Browser-level privacy (8-тест) — бұл браузер деңгейі. Егер сен қосулы VPN-мен Chrome-да болсаң, сайт бәрібір біледі: қандай fonts, қандай canvas-рендеринг, қандай плагиндер, экранның қандай ажыратымдылығы. Бұл сені миллиондардың ішінде сәйкестендіретін бірегей қолтаңба.',
+    p2:'<strong style="color:#fff">2 қадамдық шешім:</strong> (1) VOLYA network-деңгейді жабады. (2) <a href="https://mullvad.net/en/browser" target="_blank" rel="noopener" style="color:#9FE0FF;font-weight:700;border-bottom:1px solid rgba(159,224,255,.4)">Mullvad Browser</a> (тегін, open-source) browser-деңгейді жабады. Tor Browser сияқты, бірақ Tor-желісіз — кез келген VPN-мен қолдануға жасалған.',
+    p3:'Бірге олар <strong style="color:#fff">8 тесттің бәрін</strong> жабады. Бөлек — ішінара. Бұл шыны: ешбір VPN өздігінен fingerprint-ті шешпейді, ал «100% анонимдік» уәде ететін сатушылар — өтірік айтады.'},
+  footer:{rights:'© 2026 VOLYA. Барлық құқықтар қорғалған.',terms:'Шарттар мен құпиялылық',contact:'Байланысу'}
+};
+
+const ZH = {
+  nav:{services:'服务',features:'功能',tariffs:'套餐',terms:'条款',faq:'常见问题',connect:'连接'},
+  hero:{badge:'有据可查 · 8 项客观测试',title1:'检测你的',title2:'VPN 是否漏水',title3:'',sub:'落地页上的好 VPN 只是说辞。测试中的好 VPN 才是事实。VOLYA 基于 Veil 技术构建，凭借架构而非「运气」通过所有标准泄漏测试。下面是每项测试检测什么、为何重要，以及 VOLYA 与知名付费竞品的对比。',cta1:'前往测试',cta2:'与竞品对比',stat1:'网络测试',stat2:'DNS 日志',stat3:'免费'},
+  arch:{kicker:'架构',title:'为什么 VOLYA 能通过，而其他不能',sub:'这不是魔法。而是大多数付费 VPN 要么不用、要么草草实现的具体技术方案。',
+    c1:{t:'Veil 协议',p:'将 TLS 握手伪装成真实网站（yahoo.com、microsoft.com）。DPI 无法与普通 HTTPS 区分 — 在伊朗、中国、土库曼斯坦均可用。'},
+    c2:{t:'DNS 隧道',p:'所有 DNS 请求都被强制通过 Veil 隧道发往 Cloudflare。ISP 看不到你访问哪些网站 — 连域名都被隐藏。'},
+    c3:{t:'WebRTC + IPv6',p:'Veil 同时隧道化 TCP 和 UDP — WebRTC 的 STUN 请求不会泄露真实 IP。IPv6 在架构上被禁用 — 泄漏不可能发生。'},
+    c4:{t:'无日志架构',p:'仅记录 uptime 和用于防滥用的总 bandwidth。内容和 DNS 请求在任何地方都不被记录 — 连 RAM 里也没有。'}},
+  tests:{kicker:'8 项测试 · 5–10 分钟',title:'自己测试你的 VPN',sub:'每项测试都是一个具体的威胁向量。只要 VPN 有一项没通过 — 隐私就是虚构的。',
+    list:[
+      {n:1,t:'IP & Geolocation',d:'whatismyipaddress.com',u:'https://whatismyipaddress.com',badge:'基础',badgeColor:'#DC2626',badgeBg:'rgba(220,38,38,.1)',
+        what:'可见的外部 IP、其基于 MaxMind 数据库的地理位置、ISP/ASN 和时区。最基础的测试：「全世界能看到我的真实 IP 吗」。',
+        why:'如果 VPN 损坏或隧道中断 — 你会看到自己的真实 IP。任何网站都能通过这个 IP 得知国家、城市、ISP，往往还有大致区域。',
+        how:['不开 VPN 访问 — 记下真实 IP 和国家','开启 VOLYA，刷新页面','应显示不同的 IP 和不同的国家','核对 ASN — 应为 Oracle / Cloudflare / Hetzner，而非你的运营商'],
+        exp:'IP 属于 Oracle Cloud（Ashburn, Virginia, US）。ASN AS31898（Oracle）。时区可能仍是你的（这是浏览器层面，见测试 8）。',
+        volya:'出口节点在 Ashburn（US），真实 IP 完全隐藏。ASN 始终是 Oracle，而非本地运营商。'},
+      {n:2,t:'DNS Leak (Standard + Extended)',d:'dnsleaktest.com',u:'https://dnsleaktest.com',badge:'关键',badgeColor:'#DC2626',badgeBg:'rgba(220,38,38,.1)',
+        what:'你的 DNS 请求去往何处（域名到 IP 的解析）。「当你访问 habr.com 时，哪台 DNS 服务器看到这个请求？」',
+        why:'最主要的隐蔽威胁。VPN 可以加密流量，但如果 DNS 走运营商的 DNS 服务器 — ISP 就能看到你访问的每个网站。内容被隐藏，但「你在给谁打电话」是可见的。',
+        how:['点击 Extended Test（不是 Standard）','等待 20–40 秒 — 系统会发起 6+ 次请求','查看 DNS 服务器列表','全部应为 Cloudflare/Google/我们的，没有一个来自 ISP'],
+        exp:'来自 Cloudflare（AS13335）或 Google（AS15169）的 1–4 台 DNS 服务器。地理位置 — 美国或欧盟。没有 Magyar Telekom / Vodafone HU / Beeline / МТС / Ростелеком。',
+        volya:'DNS 流量被强制通过 Veil 隧道发往 Cloudflare 1.1.1.1。Extended Test 中 0 泄漏，已在匈牙利、俄罗斯、土耳其、阿联酋、伊朗验证。'},
+      {n:3,t:'WebRTC Leak',d:'browserleaks.com/webrtc',u:'https://browserleaks.com/webrtc',badge:'隐藏杀手',badgeColor:'#DC2626',badgeBg:'rgba(220,38,38,.1)',
+        what:'WebRTC — 浏览器中的 P2P 通信技术（Zoom、Discord 网页版）。为了 P2P 它会发起 STUN 请求，即使在 VPN 后也可能暴露真实 IP。',
+        why:'VPN 行业最著名也最普遍的漏洞。用户以为安全，IP 测试显示 VPN 地址，但 WebRTC 通过 STUN 泄露真实 IP — 任何只需一行 JS 的网站都能拿到你的真实地址。',
+        how:['开着 VPN 打开页面','查看「Public IP Address (WebRTC)」','应与你的 VPN IP 一致，而非真实 IP','「Local IP Address」— 若为私有地址（192.168 或 10.0）则没问题'],
+        exp:'通过 WebRTC 的 Public IP — 与测试 1 相同（Oracle Ashburn）。如果那里看到真实 IP（Magyar Telekom）— 说明 VPN 在漏。Local IP 可通过 chrome://flags → WebRTC IP handling 隐藏。',
+        volya:'Veil 隧道化包括 STUN 在内的所有 TCP/UDP 连接。WebRTC 只能看到 Oracle IP。在任何浏览器设置下真实 IP 都不会泄漏。'},
+      {n:4,t:'IPv6 Leak',d:'ipv6-test.com',u:'https://ipv6-test.com',badge:'重要',badgeColor:'#D97706',badgeBg:'rgba(217,119,6,.1)',
+        what:'你的 IPv6 是否可见 — 下一代互联网寻址。许多运营商默认开启 IPv6，如果 VPN 只隧道化 IPv4，IPv6 就会跑到隧道之外。',
+        why:'网站可以同时使用两种协议版本。如果 IPv4 走 VPN 而 IPv6 不走，网站就会拿到两个地址。你真实的 IPv6 会暴露运营商和地区。没有 IPv6 隧道的 WireGuard 配置默认存在此问题。',
+        how:['开着 VPN 打开','查看「IPv6: Not supported by your browser」','或 IPv6 显示 VPN 服务器地址','如果显示来自你 ISP 的 2a02:… — 就是泄漏'],
+        exp:'要么「IPv6 not detected」，要么是 Oracle 地址。没有 2a02:8388:（DT-HU）/ 2001:4860:（你的 ISP）。评分 — IPv4 only（10/10）或带 VPN 地址的 dual-stack。',
+        volya:'IPv6 在我们的架构层面被禁用（仅 IPv4 通过隧道）。IPv6 泄漏在架构上不可能发生。'},
+      {n:5,t:'Comprehensive Leak Check',d:'ipleak.net',u:'https://ipleak.net',badge:'All-in-one',badgeColor:'#D97706',badgeBg:'rgba(217,119,6,.1)',
+        what:'来自 AirVPN 的便捷 all-in-one：IP、DNS、WebRTC、geolocation、种子 IP、mDNS。一个页面检测 6+ 个泄漏向量。',
+        why:'一屏 — 所有主要威胁。适合在更改设置或重新连接后快速检查。也会显示种子泄漏 — 种子 tracker 可见的独立 IP。',
+        how:['开着 VPN 访问','所有区块都应显示 VPN IP','Geolocation Coordinates — Ashburn 处的一个点','Torrent Address Detection — 点击「Activate」并核对'],
+        exp:'主 IP、DNS、WebRTC、Torrent — 全部相同，全部 Oracle。Geolocation — Ashburn（38.7°, -77.5°）。mDNS — 无或私有。',
+        volya:'全部 6 个区块都显示 Oracle Ashburn。真实 IP 在所有向量中都被隐藏。'},
+      {n:6,t:'Multi-Leak Snapshot',d:'doileak.com',u:'https://doileak.com',badge:'快速',badgeColor:'#D97706',badgeBg:'rgba(217,119,6,.1)',
+        what:'用彩色指示（红/黄/绿）对大多数泄漏向量进行快速即时检查。5 秒内 — 整体画面。',
+        why:'适合定期检查。每周一次或每次 major update 之后做一次。整页全绿 — 放心。黄/红 — 通过 ipleak.net 深挖。',
+        how:['开着 VPN 打开 — 自动扫描','向下滚动，阅读各区块','所有指示灯都应为绿色','若为黄色 — 通常是 timezone/lang 的误报'],
+        exp:'WebRTC、DNS、IPv6 — 全绿。Browser Headers — 部分黄色（浏览器 timezone 可能与 IP 所在国不符 — 这是正常的，见测试 8）。',
+        volya:'网络测试全绿。浏览器 warnings（timezone）属正常，用单独的工具修复。'},
+      {n:7,t:'TLS Fingerprint (JA3)',d:'browserleaks.com/tls',u:'https://browserleaks.com/tls',badge:'进阶',badgeColor:'#7C3AED',badgeBg:'rgba(124,58,237,.1)',
+        what:'JA3 — 你 TLS 握手的哈希。每个客户端（Chrome、Firefox、特定 VPN）都有唯一的 TLS 签名。伊朗、中国、俄罗斯的审查系统用 JA3 来封锁 VPN 协议。',
+        why:'如果 VPN 使用 OpenVPN 或 WireGuard — JA3 会暴露「这是 VPN」。国家看到 TLS 签名就封锁。Veil（我们的协议）把 TLS 握手伪装成普通 Chrome — JA3 与任何浏览器相同。',
+        how:['开着 VPN 打开','查看 JA3 hash 和 fingerprint','与不开 VPN 的 Chrome 对比 — 应当相似','没有任何「OpenVPN」/「WireGuard」/「known VPN」标记'],
+        exp:'JA3 hash 与普通 Chrome 一致。没有「VPN signature detected」。User-Agent — Chrome/Firefox。',
+        volya:'Veil 把连接伪装成普通浏览器，因此 JA3 与真实 Chrome 无法区分 — 这对在伊朗/中国/土库曼斯坦使用至关重要。'},
+      {n:8,t:'Browser Fingerprint',d:'coveryourtracks.eff.org',u:'https://coveryourtracks.eff.org',badge:'与 VPN 无关',badgeColor:'#7C3AED',badgeBg:'rgba(124,58,237,.1)',
+        what:'浏览器的唯一「签名」：User-Agent + fonts + canvas 渲染 + screen + timezone + audio context + plugins。每个用户在数百万人中几乎唯一。',
+        why:'这不是 VPN 层面，而是浏览器层面。任何 VPN 在普通 Chrome 里都会没通过这项测试。浏览器绕过网络，直接通过 JavaScript 暴露 fingerprint。解决方案 — Tor Browser 或 Mullvad Browser。',
+        how:['打开 — 自动扫描 60 秒','查看「Tracking Protection」和「Fingerprint Uniqueness」','在 Chrome 中 — fingerprint 在数百万人中唯一','在 Mullvad Browser 中 — 被去标识化'],
+        exp:'在 Chrome 中：「Your browser has a unique fingerprint」— 这是真的，而且 VPN 帮不上忙。在 Mullvad Browser 中：「nearly-identical fingerprint to others」— 这才是目标。',
+        volya:'VOLYA 提供 network-level privacy（测试 1–7）。测试 8 是关于浏览器的。任何 VPN 在 Chrome 里都会没通过。要完全匿名 — Mullvad Browser + VOLYA 一起覆盖全部 8 项。',
+        warn:true}
+    ],
+    lbl:{what:'检测什么',why:'为何重要',how:'如何测试',exp:'你应该看到什么',volya:'VOLYA',honest:'实话'}
+  },
+  cmp:{kicker:'对比',title:'VOLYA vs 知名 VPN',sub:'依据公开的独立测试与审计结果（来源见脚注）。VOLYA 是表中唯一通过所有 network-level 测试的免费 VPN。',
+    th0:'测试',free:'免费',
+    r1:'1. IP 已隐藏',r2:'2. DNS leak',r3:'3. WebRTC leak',r4:'4. IPv6 leak',r5:'5. Comprehensive (ipleak.net)',r6:'6. Multi-leak snapshot',r7:'7. TLS fingerprint (JA3)',r8:'在伊朗 / 中国可用',r9:'No-log policy (audited)',r10:'价格',
+    notes:'<strong style="color:#221544">来源：</strong> <sup>1</sup> Hola 将用户流量作为 Bright Data（Luminati）网络的 exit-nodes 出售 — Vectra Networks 2015，Trend Micro 2019 证实。<sup>2</sup> Windscribe Free：无扩展的 Chrome 中的 WebRTC leak — PCMag 2024 测试。<sup>3</sup> NordVPN/ExpressVPN/Proton 有 obfuscated servers，但达不到 Veil 的水平。它们的混淆会被 DPI 识别：伊朗自 2023 年、中国自 2021 年（OONI Probe、NetBlocks）。<sup>4</sup> TunnelBear 通过了 Cure53 审计（2021/2023），但归 McAfee 所有 — 企业数据政策。<sup>5</sup> NordVPN 2018 — 芬兰的一个 exit-node（通过 Creanova）被入侵；2019 年 10 月正式承认。'},
+  disc:{kicker:'诚实声明',title:'Browser fingerprinting — 为什么 VPN 不是万能药',
+    p1:'Network-level privacy（测试 1–7）是 VPN <strong style="color:#fff">应当</strong>做到的。Browser-level privacy（测试 8）是浏览器层面的。如果你在开着 VPN 的 Chrome 里，网站依然知道：哪些 fonts、怎样的 canvas 渲染、哪些插件、什么屏幕分辨率。这是一个能在数百万人中识别出你的唯一签名。',
+    p2:'<strong style="color:#fff">两步解决方案：</strong>（1）VOLYA 覆盖网络层。（2）<a href="https://mullvad.net/en/browser" target="_blank" rel="noopener" style="color:#9FE0FF;font-weight:700;border-bottom:1px solid rgba(159,224,255,.4)">Mullvad Browser</a>（免费、开源）覆盖浏览器层。它做得像不带 Tor 网络的 Tor Browser — 可搭配任何 VPN 使用。',
+    p3:'两者结合覆盖<strong style="color:#fff">全部 8 项测试</strong>。单独使用 — 只覆盖一部分。这是实话：没有任何 VPN 单靠自己就能解决 fingerprint，那些承诺「100% 匿名」的卖家 — 在撒谎。'},
+  footer:{rights:'© 2026 VOLYA. 保留所有权利。',terms:'条款与隐私',contact:'联系我们'}
+};
+
+const LANGS = {ru:RU, en:EN, uk:UK, kk:KK, zh:ZH};
+const LANG_ORDER = ['ru','en','uk','kk','zh'];
 
 // ── Render tests ────────────────────────────────────────────────────────────
 function renderTests(L){
@@ -441,7 +667,6 @@ function renderTests(L){
 }
 
 // ── i18n apply ──────────────────────────────────────────────────────────────
-let currentLang = 'RU';
 function applyI18n(L){
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const path = el.getAttribute('data-i18n').split('.');
@@ -454,14 +679,25 @@ function applyI18n(L){
   document.querySelectorAll('[data-reveal]').forEach(el => { el.style.opacity=''; el.style.transform=''; });
   initReveal();
 }
-function toggleLang(){
-  currentLang = currentLang === 'RU' ? 'EN' : 'RU';
-  document.getElementById('lang-ru').style.opacity = currentLang === 'RU' ? '1' : '.4';
-  document.getElementById('lang-ru').style.color = currentLang === 'RU' ? '#221544' : '#5E5478';
-  document.getElementById('lang-en').style.opacity = currentLang === 'EN' ? '1' : '.4';
-  document.getElementById('lang-en').style.color = currentLang === 'EN' ? '#221544' : '#5E5478';
-  document.documentElement.lang = currentLang === 'EN' ? 'en' : 'ru';
-  applyI18n(currentLang === 'EN' ? EN : RU);
+function detectLang(){
+  const s = localStorage.getItem('volya_lang');
+  if(LANGS[s]) return s;
+  const n = (navigator.language || 'ru').toLowerCase();
+  for(const l of ['uk','kk','zh','en','ru']) if(n.startsWith(l)) return l;
+  return 'ru';
+}
+let currentLang = detectLang();
+function applyLang(lang){
+  if(!LANGS[lang]) lang = 'ru';
+  currentLang = lang;
+  localStorage.setItem('volya_lang', lang);
+  document.documentElement.lang = lang;
+  LANG_ORDER.forEach(l => {
+    const b = document.getElementById('lang-'+l);
+    if(b) b.style.cssText = 'cursor:pointer;padding:3px 7px;border-radius:999px;transition:.2s;' +
+      (l===lang ? 'color:#fff;background:linear-gradient(100deg,#7C3AED,#5B2BD6)' : 'color:#5E5478;opacity:.5');
+  });
+  applyI18n(LANGS[lang]);
 }
 
 // ── Mobile menu ─────────────────────────────────────────────────────────────
@@ -608,7 +844,7 @@ function initReveal(){
 })();
 
 // ── Init ────────────────────────────────────────────────────────────────────
-applyI18n(RU);
+applyLang(currentLang);
 </script>
 
 </body>
