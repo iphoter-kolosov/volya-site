@@ -45,7 +45,7 @@ img{max-width:100%;display:block}
 .hov-pill:hover{border-color:rgba(124,58,237,.4)!important;color:#221544!important}
 .faq-button:hover{background:rgba(124,58,237,.04)}
 .faq-item.open .faq-icon{transform:rotate(45deg)}
-.faq-item.open .faq-answer{max-height:340px}
+.faq-item.open .faq-answer{max-height:600px!important}
 .faq-item.open{border-color:rgba(124,58,237,.35)!important}
 .lang-btn{cursor:pointer;letter-spacing:.04em}
 .lang-btn:hover{border-color:rgba(124,58,237,.4)!important}
@@ -310,9 +310,9 @@ img{max-width:100%;display:block}
 // ── i18n dictionaries ────────────────────────────────────────────────────────
 const RU = {
   nav: {services:'Сервисы',features:'Возможности',privacy:'Приватность',tariffs:'Тарифы',terms:'Условия',faq:'FAQ',connect:'Подключить'},
-  hero: {badge:'Бета — бесплатно для всех',title1:'Свободный интернет',title2:'без границ',sub:'Защищённое подключение нового поколения. Серфинг без блокировок и слежки — в один клик. Без логов. Без компромиссов.',cta1:'Подключить бесплатно',cta2:'Как это работает',chips:['Без логов','VLESS Reality','5 устройств','0 ₽ в бете']},
+  hero: {badge:'Бета — бесплатно для всех',title1:'Свободный интернет',title2:'без границ',sub:'Защищённое подключение нового поколения. Серфинг без блокировок и слежки — в один клик. Без логов. Без компромиссов.',cta1:'Подключить бесплатно',cta2:'Как это работает',chips:['Без логов','VLESS Reality','5 устройств','Бесплатно в бете']},
   proof: {dpi:'не виден',logsLabel:'Логов'},
-  services: {kicker:'Снова доступно',title1:'Работает всё,',title2:'что вам нужно',sub:'Один ключ открывает сервисы, которые в вашей стране заблокированы, замедлены или недоступны.',caption:'…и тысячи других сайтов. Что разрешено, а что технически блокируется —',captionLink:'честно в Условиях'},
+  services: {kicker:'Снова доступно',title1:'Работает всё,',title2:'что вам нужно',sub:'Один ключ открывает сервисы, которые заблокированы, замедлены или недоступны там, где вы находитесь.',caption:'…и тысячи других сайтов. Что разрешено, а что технически блокируется —',captionLink:'честно в Условиях'},
   features: {kicker:'Технологии',title:'Почему Воля'},
   featureMain: {icon:'🛡',title:'Абсолютная невидимость',text:'Протокол VLESS Reality маскирует трафик под обычное HTTPS-соединение. Системы глубокого анализа (DPI) не видят защищённый туннель — для провайдера это обычный визит на сайт.'},
   featureList: [
@@ -363,7 +363,7 @@ const EN = {
   nav: {services:'Services',features:'Features',privacy:'Privacy',tariffs:'Plans',terms:'Terms',faq:'FAQ',connect:'Connect'},
   hero: {badge:'Beta — free for everyone',title1:'A free internet',title2:'without borders',sub:'A next-generation protected connection. Unrestricted, untracked browsing in one click. No logs. No compromises.',cta1:'Connect for free',cta2:'How it works',chips:['No logs','VLESS Reality','5 devices','Free in beta']},
   proof: {dpi:'invisible',logsLabel:'Logs'},
-  services: {kicker:'Unblocked',title1:'Everything you need',title2:'works again',sub:'One key opens the services that are blocked, throttled or unavailable in your country.',caption:'…and thousands more sites. What is allowed and what is technically blocked is',captionLink:'honest in the Terms'},
+  services: {kicker:'Unblocked',title1:'Everything you need',title2:'works again',sub:'One key opens the services that are blocked, throttled or unavailable wherever you are.',caption:'…and thousands more sites. What is allowed and what is technically blocked is',captionLink:'honest in the Terms'},
   features: {kicker:'Technology',title:'Why Volya'},
   featureMain: {icon:'🛡',title:'Absolute invisibility',text:'The VLESS Reality protocol masks traffic as ordinary HTTPS. Deep packet inspection (DPI) cannot detect the protected tunnel — to your ISP it looks like a normal website visit.'},
   featureList: [
