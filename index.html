@@ -193,7 +193,7 @@ img{max-width:100%;display:block}
       <div style="position:relative;font-size:30px;width:64px;height:64px;display:flex;align-items:center;justify-content:center;border-radius:17px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18)" data-i18n="featureMain.icon">🛡</div>
       <div style="position:relative">
         <h3 class="shdisplay" style="font-weight:600;font-size:26px;letter-spacing:-.01em;margin-bottom:12px" data-i18n="featureMain.title">Абсолютная невидимость</h3>
-        <p style="font-size:15.5px;line-height:1.6;color:#C9BEF0;max-width:430px" data-i18n="featureMain.text">Протокол VLESS Reality маскирует трафик под обычное HTTPS-соединение. Системы глубокого анализа (DPI) не видят защищённый туннель — для провайдера это обычный визит на сайт.</p>
+        <p style="font-size:15.5px;line-height:1.6;color:#C9BEF0;max-width:430px" data-i18n="featureMain.text">Протокол Вуаль маскирует трафик под обычное HTTPS-соединение. Системы глубокого анализа (DPI) не видят защищённый туннель — для провайдера это обычный визит на сайт.</p>
       </div>
     </div>
     <div id="features-list" style="display:grid;gap:16px"></div>
@@ -310,11 +310,11 @@ img{max-width:100%;display:block}
 // ── i18n dictionaries ────────────────────────────────────────────────────────
 const RU = {
   nav: {services:'Сервисы',features:'Возможности',privacy:'Приватность',tariffs:'Скорость',terms:'Условия',faq:'FAQ',connect:'Подключить'},
-  hero: {badge:'Бета — бесплатно для всех',title1:'Свободный интернет',title2:'без границ',sub:'Защищённое подключение нового поколения. Серфинг без блокировок и слежки — в один клик. Без логов. Без компромиссов.',cta1:'Подключить бесплатно',cta2:'Как это работает',chips:['Без логов','VLESS Reality','5 устройств','Бесплатно в бете']},
+  hero: {badge:'Бета — бесплатно для всех',title1:'Свободный интернет',title2:'без границ',sub:'Защищённое подключение нового поколения. Серфинг без блокировок и слежки — в один клик. Без логов. Без компромиссов.',cta1:'Подключить бесплатно',cta2:'Как это работает',chips:['Без логов','Вуаль','5 устройств','Бесплатно в бете']},
   proof: {dpi:'не виден',logsLabel:'Логов'},
   services: {kicker:'Снова доступно',title1:'Работает всё,',title2:'что вам нужно',sub:'Один ключ открывает сервисы, которые заблокированы, замедлены или недоступны там, где вы находитесь.',caption:'…и тысячи других сайтов. Что разрешено, а что технически блокируется —',captionLink:'честно в Условиях'},
   features: {kicker:'Технологии',title:'Почему Воля'},
-  featureMain: {icon:'🛡',title:'Абсолютная невидимость',text:'Протокол VLESS Reality маскирует трафик под обычное HTTPS-соединение. Системы глубокого анализа (DPI) не видят защищённый туннель — для провайдера это обычный визит на сайт.'},
+  featureMain: {icon:'🛡',title:'Абсолютная невидимость',text:'Протокол Вуаль маскирует трафик под обычное HTTPS-соединение. Системы глубокого анализа (DPI) не видят защищённый туннель — для провайдера это обычный визит на сайт.'},
   featureList: [
     {icon:'🔒',title:'Нулевые логи',text:'Мы не ведём журналов активности. Ваш IP, сайты и запросы нигде не хранятся.',link:'/terms.html#privacy',linkText:'Что мы знаем'},
     {icon:'⚡',title:'Чистый интернет',text:'Блокировка рекламы и трекеров на уровне сервера — быстрее и экономнее.'},
@@ -348,8 +348,8 @@ const RU = {
   ],
   faq: {kicker:'Вопросы',title:'Частые вопросы',more:'Полные правила, приватность и философия проекта —',moreLink:'в разделе Условия'},
   faqList: [
-    {q:'Это безопасно?',a:'Да. Воля использует VLESS Reality — одну из самых продвинутых технологий защиты трафика. Соединение выглядит как обычный HTTPS, данные шифруются end-to-end, а логи активности не ведутся.'},
-    {q:'Увидит ли провайдер, что я использую Volya?',a:'Нет. Технология VLESS Reality делает трафик неотличимым от обычного HTTPS. Системы DPI, которые используют провайдеры, не могут обнаружить защищённое соединение.'},
+    {q:'Это безопасно?',a:'Да. Воля использует Вуаль — собственную технологию защиты трафика нового поколения. Соединение выглядит как обычный HTTPS, данные шифруются end-to-end, а логи активности не ведутся.'},
+    {q:'Увидит ли провайдер, что я использую Volya?',a:'Нет. Технология Вуаль делает трафик неотличимым от обычного HTTPS. Системы DPI, которые используют провайдеры, не могут обнаружить защищённое соединение.'},
     {q:'Это бесплатно?',a:'Да, пока проект в бета-тестировании — всё полностью бесплатно. Мы будем рады вашей обратной связи: отзывы помогают улучшать сервис.'},
     {q:'На скольких устройствах можно использовать?',a:'Один ключ работает одновременно на 5 устройствах. Этого хватит для телефона, планшета, ПК и ТВ.'},
     {q:'Скорость правда без лимита?',a:'Мы не режем скорость и не делим её на тарифы. Ты получаешь максимум, который выдаёт узел — его хватает на 4K, игры и все 5 устройств разом. Реальная цифра зависит от твоего провайдера и расстояния до сервера, но искусственных ограничений с нашей стороны нет.'},
@@ -361,11 +361,11 @@ const RU = {
 
 const EN = {
   nav: {services:'Services',features:'Features',privacy:'Privacy',tariffs:'Speed',terms:'Terms',faq:'FAQ',connect:'Connect'},
-  hero: {badge:'Beta — free for everyone',title1:'A free internet',title2:'without borders',sub:'A next-generation protected connection. Unrestricted, untracked browsing in one click. No logs. No compromises.',cta1:'Connect for free',cta2:'How it works',chips:['No logs','VLESS Reality','5 devices','Free in beta']},
+  hero: {badge:'Beta — free for everyone',title1:'A free internet',title2:'without borders',sub:'A next-generation protected connection. Unrestricted, untracked browsing in one click. No logs. No compromises.',cta1:'Connect for free',cta2:'How it works',chips:['No logs','Veil','5 devices','Free in beta']},
   proof: {dpi:'invisible',logsLabel:'Logs'},
   services: {kicker:'Unblocked',title1:'Everything you need',title2:'works again',sub:'One key opens the services that are blocked, throttled or unavailable wherever you are.',caption:'…and thousands more sites. What is allowed and what is technically blocked is',captionLink:'honest in the Terms'},
   features: {kicker:'Technology',title:'Why Volya'},
-  featureMain: {icon:'🛡',title:'Absolute invisibility',text:'The VLESS Reality protocol masks traffic as ordinary HTTPS. Deep packet inspection (DPI) cannot detect the protected tunnel — to your ISP it looks like a normal website visit.'},
+  featureMain: {icon:'🛡',title:'Absolute invisibility',text:'The Veil protocol masks traffic as ordinary HTTPS. Deep packet inspection (DPI) cannot detect the protected tunnel — to your ISP it looks like a normal website visit.'},
   featureList: [
     {icon:'🔒',title:'Zero logs',text:'We keep no activity logs. Your IP, sites and requests are stored nowhere.',link:'/terms.html#privacy',linkText:'What we know'},
     {icon:'⚡',title:'Clean internet',text:'Server-side ad and tracker blocking — faster and more efficient.'},
@@ -399,8 +399,8 @@ const EN = {
   ],
   faq: {kicker:'Questions',title:'Frequently asked',more:'Full rules, privacy and the philosophy of the project —',moreLink:'in the Terms'},
   faqList: [
-    {q:'Is it safe?',a:'Yes. Volya uses VLESS Reality — one of the most advanced traffic-protection technologies. The connection looks like ordinary HTTPS, data is encrypted end-to-end, and no activity logs are kept.'},
-    {q:'Will my ISP see that I use Volya?',a:'No. VLESS Reality makes traffic indistinguishable from ordinary HTTPS. The DPI systems used by ISPs cannot detect the protected connection.'},
+    {q:'Is it safe?',a:'Yes. Volya uses Veil — our own next-generation traffic-protection technology. The connection looks like ordinary HTTPS, data is encrypted end-to-end, and no activity logs are kept.'},
+    {q:'Will my ISP see that I use Volya?',a:'No. Veil makes traffic indistinguishable from ordinary HTTPS. The DPI systems used by ISPs cannot detect the protected connection.'},
     {q:'Is it free?',a:'Yes, while the project is in beta — completely free. We welcome your feedback: it helps us improve the service.'},
     {q:'How many devices can I use?',a:'One key works on 5 devices simultaneously. That covers a phone, tablet, PC and TV.'},
     {q:'Is the speed really unlimited?',a:'We don’t throttle speed or split it into tiers. You get the maximum the node can deliver — enough for 4K, gaming and all 5 devices at once. The real number depends on your ISP and distance to the server, but there are no limits on our side.'},
