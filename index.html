@@ -710,7 +710,14 @@ function toggleFaq(i){
 }
 
 // ── Language ────────────────────────────────────────────────────────────────
-let currentLang = localStorage.getItem('volya_lang') || 'ru';
+function detectLang(){
+  const stored = localStorage.getItem('volya_lang');
+  if(LANGS[stored]) return stored;                       // ручной выбор всегда важнее
+  const nav = (navigator.language || 'ru').toLowerCase();
+  for(const l of ['uk','kk','zh','en','ru']) if(nav.startsWith(l)) return l;
+  return 'ru';
+}
+let currentLang = detectLang();
 function applyLang(lang){
   if(!LANGS[lang]) lang = 'ru';
   currentLang = lang;
