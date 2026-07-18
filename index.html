@@ -87,7 +87,7 @@ img{max-width:100%;display:block}
       <a class="hov hov-nav" href="#services" style="font-size:14.5px;font-weight:600;color:#5E5478" data-i18n="nav.services">Сервисы</a>
       <a class="hov hov-nav" href="#why" style="font-size:14.5px;font-weight:600;color:#5E5478" data-i18n="nav.features">Возможности</a>
       <a class="hov hov-nav" href="/privacy.html" style="font-size:14.5px;font-weight:600;color:#5E5478" data-i18n="nav.privacy">Приватность</a>
-      <a class="hov hov-nav" href="#tariffs" style="font-size:14.5px;font-weight:600;color:#5E5478" data-i18n="nav.tariffs">Тарифы</a>
+      <a class="hov hov-nav" href="#tariffs" style="font-size:14.5px;font-weight:600;color:#5E5478" data-i18n="nav.tariffs">Скорость</a>
       <a class="hov hov-nav-active" href="/terms.html" style="font-size:14.5px;font-weight:600;color:#7C3AED" data-i18n="nav.terms">Условия</a>
       <a class="hov hov-nav" href="#faq" style="font-size:14.5px;font-weight:600;color:#5E5478" data-i18n="nav.faq">FAQ</a>
     </div>
@@ -105,7 +105,7 @@ img{max-width:100%;display:block}
   <a href="#services" onclick="toggleMenu()" data-i18n="nav.services">Сервисы</a>
   <a href="#why" onclick="toggleMenu()" data-i18n="nav.features">Возможности</a>
   <a href="/privacy.html" data-i18n="nav.privacy">Приватность</a>
-  <a href="#tariffs" onclick="toggleMenu()" data-i18n="nav.tariffs">Тарифы</a>
+  <a href="#tariffs" onclick="toggleMenu()" data-i18n="nav.tariffs">Скорость</a>
   <a href="/terms.html" data-i18n="nav.terms">Условия</a>
   <a href="#faq" onclick="toggleMenu()" data-i18n="nav.faq">FAQ</a>
   <a class="mm-cta" href="https://t.me/volya_gate_bot" target="_blank" rel="noopener" data-i18n="nav.connect">Подключить</a>
@@ -249,11 +249,11 @@ img{max-width:100%;display:block}
 <section id="tariffs" class="section-pad" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:60px 32px 40px">
   <div data-reveal style="text-align:center;margin-bottom:46px">
     <div style="font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#7C3AED;margin-bottom:14px" data-i18n="tariffs.kicker">Скорость</div>
-    <h2 class="shdisplay" style="font-weight:700;font-size:clamp(28px,3.8vw,46px);line-height:1.05;letter-spacing:-.01em;color:#1A0F3D" data-i18n="tariffs.title">Гибкие тарифы</h2>
-    <p style="font-size:16px;color:#6B6088;max-width:520px;margin:16px auto 0" data-i18n="tariffs.sub">Переключайте скорость бесплатно в зависимости от задач.</p>
+    <h2 class="shdisplay" style="font-weight:700;font-size:clamp(28px,3.8vw,46px);line-height:1.05;letter-spacing:-.01em;color:#1A0F3D" data-i18n="tariffs.title">Скорость без тормозов</h2>
+    <p style="font-size:16px;color:#6B6088;max-width:520px;margin:16px auto 0" data-i18n="tariffs.sub">Мы не ставим искусственных лимитов — ты получаешь максимум, который выдаёт узел.</p>
   </div>
   <div id="tariffs-list" class="grid-tariffs grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px"></div>
-  <div data-reveal style="margin-top:20px;text-align:center;padding:20px;border-radius:18px;background:#fff;border:1px solid rgba(46,26,102,.08);font-size:15px;color:#5E5478">🚀 <span data-i18n="tariffs.note">Нужна большая скорость или безлимит? Выберите «Свой вариант» в боте.</span> <a href="/terms.html#limits" style="color:#7C3AED;font-weight:700" data-i18n="tariffs.noteLink">Лимиты и тарифы</a> →</div>
+  <div data-reveal style="margin-top:22px;text-align:center;max-width:640px;margin-left:auto;margin-right:auto;font-size:13px;line-height:1.55;color:#8A7FA8" data-i18n="tariffs.note">* Фактическая скорость зависит от нагрузки узла, твоего интернет-провайдера и расстояния до сервера. Лимитов с нашей стороны нет.</div>
 </section>
 
 <!-- TELEGRAM HUB -->
@@ -309,7 +309,7 @@ img{max-width:100%;display:block}
 <script>
 // ── i18n dictionaries ────────────────────────────────────────────────────────
 const RU = {
-  nav: {services:'Сервисы',features:'Возможности',privacy:'Приватность',tariffs:'Тарифы',terms:'Условия',faq:'FAQ',connect:'Подключить'},
+  nav: {services:'Сервисы',features:'Возможности',privacy:'Приватность',tariffs:'Скорость',terms:'Условия',faq:'FAQ',connect:'Подключить'},
   hero: {badge:'Бета — бесплатно для всех',title1:'Свободный интернет',title2:'без границ',sub:'Защищённое подключение нового поколения. Серфинг без блокировок и слежки — в один клик. Без логов. Без компромиссов.',cta1:'Подключить бесплатно',cta2:'Как это работает',chips:['Без логов','VLESS Reality','5 устройств','Бесплатно в бете']},
   proof: {dpi:'не виден',logsLabel:'Логов'},
   services: {kicker:'Снова доступно',title1:'Работает всё,',title2:'что вам нужно',sub:'Один ключ открывает сервисы, которые заблокированы, замедлены или недоступны там, где вы находитесь.',caption:'…и тысячи других сайтов. Что разрешено, а что технически блокируется —',captionLink:'честно в Условиях'},
@@ -333,11 +333,11 @@ const RU = {
     {icon:'📱',platform:'iPhone / iPad',app:'Hiddify',text:'Установка из App Store. Альтернатива для регионов без App Store — V2Box, бот покажет инструкцию.',tag:'1 минута'},
     {icon:'💻',platform:'Windows',app:'v2rayN',text:'Стабильный клиент с 2018 года. Бот пошагово проведёт через настройку профиля и system proxy.',tag:'3 минуты'}
   ],
-  tariffs: {kicker:'Скорость',title:'Гибкие тарифы',sub:'Переключайте скорость бесплатно в зависимости от задач.',note:'Нужна большая скорость или безлимит? Выберите «Свой вариант» в боте.',noteLink:'Лимиты и тарифы'},
-  tariffList: [
-    {speed:'10',unit:'Мбит/с',tag:'Базовый',items:['Мессенджеры и соцсети','AI-сервисы','Видео до 1080p','Повседневный серфинг']},
-    {speed:'20',unit:'Мбит/с',tag:'Оптимальный',items:['Стриминг Full HD','Видеоконференции','Облачные файлы','Мгновенная загрузка']},
-    {speed:'30',unit:'Мбит/с',tag:'Максимум',items:['Видео 2K и 4K','Игры с низким пингом','Несколько устройств','Тяжёлые загрузки']}
+  tariffs: {kicker:'Скорость',title:'Скорость без тормозов',sub:'Мы не ставим искусственных лимитов — ты получаешь максимум, который выдаёт узел.',note:'* Фактическая скорость зависит от нагрузки узла, твоего интернет-провайдера и расстояния до сервера. Лимитов с нашей стороны нет.'},
+  speedUses: [
+    {icon:'🎬',tag:'Стриминг',items:['Видео 4K и 8K','Ноль буферизации','Несколько экранов разом']},
+    {icon:'🎧',tag:'Онлайн',items:['Звонки без лагов','Низкий пинг в играх','Мгновенная отправка файлов']},
+    {icon:'🏠',tag:'Вся семья',items:['5 устройств одновременно','Тяжёлые загрузки','Скорость не делится на тарифы']}
   ],
   tg: {kicker:'Экосистема VOLYA',title:'Не бот — целая экосистема',sub:'Единый аккаунт VOLYA ID связывает все поверхности: Telegram сегодня, веб-кабинет и нативные приложения — дальше. Один ключ, один профиль, одна Воля.',cta:'Начать в Telegram'},
   tgSteps: [
@@ -352,7 +352,7 @@ const RU = {
     {q:'Увидит ли провайдер, что я использую Volya?',a:'Нет. Технология VLESS Reality делает трафик неотличимым от обычного HTTPS. Системы DPI, которые используют провайдеры, не могут обнаружить защищённое соединение.'},
     {q:'Это бесплатно?',a:'Да, пока проект в бета-тестировании — всё полностью бесплатно. Мы будем рады вашей обратной связи: отзывы помогают улучшать сервис.'},
     {q:'На скольких устройствах можно использовать?',a:'Один ключ работает одновременно на 5 устройствах. Этого хватит для телефона, планшета, ПК и ТВ.'},
-    {q:'Как делится скорость?',a:'Установленный лимит скорости — это общий пул для вашего ключа. Все устройства делят его между собой, и этого хватает с запасом.'},
+    {q:'Скорость правда без лимита?',a:'Мы не режем скорость и не делим её на тарифы. Ты получаешь максимум, который выдаёт узел — его хватает на 4K, игры и все 5 устройств разом. Реальная цифра зависит от твоего провайдера и расстояния до сервера, но искусственных ограничений с нашей стороны нет.'},
     {q:'Что будет, когда закончится трафик?',a:'Когда трафик закончится, просто напишите в бота и получите новый объём. В бета-режиме продление бесплатное.'}
   ],
   cta: {title1:'Готовы почувствовать',title2:'свободу?',sub:'Подключение занимает меньше минуты. Без регистраций, паролей и платёжных данных.',btn1:'Подключить бесплатно',btn2:'Узнать, как всё устроено'},
@@ -360,7 +360,7 @@ const RU = {
 };
 
 const EN = {
-  nav: {services:'Services',features:'Features',privacy:'Privacy',tariffs:'Plans',terms:'Terms',faq:'FAQ',connect:'Connect'},
+  nav: {services:'Services',features:'Features',privacy:'Privacy',tariffs:'Speed',terms:'Terms',faq:'FAQ',connect:'Connect'},
   hero: {badge:'Beta — free for everyone',title1:'A free internet',title2:'without borders',sub:'A next-generation protected connection. Unrestricted, untracked browsing in one click. No logs. No compromises.',cta1:'Connect for free',cta2:'How it works',chips:['No logs','VLESS Reality','5 devices','Free in beta']},
   proof: {dpi:'invisible',logsLabel:'Logs'},
   services: {kicker:'Unblocked',title1:'Everything you need',title2:'works again',sub:'One key opens the services that are blocked, throttled or unavailable wherever you are.',caption:'…and thousands more sites. What is allowed and what is technically blocked is',captionLink:'honest in the Terms'},
@@ -384,11 +384,11 @@ const EN = {
     {icon:'📱',platform:'iPhone / iPad',app:'Hiddify',text:'Install from the App Store. For regions without App Store — V2Box is the alternative, the bot will guide you.',tag:'1 minute'},
     {icon:'💻',platform:'Windows',app:'v2rayN',text:'A stable client since 2018. The bot walks you through profile setup and system proxy step by step.',tag:'3 minutes'}
   ],
-  tariffs: {kicker:'Speed',title:'Flexible plans',sub:'Switch speed for free depending on your needs.',note:'Need more speed or unlimited? Pick “Custom” in the bot.',noteLink:'Limits and plans'},
-  tariffList: [
-    {speed:'10',unit:'Mbps',tag:'Basic',items:['Messengers & social','AI services','Video up to 1080p','Everyday browsing']},
-    {speed:'20',unit:'Mbps',tag:'Optimal',items:['Full HD streaming','Video calls','Cloud files','Instant loading']},
-    {speed:'30',unit:'Mbps',tag:'Maximum',items:['2K and 4K video','Low-ping gaming','Multiple devices','Heavy downloads']}
+  tariffs: {kicker:'Speed',title:'Speed with no brakes',sub:'No artificial limits — you get the maximum the node can deliver.',note:'* Actual speed depends on node load, your ISP and distance to the server. There are no limits on our side.'},
+  speedUses: [
+    {icon:'🎬',tag:'Streaming',items:['4K and 8K video','Zero buffering','Several screens at once']},
+    {icon:'🎧',tag:'Realtime',items:['Lag-free calls','Low-ping gaming','Instant file uploads']},
+    {icon:'🏠',tag:'Whole home',items:['5 devices at once','Heavy downloads','No speed tiers']}
   ],
   tg: {kicker:'VOLYA ecosystem',title:'Not a bot — a whole ecosystem',sub:'A single VOLYA ID ties every surface together: Telegram today, a web dashboard and native apps next. One key, one profile, one Volya.',cta:'Start in Telegram'},
   tgSteps: [
@@ -403,7 +403,7 @@ const EN = {
     {q:'Will my ISP see that I use Volya?',a:'No. VLESS Reality makes traffic indistinguishable from ordinary HTTPS. The DPI systems used by ISPs cannot detect the protected connection.'},
     {q:'Is it free?',a:'Yes, while the project is in beta — completely free. We welcome your feedback: it helps us improve the service.'},
     {q:'How many devices can I use?',a:'One key works on 5 devices simultaneously. That covers a phone, tablet, PC and TV.'},
-    {q:'How is speed shared?',a:'Your speed limit is a shared pool for the key. All devices share it, and it is more than enough.'},
+    {q:'Is the speed really unlimited?',a:'We don’t throttle speed or split it into tiers. You get the maximum the node can deliver — enough for 4K, gaming and all 5 devices at once. The real number depends on your ISP and distance to the server, but there are no limits on our side.'},
     {q:'What happens when traffic runs out?',a:'Just message the bot and get a new allowance. In beta, renewal is free.'}
   ],
   cta: {title1:'Ready to feel the',title2:'freedom?',sub:'Connecting takes under a minute. No sign-ups, passwords or payment details.',btn1:'Connect for free',btn2:'See how it works'},
@@ -498,15 +498,12 @@ function renderAll(L){
     </div>`
   ).join('');
 
-  // tariffs
-  document.getElementById('tariffs-list').innerHTML = L.tariffList.map((t,i) => {
+  // speed uses
+  document.getElementById('tariffs-list').innerHTML = L.speedUses.map((t,i) => {
     const s = TARIFF_STYLE[i];
     return `<div class="hov hov-tariff" data-reveal data-delay="${i*110}" style="position:relative;padding:32px 28px;border-radius:24px;background:${s.bg};border:1px solid ${s.border};box-shadow:${s.shadow};color:${s.fg}">
       <div style="display:inline-block;font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:${s.tagColor};padding:5px 11px;border-radius:999px;background:${s.tagBg};margin-bottom:18px">${t.tag}</div>
-      <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:22px">
-        <span class="shdisplay" style="font-weight:700;font-size:44px;line-height:1;letter-spacing:-.02em;color:${s.fg}">${t.speed}</span>
-        <span style="font-size:16px;font-weight:700;color:${s.unitColor}">${t.unit}</span>
-      </div>
+      <div style="font-size:46px;line-height:1;margin-bottom:20px">${t.icon}</div>
       <ul style="list-style:none;display:flex;flex-direction:column;gap:12px">
         ${t.items.map(it => `<li style="display:flex;gap:10px;align-items:flex-start;font-size:14.5px;color:${s.itemColor}"><span style="color:${s.check};flex-shrink:0;font-weight:800">✓</span>${it}</li>`).join('')}
       </ul>
