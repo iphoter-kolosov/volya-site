@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>VOLYA — бесплатный VPN через Telegram | обход блокировок, без логов</title>
-<meta name="description" content="Бесплатный VPN VOLYA через Telegram-бот: доступ к заблокированным сайтам за 1 минуту. Стойкость к DPI (технология Вуаль), 5 устройств, без логов и регистрации.">
+<meta name="description" content="Бесплатный VPN VOLYA через Telegram-бот: доступ к заблокированным сайтам за 1 минуту. Стойкость к DPI (технология VEIL), 5 устройств, без логов и регистрации.">
 <meta name="keywords" content="бесплатный VPN, VPN Telegram, обход блокировок, VPN без логов, доступ к заблокированным сайтам, free VPN, VPN бот, свободный интернет">
 <link rel="canonical" href="https://volya.cloud/">
 <meta name="robots" content="index, follow">
@@ -31,7 +31,7 @@
 <!-- JSON-LD: Organization + SoftwareApplication + FAQPage (GEO/AI-цитируемость) -->
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"VOLYA","url":"https://volya.cloud/","logo":"https://volya.cloud/logo.png","sameAs":["https://t.me/volya_gate_bot"],"description":"Бесплатный VPN-сервис через Telegram-бот: доступ к свободному интернету, обход блокировок, без логов."}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"VOLYA VPN","applicationCategory":"SecurityApplication","operatingSystem":"Android, iOS, Windows","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Бесплатный VPN через Telegram-бот. Обход блокировок, стойкость к DPI, 5 устройств, без логов и регистрации.","url":"https://volya.cloud/"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"VOLYA — это бесплатно?","acceptedAnswer":{"@type":"Answer","text":"Да. Пока проект в бета-тестировании, VOLYA полностью бесплатен: без регистрации, паролей и платёжных данных. Ключ доступа выдаётся в Telegram-боте за 1 минуту."}},{"@type":"Question","name":"Как получить бесплатный VPN VOLYA?","acceptedAnswer":{"@type":"Answer","text":"Откройте Telegram-бот @volya_gate_bot, нажмите «Получить ключ», выберите платформу (Android, iOS, Windows) и следуйте пошаговой инструкции. Подключение занимает меньше минуты."}},{"@type":"Question","name":"Увидит ли провайдер, что я использую VPN?","acceptedAnswer":{"@type":"Answer","text":"Нет. Технология Вуаль делает трафик неотличимым от обычного HTTPS. Системы DPI, которые используют провайдеры, не могут обнаружить защищённое соединение."}},{"@type":"Question","name":"На скольких устройствах работает один ключ?","acceptedAnswer":{"@type":"Answer","text":"Один ключ работает одновременно на 5 устройствах — телефон, планшет, ПК и ТВ. Скорость не делится на тарифы."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"VOLYA — это бесплатно?","acceptedAnswer":{"@type":"Answer","text":"Да. Пока проект в бета-тестировании, VOLYA полностью бесплатен: без регистрации, паролей и платёжных данных. Ключ доступа выдаётся в Telegram-боте за 1 минуту."}},{"@type":"Question","name":"Как получить бесплатный VPN VOLYA?","acceptedAnswer":{"@type":"Answer","text":"Откройте Telegram-бот @volya_gate_bot, нажмите «Получить ключ», выберите платформу (Android, iOS, Windows) и следуйте пошаговой инструкции. Подключение занимает меньше минуты."}},{"@type":"Question","name":"Увидит ли провайдер, что я использую VPN?","acceptedAnswer":{"@type":"Answer","text":"Нет. Технология VEIL делает трафик неотличимым от обычного HTTPS. Системы DPI, которые используют провайдеры, не могут обнаружить защищённое соединение."}},{"@type":"Question","name":"На скольких устройствах работает один ключ?","acceptedAnswer":{"@type":"Answer","text":"Один ключ работает одновременно на 5 устройствах — телефон, планшет, ПК и ТВ. Скорость не делится на тарифы."}}]}</script>
 <link rel="icon" type="image/png" href="favicon.png?v=2">
 <link href="assets/fonts/fonts.css" rel="stylesheet">
 <style>
@@ -156,7 +156,7 @@ img{max-width:100%;display:block}
       <a class="hov hov-cta" href="https://t.me/volya_gate_bot" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:16px;color:#fff;padding:16px 30px;border-radius:14px;background:linear-gradient(100deg,#7C3AED,#5B2BD6);box-shadow:0 16px 36px -12px rgba(124,58,237,.6)"><span data-i18n="hero.cta1">Подключить бесплатно</span> →</a>
       <a class="hov hov-secondary" href="#how" style="display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:16px;color:#221544;padding:16px 28px;border-radius:14px;background:#fff;border:1px solid rgba(46,26,102,.12)" data-i18n="hero.cta2">Как это работает</a>
     </div>
-    <div data-reveal data-delay="320" id="hero-chips" style="display:flex;gap:10px;flex-wrap:wrap"><span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#5E5478;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid rgba(46,26,102,.08)"><span style="width:5px;height:5px;border-radius:50%;background:linear-gradient(#7C3AED,#2A8FE0)"></span>No logs</span><span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#5E5478;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid rgba(46,26,102,.08)"><span style="width:5px;height:5px;border-radius:50%;background:linear-gradient(#7C3AED,#2A8FE0)"></span>Veil</span><span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#5E5478;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid rgba(46,26,102,.08)"><span style="width:5px;height:5px;border-radius:50%;background:linear-gradient(#7C3AED,#2A8FE0)"></span>5 devices</span><span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#5E5478;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid rgba(46,26,102,.08)"><span style="width:5px;height:5px;border-radius:50%;background:linear-gradient(#7C3AED,#2A8FE0)"></span>Free in beta</span></div>
+    <div data-reveal data-delay="320" id="hero-chips" style="display:flex;gap:10px;flex-wrap:wrap"><span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#5E5478;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid rgba(46,26,102,.08)"><span style="width:5px;height:5px;border-radius:50%;background:linear-gradient(#7C3AED,#2A8FE0)"></span>No logs</span><span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#5E5478;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid rgba(46,26,102,.08)"><span style="width:5px;height:5px;border-radius:50%;background:linear-gradient(#7C3AED,#2A8FE0)"></span>VEIL</span><span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#5E5478;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid rgba(46,26,102,.08)"><span style="width:5px;height:5px;border-radius:50%;background:linear-gradient(#7C3AED,#2A8FE0)"></span>5 devices</span><span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#5E5478;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid rgba(46,26,102,.08)"><span style="width:5px;height:5px;border-radius:50%;background:linear-gradient(#7C3AED,#2A8FE0)"></span>Free in beta</span></div>
   </div>
   <div class="hero-visual" data-reveal data-delay="120" style="position:relative;min-height:480px;display:flex;align-items:center;justify-content:center">
     <div style="position:relative;width:100%;max-width:430px;aspect-ratio:1;border-radius:38px;background:linear-gradient(160deg,#fff,#F2EFFB);border:1px solid rgba(46,26,102,.08);box-shadow:0 44px 90px -34px rgba(46,26,102,.42);overflow:hidden;display:flex;align-items:center;justify-content:center">
@@ -260,7 +260,7 @@ img{max-width:100%;display:block}
       <div style="position:relative;font-size:30px;width:64px;height:64px;display:flex;align-items:center;justify-content:center;border-radius:17px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18)" data-i18n="featureMain.icon">🛡</div>
       <div style="position:relative">
         <h3 class="shdisplay" style="font-weight:600;font-size:26px;letter-spacing:-.01em;margin-bottom:12px" data-i18n="featureMain.title">Абсолютная невидимость</h3>
-        <p style="font-size:15.5px;line-height:1.6;color:#C9BEF0;max-width:430px" data-i18n="featureMain.text">Протокол Вуаль маскирует трафик под обычное HTTPS-соединение. Системы глубокого анализа (DPI) не видят защищённый туннель — для провайдера это обычный визит на сайт.</p>
+        <p style="font-size:15.5px;line-height:1.6;color:#C9BEF0;max-width:430px" data-i18n="featureMain.text">Протокол VEIL маскирует трафик под обычное HTTPS-соединение. Системы глубокого анализа (DPI) не видят защищённый туннель — для провайдера это обычный визит на сайт.</p>
       </div>
     </div>
     <div id="features-list" style="display:grid;gap:16px"><div class="hov hov-card-feat" style="display:flex;gap:18px;padding:24px;border-radius:22px;background:#fff;border:1px solid rgba(46,26,102,.07);box-shadow:0 8px 30px -20px rgba(46,26,102,.3)">
@@ -454,7 +454,7 @@ img{max-width:100%;display:block}
         <span class="faq-icon" style="flex-shrink:0;font-size:24px;color:#7C3AED;transition:transform .3s">+</span>
       </button>
       <div class="faq-answer" style="max-height:0;overflow:hidden;transition:max-height .4s ease">
-        <p style="padding:0 24px 22px;font-size:15px;line-height:1.65;color:#6B6088">Yes. Volya uses Veil — our own next-generation traffic-protection technology. The connection looks like ordinary HTTPS, data is encrypted end-to-end, and no activity logs are kept.</p>
+        <p style="padding:0 24px 22px;font-size:15px;line-height:1.65;color:#6B6088">Yes. Volya uses VEIL — our own next-generation traffic-protection technology. The connection looks like ordinary HTTPS, data is encrypted end-to-end, and no activity logs are kept.</p>
       </div>
     </div><div class="faq-item" style="border-radius:16px;background:#fff;border:1px solid rgba(46,26,102,.07);box-shadow:0 6px 22px -16px rgba(46,26,102,.3);overflow:hidden">
       <button class="faq-button" onclick="toggleFaq(1)" style="width:100%;display:flex;align-items:center;gap:16px;text-align:left;padding:21px 24px;background:transparent;border:none;color:#1A0F3D;cursor:pointer;font-family:'Manrope';font-weight:700;font-size:16.5px">
@@ -462,7 +462,7 @@ img{max-width:100%;display:block}
         <span class="faq-icon" style="flex-shrink:0;font-size:24px;color:#7C3AED;transition:transform .3s">+</span>
       </button>
       <div class="faq-answer" style="max-height:0;overflow:hidden;transition:max-height .4s ease">
-        <p style="padding:0 24px 22px;font-size:15px;line-height:1.65;color:#6B6088">No. Veil makes traffic indistinguishable from ordinary HTTPS. The DPI systems used by ISPs cannot detect the protected connection.</p>
+        <p style="padding:0 24px 22px;font-size:15px;line-height:1.65;color:#6B6088">No. VEIL makes traffic indistinguishable from ordinary HTTPS. The DPI systems used by ISPs cannot detect the protected connection.</p>
       </div>
     </div><div class="faq-item" style="border-radius:16px;background:#fff;border:1px solid rgba(46,26,102,.07);box-shadow:0 6px 22px -16px rgba(46,26,102,.3);overflow:hidden">
       <button class="faq-button" onclick="toggleFaq(2)" style="width:100%;display:flex;align-items:center;gap:16px;text-align:left;padding:21px 24px;background:transparent;border:none;color:#1A0F3D;cursor:pointer;font-family:'Manrope';font-weight:700;font-size:16.5px">
@@ -530,11 +530,11 @@ img{max-width:100%;display:block}
 // ── i18n dictionaries ────────────────────────────────────────────────────────
 const RU = {
   nav: {services:'Сервисы',features:'Возможности',privacy:'Приватность',tariffs:'Скорость',terms:'Условия',faq:'FAQ',connect:'Подключить'},
-  hero: {badge:'Бета — бесплатно для всех',title1:'Свободный интернет',title2:'без границ',sub:'Защищённое подключение нового поколения. Серфинг без блокировок и слежки — в один клик. Без логов. Без компромиссов.',cta1:'Подключить бесплатно',cta2:'Как это работает',chips:['Без логов','Вуаль','5 устройств','Бесплатно в бете']},
+  hero: {badge:'Бета — бесплатно для всех',title1:'Свободный интернет',title2:'без границ',sub:'Защищённое подключение нового поколения. Серфинг без блокировок и слежки — в один клик. Без логов. Без компромиссов.',cta1:'Подключить бесплатно',cta2:'Как это работает',chips:['Без логов','VEIL','5 устройств','Бесплатно в бете']},
   proof: {dpi:'не виден',logsLabel:'Логов'},
   services: {kicker:'Снова доступно',title1:'Работает всё,',title2:'что вам нужно',sub:'Один ключ открывает сервисы, которые заблокированы, замедлены или недоступны там, где вы находитесь.',caption:'…и тысячи других сайтов. Что разрешено, а что технически блокируется —',captionLink:'честно в Условиях'},
   features: {kicker:'Технологии',title:'Почему Воля'},
-  featureMain: {icon:'🛡',title:'Абсолютная невидимость',text:'Протокол Вуаль маскирует трафик под обычное HTTPS-соединение. Системы глубокого анализа (DPI) не видят защищённый туннель — для провайдера это обычный визит на сайт.'},
+  featureMain: {icon:'🛡',title:'Абсолютная невидимость',text:'Протокол VEIL маскирует трафик под обычное HTTPS-соединение. Системы глубокого анализа (DPI) не видят защищённый туннель — для провайдера это обычный визит на сайт.'},
   featureList: [
     {icon:'🔒',title:'Нулевые логи',text:'Мы не ведём журналов активности. Ваш IP, сайты и запросы нигде не хранятся.',link:'/terms.html#privacy',linkText:'Что мы знаем'},
     {icon:'⚡',title:'Чистый интернет',text:'Блокировка рекламы и трекеров на уровне сервера — быстрее и экономнее.'},
@@ -568,8 +568,8 @@ const RU = {
   ],
   faq: {kicker:'Вопросы',title:'Частые вопросы',more:'Полные правила, приватность и философия проекта —',moreLink:'в разделе Условия'},
   faqList: [
-    {q:'Это безопасно?',a:'Да. Воля использует Вуаль — собственную технологию защиты трафика нового поколения. Соединение выглядит как обычный HTTPS, данные шифруются end-to-end, а логи активности не ведутся.'},
-    {q:'Увидит ли провайдер, что я использую Volya?',a:'Нет. Технология Вуаль делает трафик неотличимым от обычного HTTPS. Системы DPI, которые используют провайдеры, не могут обнаружить защищённое соединение.'},
+    {q:'Это безопасно?',a:'Да. Воля использует VEIL — собственную технологию защиты трафика нового поколения. Соединение выглядит как обычный HTTPS, данные шифруются end-to-end, а логи активности не ведутся.'},
+    {q:'Увидит ли провайдер, что я использую Volya?',a:'Нет. Технология VEIL делает трафик неотличимым от обычного HTTPS. Системы DPI, которые используют провайдеры, не могут обнаружить защищённое соединение.'},
     {q:'Это бесплатно?',a:'Да, пока проект в бета-тестировании — всё полностью бесплатно. Мы будем рады вашей обратной связи: отзывы помогают улучшать сервис.'},
     {q:'На скольких устройствах можно использовать?',a:'Один ключ работает одновременно на 5 устройствах. Этого хватит для телефона, планшета, ПК и ТВ.'},
     {q:'Скорость правда без лимита?',a:'Мы не режем скорость и не делим её на тарифы. Ты получаешь максимум, который выдаёт узел — его хватает на 4K, игры и все 5 устройств разом. Реальная цифра зависит от твоего провайдера и расстояния до сервера, но искусственных ограничений с нашей стороны нет.'},
@@ -581,11 +581,11 @@ const RU = {
 
 const EN = {
   nav: {services:'Services',features:'Features',privacy:'Privacy',tariffs:'Speed',terms:'Terms',faq:'FAQ',connect:'Connect'},
-  hero: {badge:'Beta — free for everyone',title1:'A free internet',title2:'without borders',sub:'A next-generation protected connection. Unrestricted, untracked browsing in one click. No logs. No compromises.',cta1:'Connect for free',cta2:'How it works',chips:['No logs','Veil','5 devices','Free in beta']},
+  hero: {badge:'Beta — free for everyone',title1:'A free internet',title2:'without borders',sub:'A next-generation protected connection. Unrestricted, untracked browsing in one click. No logs. No compromises.',cta1:'Connect for free',cta2:'How it works',chips:['No logs','VEIL','5 devices','Free in beta']},
   proof: {dpi:'invisible',logsLabel:'Logs'},
   services: {kicker:'Unblocked',title1:'Everything you need',title2:'works again',sub:'One key opens the services that are blocked, throttled or unavailable wherever you are.',caption:'…and thousands more sites. What is allowed and what is technically blocked is',captionLink:'honest in the Terms'},
   features: {kicker:'Technology',title:'Why Volya'},
-  featureMain: {icon:'🛡',title:'Absolute invisibility',text:'The Veil protocol masks traffic as ordinary HTTPS. Deep packet inspection (DPI) cannot detect the protected tunnel — to your ISP it looks like a normal website visit.'},
+  featureMain: {icon:'🛡',title:'Absolute invisibility',text:'The VEIL protocol masks traffic as ordinary HTTPS. Deep packet inspection (DPI) cannot detect the protected tunnel — to your ISP it looks like a normal website visit.'},
   featureList: [
     {icon:'🔒',title:'Zero logs',text:'We keep no activity logs. Your IP, sites and requests are stored nowhere.',link:'/terms.html#privacy',linkText:'What we know'},
     {icon:'⚡',title:'Clean internet',text:'Server-side ad and tracker blocking — faster and more efficient.'},
@@ -619,8 +619,8 @@ const EN = {
   ],
   faq: {kicker:'Questions',title:'Frequently asked',more:'Full rules, privacy and the philosophy of the project —',moreLink:'in the Terms'},
   faqList: [
-    {q:'Is it safe?',a:'Yes. Volya uses Veil — our own next-generation traffic-protection technology. The connection looks like ordinary HTTPS, data is encrypted end-to-end, and no activity logs are kept.'},
-    {q:'Will my ISP see that I use Volya?',a:'No. Veil makes traffic indistinguishable from ordinary HTTPS. The DPI systems used by ISPs cannot detect the protected connection.'},
+    {q:'Is it safe?',a:'Yes. Volya uses VEIL — our own next-generation traffic-protection technology. The connection looks like ordinary HTTPS, data is encrypted end-to-end, and no activity logs are kept.'},
+    {q:'Will my ISP see that I use Volya?',a:'No. VEIL makes traffic indistinguishable from ordinary HTTPS. The DPI systems used by ISPs cannot detect the protected connection.'},
     {q:'Is it free?',a:'Yes, while the project is in beta — completely free. We welcome your feedback: it helps us improve the service.'},
     {q:'How many devices can I use?',a:'One key works on 5 devices simultaneously. That covers a phone, tablet, PC and TV.'},
     {q:'Is the speed really unlimited?',a:'We don’t throttle speed or split it into tiers. You get the maximum the node can deliver — enough for 4K, gaming and all 5 devices at once. The real number depends on your ISP and distance to the server, but there are no limits on our side.'},
@@ -632,11 +632,11 @@ const EN = {
 
 const UK = {
   nav: {services:'Сервіси',features:'Можливості',privacy:'Приватність',tariffs:'Швидкість',terms:'Умови',faq:'FAQ',connect:'Підключити'},
-  hero: {badge:'Бета — безкоштовно для всіх',title1:'Вільний інтернет',title2:'без кордонів',sub:'Захищене підключення нового покоління. Серфінг без блокувань і стеження — в один клік. Без логів. Без компромісів.',cta1:'Підключити безкоштовно',cta2:'Як це працює',chips:['Без логів','Вуаль','5 пристроїв','Безкоштовно в беті']},
+  hero: {badge:'Бета — безкоштовно для всіх',title1:'Вільний інтернет',title2:'без кордонів',sub:'Захищене підключення нового покоління. Серфінг без блокувань і стеження — в один клік. Без логів. Без компромісів.',cta1:'Підключити безкоштовно',cta2:'Як це працює',chips:['Без логів','VEIL','5 пристроїв','Безкоштовно в беті']},
   proof: {dpi:'не видно',logsLabel:'Логів'},
   services: {kicker:'Знову доступно',title1:'Працює все,',title2:'що вам потрібно',sub:'Один ключ відкриває сервіси, які заблоковані, сповільнені або недоступні там, де ви перебуваєте.',caption:'…і тисячі інших сайтів. Що дозволено, а що технічно блокується —',captionLink:'чесно в Умовах'},
   features: {kicker:'Технології',title:'Чому Воля'},
-  featureMain: {icon:'🛡',title:'Абсолютна невидимість',text:'Протокол Вуаль маскує трафік під звичайне HTTPS-з’єднання. Системи глибокого аналізу (DPI) не бачать захищений тунель — для провайдера це звичайний візит на сайт.'},
+  featureMain: {icon:'🛡',title:'Абсолютна невидимість',text:'Протокол VEIL маскує трафік під звичайне HTTPS-з’єднання. Системи глибокого аналізу (DPI) не бачать захищений тунель — для провайдера це звичайний візит на сайт.'},
   featureList: [
     {icon:'🔒',title:'Нульові логи',text:'Ми не ведемо журналів активності. Ваш IP, сайти та запити ніде не зберігаються.',link:'/terms.html#privacy',linkText:'Що ми знаємо'},
     {icon:'⚡',title:'Чистий інтернет',text:'Блокування реклами та трекерів на рівні сервера — швидше й економніше.'},
@@ -670,8 +670,8 @@ const UK = {
   ],
   faq: {kicker:'Питання',title:'Часті запитання',more:'Повні правила, приватність і філософія проєкту —',moreLink:'у розділі Умови'},
   faqList: [
-    {q:'Це безпечно?',a:'Так. Воля використовує Вуаль — власну технологію захисту трафіку нового покоління. З’єднання виглядає як звичайний HTTPS, дані шифруються end-to-end, а логи активності не ведуться.'},
-    {q:'Чи побачить провайдер, що я використовую Volya?',a:'Ні. Технологія Вуаль робить трафік невідрізнюваним від звичайного HTTPS. Системи DPI, які використовують провайдери, не можуть виявити захищене з’єднання.'},
+    {q:'Це безпечно?',a:'Так. Воля використовує VEIL — власну технологію захисту трафіку нового покоління. З’єднання виглядає як звичайний HTTPS, дані шифруються end-to-end, а логи активності не ведуться.'},
+    {q:'Чи побачить провайдер, що я використовую Volya?',a:'Ні. Технологія VEIL робить трафік невідрізнюваним від звичайного HTTPS. Системи DPI, які використовують провайдери, не можуть виявити захищене з’єднання.'},
     {q:'Це безкоштовно?',a:'Так, поки проєкт у бета-тестуванні — все повністю безкоштовно. Ми будемо раді вашому відгуку: він допомагає покращувати сервіс.'},
     {q:'На скількох пристроях можна використовувати?',a:'Один ключ працює одночасно на 5 пристроях. Цього вистачить для телефона, планшета, ПК і ТВ.'},
     {q:'Швидкість справді без ліміту?',a:'Ми не ріжемо швидкість і не ділимо її на тарифи. Ти отримуєш максимум, який видає вузол — його вистачає на 4K, ігри та всі 5 пристроїв одразу. Реальна цифра залежить від твого провайдера і відстані до сервера, але штучних обмежень з нашого боку немає.'},
@@ -683,11 +683,11 @@ const UK = {
 
 const KK = {
   nav: {services:'Сервистер',features:'Мүмкіндіктер',privacy:'Құпиялылық',tariffs:'Жылдамдық',terms:'Шарттар',faq:'FAQ',connect:'Қосылу'},
-  hero: {badge:'Бета — барлығына тегін',title1:'Еркін интернет',title2:'шекарасыз',sub:'Жаңа буын қорғалған қосылым. Бөгеусіз және бақылаусыз серфинг — бір басумен. Логсыз. Ымырасыз.',cta1:'Тегін қосылу',cta2:'Бұл қалай жұмыс істейді',chips:['Логсыз','Вуаль','5 құрылғы','Бетада тегін']},
+  hero: {badge:'Бета — барлығына тегін',title1:'Еркін интернет',title2:'шекарасыз',sub:'Жаңа буын қорғалған қосылым. Бөгеусіз және бақылаусыз серфинг — бір басумен. Логсыз. Ымырасыз.',cta1:'Тегін қосылу',cta2:'Бұл қалай жұмыс істейді',chips:['Логсыз','VEIL','5 құрылғы','Бетада тегін']},
   proof: {dpi:'көрінбейді',logsLabel:'Логтар'},
   services: {kicker:'Қайта қолжетімді',title1:'Бәрі жұмыс істейді,',title2:'сізге не қажет',sub:'Бір кілт сіз жүрген жерде бөгелген, баяулатылған немесе қолжетімсіз сервистерді ашады.',caption:'…және тағы мыңдаған сайт. Не рұқсат етілген, ал не техникалық түрде бөгеледі —',captionLink:'Шарттарда шынайы'},
   features: {kicker:'Технологиялар',title:'Неге Воля'},
-  featureMain: {icon:'🛡',title:'Толық көрінбеушілік',text:'Вуаль хаттамасы трафикті кәдімгі HTTPS қосылымы ретінде бүркемелейді. Терең талдау жүйелері (DPI) қорғалған туннельді көрмейді — провайдер үшін бұл әдеттегі сайтқа кіру.'},
+  featureMain: {icon:'🛡',title:'Толық көрінбеушілік',text:'VEIL хаттамасы трафикті кәдімгі HTTPS қосылымы ретінде бүркемелейді. Терең талдау жүйелері (DPI) қорғалған туннельді көрмейді — провайдер үшін бұл әдеттегі сайтқа кіру.'},
   featureList: [
     {icon:'🔒',title:'Нөлдік логтар',text:'Біз белсенділік журналын жүргізбейміз. Сіздің IP, сайттар мен сұраныстар ешжерде сақталмайды.',link:'/terms.html#privacy',linkText:'Біз не білеміз'},
     {icon:'⚡',title:'Таза интернет',text:'Жарнама мен трекерлерді сервер деңгейінде бөгеу — жылдамырақ әрі үнемдірек.'},
@@ -721,8 +721,8 @@ const KK = {
   ],
   faq: {kicker:'Сұрақтар',title:'Жиі қойылатын сұрақтар',more:'Толық ережелер, құпиялылық және жоба философиясы —',moreLink:'Шарттар бөлімінде'},
   faqList: [
-    {q:'Бұл қауіпсіз бе?',a:'Иә. Воля Вуаль — трафикті қорғаудың жаңа буын меншікті технологиясын қолданады. Қосылым кәдімгі HTTPS сияқты көрінеді, деректер end-to-end шифрланады, ал белсенділік логтары жүргізілмейді.'},
-    {q:'Провайдер менің Volya қолданғанымды көре ме?',a:'Жоқ. Вуаль технологиясы трафикті кәдімгі HTTPS-тен ажыратылмайтын етеді. Провайдерлер қолданатын DPI жүйелері қорғалған қосылымды анықтай алмайды.'},
+    {q:'Бұл қауіпсіз бе?',a:'Иә. Воля VEIL — трафикті қорғаудың жаңа буын меншікті технологиясын қолданады. Қосылым кәдімгі HTTPS сияқты көрінеді, деректер end-to-end шифрланады, ал белсенділік логтары жүргізілмейді.'},
+    {q:'Провайдер менің Volya қолданғанымды көре ме?',a:'Жоқ. VEIL технологиясы трафикті кәдімгі HTTPS-тен ажыратылмайтын етеді. Провайдерлер қолданатын DPI жүйелері қорғалған қосылымды анықтай алмайды.'},
     {q:'Бұл тегін бе?',a:'Иә, жоба бета-тестілеуде тұрғанда — бәрі толық тегін. Пікіріңізге қуаныштымыз: ол сервисті жақсартуға көмектеседі.'},
     {q:'Қанша құрылғыда қолдануға болады?',a:'Бір кілт бір мезгілде 5 құрылғыда жұмыс істейді. Бұл телефон, планшет, ДК және ТВ үшін жеткілікті.'},
     {q:'Жылдамдық шынымен шексіз бе?',a:'Біз жылдамдықты кеспейміз және оны тарифке бөлмейміз. Сен түйін бере алатын максимумды аласың — ол 4K, ойындар және 5 құрылғының бәріне бірден жетеді. Нақты сан провайдеріңе және серверге дейінгі қашықтыққа байланысты, бірақ біздің тараптан жасанды шектеу жоқ.'},
@@ -734,11 +734,11 @@ const KK = {
 
 const ZH = {
   nav: {services:'服务',features:'功能',privacy:'隐私',tariffs:'速度',terms:'条款',faq:'常见问题',connect:'连接'},
-  hero: {badge:'测试版 — 全员免费',title1:'自由的互联网',title2:'没有边界',sub:'新一代加密连接。一键畅游，不被封锁、不被追踪。无日志。无妥协。',cta1:'免费连接',cta2:'工作原理',chips:['无日志','Veil','5 台设备','测试版免费']},
+  hero: {badge:'测试版 — 全员免费',title1:'自由的互联网',title2:'没有边界',sub:'新一代加密连接。一键畅游，不被封锁、不被追踪。无日志。无妥协。',cta1:'免费连接',cta2:'工作原理',chips:['无日志','VEIL','5 台设备','测试版免费']},
   proof: {dpi:'不可见',logsLabel:'日志'},
   services: {kicker:'重新可用',title1:'一切照常运行，',title2:'你所需要的',sub:'一把钥匙即可打开在你所在地区被封锁、限速或无法访问的服务。',caption:'……以及成千上万的其他网站。什么被允许、什么在技术上被屏蔽 —',captionLink:'条款中如实说明'},
   features: {kicker:'技术',title:'为什么选择 Volya'},
-  featureMain: {icon:'🛡',title:'绝对隐形',text:'Veil 协议将流量伪装成普通的 HTTPS 连接。深度包检测（DPI）无法发现加密隧道 — 在运营商看来，这只是一次普通的网站访问。'},
+  featureMain: {icon:'🛡',title:'绝对隐形',text:'VEIL 协议将流量伪装成普通的 HTTPS 连接。深度包检测（DPI）无法发现加密隧道 — 在运营商看来，这只是一次普通的网站访问。'},
   featureList: [
     {icon:'🔒',title:'零日志',text:'我们不保留任何活动日志。你的 IP、访问的网站和请求不会存储在任何地方。',link:'/terms.html#privacy',linkText:'我们知道什么'},
     {icon:'⚡',title:'纯净上网',text:'在服务器端屏蔽广告和追踪器 — 更快、更省流量。'},
@@ -772,8 +772,8 @@ const ZH = {
   ],
   faq: {kicker:'问题',title:'常见问题',more:'完整规则、隐私和项目理念 —',moreLink:'见条款页'},
   faqList: [
-    {q:'安全吗？',a:'安全。Volya 使用 Veil — 我们自研的新一代流量保护技术。连接看起来就像普通 HTTPS，数据端到端加密，且不保留活动日志。'},
-    {q:'运营商会看到我在用 Volya 吗？',a:'不会。Veil 技术让流量与普通 HTTPS 无法区分。运营商使用的 DPI 系统无法检测到加密连接。'},
+    {q:'安全吗？',a:'安全。Volya 使用 VEIL — 我们自研的新一代流量保护技术。连接看起来就像普通 HTTPS，数据端到端加密，且不保留活动日志。'},
+    {q:'运营商会看到我在用 Volya 吗？',a:'不会。VEIL 技术让流量与普通 HTTPS 无法区分。运营商使用的 DPI 系统无法检测到加密连接。'},
     {q:'免费吗？',a:'免费。在项目测试阶段 — 完全免费。我们欢迎你的反馈：它能帮助我们改进服务。'},
     {q:'可以在几台设备上使用？',a:'一把钥匙可同时在 5 台设备上使用。足够覆盖手机、平板、电脑和电视。'},
     {q:'速度真的不限吗？',a:'我们不限速，也不按套餐拆分速度。你能获得节点所能提供的最高速度 — 足以支持 4K、游戏和 5 台设备同时使用。实际数值取决于你的运营商和到服务器的距离，但我们这边没有任何人为限制。'},
