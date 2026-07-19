@@ -273,7 +273,7 @@ img{max-width:100%;display:block}
       </div>
       <div style="display:flex;gap:14px;padding:20px;border-radius:16px;background:linear-gradient(135deg,#221544,#3A2178);color:#fff;margin-bottom:18px">
         <span style="font-size:22px;flex-shrink:0">📜</span>
-        <p id="legal-dmca" style="font-size:14.5px;line-height:1.6;color:#E2DAF6"></p>
+        <p id="legal-claims" style="font-size:14.5px;line-height:1.6;color:#E2DAF6"></p>
       </div>
       <div style="padding:20px;border-radius:16px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.22)">
         <div style="font-weight:800;font-size:14px;color:#B45309;margin-bottom:12px" data-i18n="legal.noPromiseTitle">Чего мы НЕ обещаем</div>
@@ -321,7 +321,7 @@ const LADDER_STYLE = [
 const RU = {
   nav: {services:'Сервисы',features:'Возможности',privacy:'Приватность',tariffs:'Тарифы',terms:'Условия',faq:'FAQ',connect:'Подключить'},
   hero: {badge:'📖 Документация · Версия 1.0', title1:'Условия использования', title2:'и приватность', sub:'Здесь подробно о том, как устроен VOLYA, что мы знаем и НЕ знаем о вас, и по каким правилам всё работает. Без юридического канцелярита — человеческим языком, но конкретно.',
-    meta: [{text:'📅 Действует с 27 июня 2026'}, {text:'⏱ Чтение ~8 минут'}, {text:'🇺🇸 Юрисдикция США', green:true}]},
+    meta: [{text:'📅 Действует с 27 июня 2026'}, {text:'⏱ Чтение ~8 минут'}, {text:'🌍 Прозрачная юрисдикция', green:true}]},
   philo: {kicker:'Философия проекта', title:'VOLYA — это «воля». Свобода как принцип, а не как фича.', sub:'Шесть ценностей, на которых стоит весь проект — от строчки кода до этого документа.'},
   values: [
     {icon:'🕊', t:'Свобода', d:'Доступ к мировому интернету — базовое право, а не привилегия.'},
@@ -352,7 +352,7 @@ const RU = {
     title:'Как это работает',
     p1:'VOLYA построен на технологии **Вуаль** — одном из самых современных способов маскировки трафика. Обычный VPN провайдер может опознать по «следам» в первых байтах соединения. Вуаль эти следы убирает: ваш трафик внешне выглядит как обычный визит на настоящий легитимный сайт.',
     seesTitle:'👁 Что видит провайдер',
-    sees: ['Что вы подключились к какому-то серверу в США', 'Сколько байт прошло туда и обратно'],
+    sees: ['Что вы подключились к какому-то серверу', 'Сколько байт прошло туда и обратно'],
     blindTitle:'🛡 Чего провайдер НЕ видит',
     blind: ['Что это VPN или VOLYA', 'Какие сайты вы посещаете', 'Какие приложения используете', 'Содержимое сообщений и запросов'],
     note:'**Тарифы работают «внутри» сервера.** Три тарифа — 10, 20 и 30 Мбит/с — это отдельные «входы» с разными портами, а ограничение скорости делает движок Вуали на уровне сети. Переключение тарифа моментально и ничего не нужно переустанавливать.'
@@ -382,10 +382,10 @@ const RU = {
     allowedTitle:'✓ Разрешено',
     allowed: ['Личный VPN, обход геоблокировок (соцсети, YouTube, Netflix)', 'Приватный сёрфинг и защита в публичных Wi-Fi', 'Любой легальный контент — включая взрослый', 'Любые мессенджеры и звонки', 'Работа, учёба, развлечения'],
     prohibitedTitle:'✗ Запрещено',
-    prohibited: ['DDoS-атаки, port scanning, попытки взлома', 'Рассылка спама и фишинга', 'CSAM (детская порнография)', 'Деятельность, связанная с терроризмом', 'Использование под санкциями США (OFAC)'],
+    prohibited: ['DDoS-атаки, port scanning, попытки взлома', 'Рассылка спама и фишинга', 'CSAM (детская порнография)', 'Деятельность, связанная с терроризмом', 'Использование под международными санкциями'],
     blockedTitle:'🔧 Технически заблокировано на уровне сервера',
     blocked: [
-      {what:'Торренты и P2P', why:'Главный источник DMCA-жалоб. У нас один общий IP — одна жалоба может уронить сервис для всех. Заблокированный торрент жалоб не создаёт.'},
+      {what:'Торренты и P2P', why:'Главный источник жалоб правообладателей. У нас один общий IP — одна жалоба может уронить сервис для всех. Заблокированный торрент жалоб не создаёт.'},
       {what:'Порт 25 (SMTP)', why:'Канал для прямой рассылки писем и спама. Блокировка защищает наш IP от чёрных списков. Обычная почта через 465/587 (Gmail, Outlook) работает.'}
     ],
     warn:'Если торрент-клиент «не качает» через VOLYA — это **не поломка**, а нормальное поведение. Качайте торренты по обычному интернету: VOLYA для этого не подходит.'
@@ -403,12 +403,12 @@ const RU = {
   ],
   legal: {
     title:'Юридический статус',
-    p1:'VOLYA работает на серверах в США — значит, юрисдикция сервиса американская. Мы квалифицируемся как **provider of transitory digital network communications** (17 U.S.C. § 512(a)) — просто транзитный канал, не контролирующий и не хранящий содержимое трафика.',
+    p1:'VOLYA — просто транзитный сетевой канал (mere conduit): мы технически не контролируем и не храним содержимое трафика. Поэтому мы не отвечаем за то, что именно передают пользователи — мы этого не видим и не логируем.',
     forUsTitle:'Для нас',
     forUs:'Мы **не обязаны** фильтровать или цензурировать контент и **не несём вторичной ответственности** за действия пользователей — потому что не контролируем и не знаем, что именно они делают.',
     forYouTitle:'Для вас',
     forYou:'Допустимость использования VPN определяется **законом вашей страны**. Если у вас есть ограничения на VPN или конкретные сайты — это ваша зона ответственности.',
-    dmca:'На DMCA-жалобы ответ прост: «We are a transitory network service. We do not store, log or have access to user content.» С нас взять нечего — и это не уловка, а техническая реальность.',
+    claims:'На жалобы правообладателей ответ прост: «Мы — транзитный сетевой сервис. Мы не храним, не логируем и не имеем доступа к пользовательскому контенту.» С нас взять нечего — и это не уловка, а техническая реальность.',
     noPromiseTitle:'Чего мы НЕ обещаем',
     noPromise: ['VOLYA — бета-проект: сервис может быть временно недоступен из-за техработ или проблем у хостинга.', 'Мы не отвечаем за убытки из-за недоступности сервиса.', 'Обход всех блокировок не гарантирован — отдельные сайты используют доп. ограничения (например, по геолокации карты), которые VPN не решает.']
   },
@@ -424,7 +424,7 @@ const RU = {
 const EN = {
   nav: {services:'Services',features:'Features',privacy:'Privacy',tariffs:'Plans',terms:'Terms',faq:'FAQ',connect:'Connect'},
   hero: {badge:'📖 Documentation · Version 1.0', title1:'Terms of use', title2:'and privacy', sub:'A detailed look at how VOLYA is built, what we know and do NOT know about you, and the rules everything runs by. No legalese — in plain language, but specific.',
-    meta: [{text:'📅 Effective June 27, 2026'}, {text:'⏱ ~8 min read'}, {text:'🇺🇸 US jurisdiction', green:true}]},
+    meta: [{text:'📅 Effective June 27, 2026'}, {text:'⏱ ~8 min read'}, {text:'🌍 Transparent jurisdiction', green:true}]},
   philo: {kicker:'Project philosophy', title:'VOLYA means “will”. Freedom as a principle, not a feature.', sub:'Six values the whole project stands on — from a line of code to this document.'},
   values: [
     {icon:'🕊', t:'Freedom', d:'Access to the global internet is a basic right, not a privilege.'},
@@ -455,7 +455,7 @@ const EN = {
     title:'How it works',
     p1:'VOLYA is built on **Veil** technology — one of the most advanced traffic-masking approaches. An ordinary VPN can be spotted by “fingerprints” in the first bytes of a connection. Veil removes those: your traffic looks like an ordinary visit to a real, legitimate website.',
     seesTitle:'👁 What your ISP sees',
-    sees: ['That you connected to some server in the US', 'How many bytes went back and forth'],
+    sees: ['That you connected to some server', 'How many bytes went back and forth'],
     blindTitle:'🛡 What your ISP does NOT see',
     blind: ['That it’s a VPN or VOLYA', 'Which sites you visit', 'Which apps you use', 'The content of your messages and requests'],
     note:'**Plans live “inside” the server.** The three plans — 10, 20 and 30 Mbps — are separate “entrances” on different ports, with the speed cap enforced by the Veil engine at the network level. Switching plans is instant and requires no reinstall.'
@@ -485,10 +485,10 @@ const EN = {
     allowedTitle:'✓ Allowed',
     allowed: ['Personal VPN, bypassing geo-blocks (social, YouTube, Netflix)', 'Private browsing and protection on public Wi-Fi', 'Any legal content — including adult', 'Any messengers and calls', 'Work, study, entertainment'],
     prohibitedTitle:'✗ Prohibited',
-    prohibited: ['DDoS attacks, port scanning, hacking attempts', 'Spam and phishing campaigns', 'CSAM (child sexual abuse material)', 'Terrorism-related activity', 'Use under US sanctions (OFAC)'],
+    prohibited: ['DDoS attacks, port scanning, hacking attempts', 'Spam and phishing campaigns', 'CSAM (child sexual abuse material)', 'Terrorism-related activity', 'Use under international sanctions'],
     blockedTitle:'🔧 Technically blocked at the server level',
     blocked: [
-      {what:'Torrents & P2P', why:'The main source of DMCA complaints. We share one IP — a single complaint could take the service down for everyone. A blocked torrent generates no complaints.'},
+      {what:'Torrents & P2P', why:'The main source of rights-holder complaints. We share one IP — a single complaint could take the service down for everyone. A blocked torrent generates no complaints.'},
       {what:'Port 25 (SMTP)', why:'A channel for direct mail and spam. Blocking it keeps our IP off blacklists. Normal email via 465/587 (Gmail, Outlook) works fine.'}
     ],
     warn:'If a torrent client “won’t download” through VOLYA — that’s **not a bug**, it’s expected behaviour. Torrent over your regular internet: VOLYA isn’t made for it.'
@@ -506,12 +506,12 @@ const EN = {
   ],
   legal: {
     title:'Legal status',
-    p1:'VOLYA runs on servers in the US, so the service falls under US jurisdiction. We qualify as a **provider of transitory digital network communications** (17 U.S.C. § 512(a)) — simply a transit channel that doesn’t control or store the content of traffic.',
+    p1:'VOLYA is simply a transit network channel (mere conduit): technically we neither control nor store the content of traffic. That’s why we aren’t responsible for what exactly users transmit — we don’t see it and we don’t log it.',
     forUsTitle:'For us',
     forUs:'We are **not required** to filter or censor content and **bear no secondary liability** for users’ actions — because we don’t control and don’t know what exactly they do.',
     forYouTitle:'For you',
     forYou:'Whether VPN use is permitted is determined by **the law of your country**. If you face restrictions on VPNs or specific sites, that’s your area of responsibility.',
-    dmca:'Our reply to DMCA complaints is simple: “We are a transitory network service. We do not store, log or have access to user content.” There’s nothing to take from us — and that’s not a trick, it’s a technical fact.',
+    claims:'To rights-holder complaints, our reply is simple: “We are a transitory network service. We do not store, log or have access to user content.” There’s nothing to take from us — and that’s not a trick, it’s a technical fact.',
     noPromiseTitle:'What we do NOT promise',
     noPromise: ['VOLYA is a beta project: the service may be temporarily unavailable due to maintenance or hosting issues.', 'We are not liable for losses caused by service downtime.', 'Bypassing every block isn’t guaranteed — some sites use extra restrictions (e.g. card geolocation) that a VPN doesn’t solve.']
   },
@@ -527,7 +527,7 @@ const EN = {
 const UK = {
   nav: {services:'Сервіси',features:'Можливості',privacy:'Приватність',tariffs:'Тарифи',terms:'Умови',faq:'FAQ',connect:'Підключити'},
   hero: {badge:'📖 Документація · Версія 1.0', title1:'Умови використання', title2:'і приватність', sub:'Тут докладно про те, як влаштований VOLYA, що ми знаємо і НЕ знаємо про вас, і за якими правилами все працює. Без юридичного канцеляриту — людською мовою, але конкретно.',
-    meta: [{text:'📅 Діє з 27 червня 2026'}, {text:'⏱ Читання ~8 хвилин'}, {text:'🇺🇸 Юрисдикція США', green:true}]},
+    meta: [{text:'📅 Діє з 27 червня 2026'}, {text:'⏱ Читання ~8 хвилин'}, {text:'🌍 Прозора юрисдикція', green:true}]},
   philo: {kicker:'Філософія проєкту', title:'VOLYA — це «воля». Свобода як принцип, а не як фіча.', sub:'Шість цінностей, на яких стоїть увесь проєкт — від рядка коду до цього документа.'},
   values: [
     {icon:'🕊', t:'Свобода', d:'Доступ до світового інтернету — базове право, а не привілей.'},
@@ -558,7 +558,7 @@ const UK = {
     title:'Як це працює',
     p1:'VOLYA побудований на технології **Вуаль** — одному з найсучасніших способів маскування трафіку. Звичайного VPN провайдер може розпізнати за «слідами» в перших байтах з’єднання. Вуаль ці сліди прибирає: ваш трафік зовні виглядає як звичайний візит на справжній легітимний сайт.',
     seesTitle:'👁 Що бачить провайдер',
-    sees: ['Що ви підключилися до якогось сервера у США', 'Скільки байтів пройшло туди й назад'],
+    sees: ['Що ви підключилися до якогось сервера', 'Скільки байтів пройшло туди й назад'],
     blindTitle:'🛡 Чого провайдер НЕ бачить',
     blind: ['Що це VPN або VOLYA', 'Які сайти ви відвідуєте', 'Які застосунки використовуєте', 'Вміст повідомлень і запитів'],
     note:'**Тарифи працюють «всередині» сервера.** Три тарифи — 10, 20 і 30 Мбіт/с — це окремі «входи» з різними портами, а обмеження швидкості робить рушій Вуалі на рівні мережі. Перемикання тарифу миттєве, і нічого не треба перевстановлювати.'
@@ -588,10 +588,10 @@ const UK = {
     allowedTitle:'✓ Дозволено',
     allowed: ['Особистий VPN, обхід геоблокувань (соцмережі, YouTube, Netflix)', 'Приватний серфінг і захист у публічних Wi-Fi', 'Будь-який легальний контент — включно з дорослим', 'Будь-які месенджери і дзвінки', 'Робота, навчання, розваги'],
     prohibitedTitle:'✗ Заборонено',
-    prohibited: ['DDoS-атаки, port scanning, спроби зламу', 'Розсилка спаму і фішингу', 'CSAM (дитяча порнографія)', 'Діяльність, пов’язана з тероризмом', 'Використання під санкціями США (OFAC)'],
+    prohibited: ['DDoS-атаки, port scanning, спроби зламу', 'Розсилка спаму і фішингу', 'CSAM (дитяча порнографія)', 'Діяльність, пов’язана з тероризмом', 'Використання під міжнародними санкціями'],
     blockedTitle:'🔧 Технічно заблоковано на рівні сервера',
     blocked: [
-      {what:'Торенти і P2P', why:'Головне джерело DMCA-скарг. У нас одна спільна IP — одна скарга може покласти сервіс для всіх. Заблокований торент скарг не створює.'},
+      {what:'Торенти і P2P', why:'Головне джерело скарг правовласників. У нас одна спільна IP — одна скарга може покласти сервіс для всіх. Заблокований торент скарг не створює.'},
       {what:'Порт 25 (SMTP)', why:'Канал для прямої розсилки листів і спаму. Блокування захищає нашу IP від чорних списків. Звичайна пошта через 465/587 (Gmail, Outlook) працює.'}
     ],
     warn:'Якщо торент-клієнт «не качає» через VOLYA — це **не поломка**, а нормальна поведінка. Качайте торенти звичайним інтернетом: VOLYA для цього не підходить.'
@@ -609,12 +609,12 @@ const UK = {
   ],
   legal: {
     title:'Юридичний статус',
-    p1:'VOLYA працює на серверах у США — отже, юрисдикція сервісу американська. Ми кваліфікуємося як **provider of transitory digital network communications** (17 U.S.C. § 512(a)) — просто транзитний канал, що не контролює і не зберігає вміст трафіку.',
+    p1:'VOLYA — просто транзитний мережевий канал (mere conduit): ми технічно не контролюємо і не зберігаємо вміст трафіку. Тому ми не відповідаємо за те, що саме передають користувачі — ми цього не бачимо і не логуємо.',
     forUsTitle:'Для нас',
     forUs:'Ми **не зобов’язані** фільтрувати чи цензурувати контент і **не несемо вторинної відповідальності** за дії користувачів — бо не контролюємо і не знаємо, що саме вони роблять.',
     forYouTitle:'Для вас',
     forYou:'Допустимість використання VPN визначається **законом вашої країни**. Якщо у вас є обмеження на VPN або конкретні сайти — це ваша зона відповідальності.',
-    dmca:'На DMCA-скарги відповідь проста: «We are a transitory network service. We do not store, log or have access to user content.» З нас узяти нічого — і це не виверт, а технічна дійсність.',
+    claims:'На скарги правовласників відповідь проста: «Ми — транзитний мережевий сервіс. Ми не зберігаємо, не логуємо і не маємо доступу до користувацького контенту.» З нас узяти нічого — і це не виверт, а технічна дійсність.',
     noPromiseTitle:'Чого ми НЕ обіцяємо',
     noPromise: ['VOLYA — бета-проєкт: сервіс може бути тимчасово недоступний через техроботи або проблеми в хостингу.', 'Ми не відповідаємо за збитки через недоступність сервісу.', 'Обхід усіх блокувань не гарантований — окремі сайти використовують дод. обмеження (наприклад, за геолокацією картки), які VPN не вирішує.']
   },
@@ -630,7 +630,7 @@ const UK = {
 const KK = {
   nav: {services:'Сервистер',features:'Мүмкіндіктер',privacy:'Құпиялылық',tariffs:'Тарифтер',terms:'Шарттар',faq:'FAQ',connect:'Қосылу'},
   hero: {badge:'📖 Құжаттама · Нұсқа 1.0', title1:'Пайдалану шарттары', title2:'және құпиялылық', sub:'Мұнда VOLYA қалай жұмыс істейтіні, біз сіз туралы нені білеміз және БІЛМЕЙМІЗ, бәрі қандай ережелермен жұмыс істейтіні туралы толық жазылған. Заң канцеляритінсіз — адам тілімен, бірақ нақты.',
-    meta: [{text:'📅 2026 жылғы 27 маусымнан бастап қолданыста'}, {text:'⏱ Оқу ~8 минут'}, {text:'🇺🇸 АҚШ юрисдикциясы', green:true}]},
+    meta: [{text:'📅 2026 жылғы 27 маусымнан бастап қолданыста'}, {text:'⏱ Оқу ~8 минут'}, {text:'🌍 Ашық юрисдикция', green:true}]},
   philo: {kicker:'Жоба философиясы', title:'VOLYA — бұл «еркіндік». Фича емес, принцип ретіндегі бостандық.', sub:'Бүкіл жоба сүйенетін алты құндылық — код жолынан осы құжатқа дейін.'},
   values: [
     {icon:'🕊', t:'Бостандық', d:'Әлемдік интернетке қолжетімділік — артықшылық емес, базалық құқық.'},
@@ -661,7 +661,7 @@ const KK = {
     title:'Бұл қалай жұмыс істейді',
     p1:'VOLYA **Вуаль** технологиясына негізделген — трафикті бүркемелеудің ең заманауи тәсілдерінің бірі. Кәдімгі VPN-ді провайдер қосылымның алғашқы байттарындағы «іздер» бойынша тани алады. Вуаль ол іздерді жояды: сіздің трафигіңіз сырттай нағыз заңды сайтқа кәдімгі кіру сияқты көрінеді.',
     seesTitle:'👁 Провайдер нені көреді',
-    sees: ['Сіз АҚШ-тағы бір серверге қосылғаныңызды', 'Ол жаққа және кері қанша байт өткенін'],
+    sees: ['Сіз бір серверге қосылғаныңызды', 'Ол жаққа және кері қанша байт өткенін'],
     blindTitle:'🛡 Провайдер нені КӨРМЕЙДІ',
     blind: ['Бұл VPN немесе VOLYA екенін', 'Қандай сайттарға кіретініңізді', 'Қандай қосымшаларды қолданатыныңызды', 'Хабарламалар мен сұраулардың мазмұнын'],
     note:'**Тарифтер сервердің «ішінде» жұмыс істейді.** Үш тариф — 10, 20 және 30 Мбит/с — түрлі порттары бар бөлек «кірулер», ал жылдамдық шектеуін Вуаль қозғалтқышы желі деңгейінде жасайды. Тарифті ауыстыру лезде және ештеңені қайта орнатудың қажеті жоқ.'
@@ -691,10 +691,10 @@ const KK = {
     allowedTitle:'✓ Рұқсат етілген',
     allowed: ['Жеке VPN, геобұғаттауды айналып өту (соцжелілер, YouTube, Netflix)', 'Жеке серфинг және қоғамдық Wi-Fi-да қорғаныс', 'Кез келген заңды контент — ересектерге арналғанын қоса', 'Кез келген мессенджерлер мен қоңыраулар', 'Жұмыс, оқу, ойын-сауық'],
     prohibitedTitle:'✗ Тыйым салынған',
-    prohibited: ['DDoS-шабуылдар, port scanning, бұзу әрекеттері', 'Спам мен фишинг тарату', 'CSAM (балалар порнографиясы)', 'Терроризммен байланысты қызмет', 'АҚШ санкциялары аясында қолдану (OFAC)'],
+    prohibited: ['DDoS-шабуылдар, port scanning, бұзу әрекеттері', 'Спам мен фишинг тарату', 'CSAM (балалар порнографиясы)', 'Терроризммен байланысты қызмет', 'Халықаралық санкциялар аясында қолдану'],
     blockedTitle:'🔧 Сервер деңгейінде техникалық бұғатталған',
     blocked: [
-      {what:'Торренттер мен P2P', why:'DMCA-шағымдарының басты көзі. Бізде бір ортақ IP — бір шағым сервисті бәріне жауып тастауы мүмкін. Бұғатталған торрент шағым тудырмайды.'},
+      {what:'Торренттер мен P2P', why:'Құқық иелерінің шағымдарының басты көзі. Бізде бір ортақ IP — бір шағым сервисті бәріне жауып тастауы мүмкін. Бұғатталған торрент шағым тудырмайды.'},
       {what:'25-порт (SMTP)', why:'Хат пен спамды тікелей таратуға арналған арна. Бұғаттау біздің IP-ды қара тізімдерден қорғайды. 465/587 (Gmail, Outlook) арқылы кәдімгі пошта жұмыс істейді.'}
     ],
     warn:'Егер торрент-клиент VOLYA арқылы «жүктемесе» — бұл **ақау емес**, қалыпты мінез-құлық. Торренттерді кәдімгі интернетпен жүктеңіз: VOLYA бұған жарамайды.'
@@ -712,12 +712,12 @@ const KK = {
   ],
   legal: {
     title:'Заңдық мәртебе',
-    p1:'VOLYA АҚШ-тағы серверлерде жұмыс істейді — демек, сервис юрисдикциясы америкалық. Біз **provider of transitory digital network communications** (17 U.S.C. § 512(a)) ретінде танылмыз — трафик мазмұнын бақыламайтын әрі сақтамайтын жай транзиттік арна.',
+    p1:'VOLYA — жай транзиттік желілік арна (mere conduit): біз техникалық тұрғыда трафик мазмұнын бақыламаймыз әрі сақтамаймыз. Сондықтан пайдаланушылардың нақты нені жеткізетіні үшін жауап бермейміз — біз оны көрмейміз әрі логқа жазбаймыз.',
     forUsTitle:'Біз үшін',
     forUs:'Біз контентті сүзуге немесе цензуралауға **міндетті емеспіз** және пайдаланушылардың әрекеттері үшін **қосымша жауапкершілік көтермейміз** — өйткені олардың нақты не істейтінін бақыламаймыз әрі білмейміз.',
     forYouTitle:'Сіз үшін',
     forYou:'VPN қолдануға болатын-болмайтыны **еліңіздің заңымен** айқындалады. Егер сізде VPN-ге немесе нақты сайттарға шектеулер болса — бұл сіздің жауапкершілік аймағыңыз.',
-    dmca:'DMCA-шағымдарға жауап қарапайым: «We are a transitory network service. We do not store, log or have access to user content.» Бізден алатын ештеңе жоқ — бұл айла емес, техникалық шындық.',
+    claims:'Құқық иелерінің шағымдарына жауап қарапайым: «Біз — транзиттік желілік сервиспіз. Біз пайдаланушы контентін сақтамаймыз, логқа жазбаймыз және оған қолжетімділігіміз жоқ.» Бізден алатын ештеңе жоқ — бұл айла емес, техникалық шындық.',
     noPromiseTitle:'Біз нені уәде ЕТПЕЙМІЗ',
     noPromise: ['VOLYA — бета-жоба: техжұмыстарға немесе хостинг мәселелеріне байланысты сервис уақытша қолжетімсіз болуы мүмкін.', 'Сервистің қолжетімсіздігінен болған залал үшін жауап бермейміз.', 'Барлық бұғаттауды айналып өту кепілдендірілмейді — кейбір сайттар VPN шешпейтін қосымша шектеулерді қолданады (мысалы, карта геолокациясы бойынша).']
   },
@@ -733,7 +733,7 @@ const KK = {
 const ZH = {
   nav: {services:'服务',features:'功能',privacy:'隐私',tariffs:'套餐',terms:'条款',faq:'常见问题',connect:'连接'},
   hero: {badge:'📖 文档 · 版本 1.0', title1:'使用条款', title2:'与隐私', sub:'这里详细说明 VOLYA 如何运作、我们知道和不知道你的哪些信息，以及一切遵循的规则。没有法律官腔——用通俗易懂的语言，但很具体。',
-    meta: [{text:'📅 自 2026 年 6 月 27 日起生效'}, {text:'⏱ 阅读约 8 分钟'}, {text:'🇺🇸 美国司法管辖', green:true}]},
+    meta: [{text:'📅 自 2026 年 6 月 27 日起生效'}, {text:'⏱ 阅读约 8 分钟'}, {text:'🌍 透明的司法管辖', green:true}]},
   philo: {kicker:'项目理念', title:'VOLYA 意为「自由意志」。自由是原则，而非功能。', sub:'整个项目所依托的六项价值观——从一行代码到这份文档。'},
   values: [
     {icon:'🕊', t:'自由', d:'访问全球互联网是基本权利，而非特权。'},
@@ -764,7 +764,7 @@ const ZH = {
     title:'它如何运作',
     p1:'VOLYA 基于 **Veil** 技术——最先进的流量伪装方式之一。普通 VPN 会被运营商通过连接头几个字节里的「指纹」识别出来。Veil 会抹去这些指纹：你的流量在外观上就像一次对真实合法网站的普通访问。',
     seesTitle:'👁 运营商能看到什么',
-    sees: ['你连接到了美国的某台服务器', '来回传输了多少字节'],
+    sees: ['你连接到了某台服务器', '来回传输了多少字节'],
     blindTitle:'🛡 运营商看不到什么',
     blind: ['这是 VPN 还是 VOLYA', '你访问哪些网站', '你使用哪些应用', '你的消息和请求内容'],
     note:'**套餐在服务器「内部」运作。**三档套餐——10、20 和 30 Mbps——是使用不同端口的独立「入口」，限速由 Veil 引擎在网络层完成。切换套餐即时生效，无需重装任何东西。'
@@ -794,10 +794,10 @@ const ZH = {
     allowedTitle:'✓ 允许',
     allowed: ['个人 VPN、绕过地域限制（社交网络、YouTube、Netflix）', '私密浏览和公共 Wi-Fi 下的保护', '任何合法内容——包括成人内容', '任何即时通讯和通话', '工作、学习、娱乐'],
     prohibitedTitle:'✗ 禁止',
-    prohibited: ['DDoS 攻击、端口扫描、入侵尝试', '发送垃圾信息和钓鱼', 'CSAM（儿童色情）', '与恐怖主义相关的活动', '在美国制裁（OFAC）下使用'],
+    prohibited: ['DDoS 攻击、端口扫描、入侵尝试', '发送垃圾信息和钓鱼', 'CSAM（儿童色情）', '与恐怖主义相关的活动', '在国际制裁下使用'],
     blockedTitle:'🔧 在服务器层面被技术性屏蔽',
     blocked: [
-      {what:'种子下载和 P2P', why:'DMCA 投诉的主要来源。我们共用一个 IP——一次投诉就可能让所有人的服务瘫痪。被屏蔽的种子不会产生投诉。'},
+      {what:'种子下载和 P2P', why:'版权方投诉的主要来源。我们共用一个 IP——一次投诉就可能让所有人的服务瘫痪。被屏蔽的种子不会产生投诉。'},
       {what:'25 端口（SMTP）', why:'用于直接群发邮件和垃圾邮件的通道。屏蔽它可保护我们的 IP 不进黑名单。通过 465/587 的常规邮件（Gmail、Outlook）正常工作。'}
     ],
     warn:'如果种子客户端通过 VOLYA「下不动」——这**不是故障**，而是正常表现。请用常规网络下载种子：VOLYA 不适合做这件事。'
@@ -815,12 +815,12 @@ const ZH = {
   ],
   legal: {
     title:'法律状态',
-    p1:'VOLYA 运行在美国的服务器上——因此服务受美国司法管辖。我们被认定为 **provider of transitory digital network communications**（17 U.S.C. § 512(a)）——只是一条不控制、也不存储流量内容的中转通道。',
+    p1:'VOLYA 只是一条中转网络通道（mere conduit）：在技术上我们既不控制也不存储流量内容。因此我们不对用户具体传输了什么负责——我们看不到，也不记录。',
     forUsTitle:'对我们而言',
     forUs:'我们**没有义务**过滤或审查内容，也**不承担对用户行为的次要责任**——因为我们不控制、也不知道他们具体在做什么。',
     forYouTitle:'对你而言',
     forYou:'能否使用 VPN 由**你所在国家的法律**决定。如果你受到对 VPN 或特定网站的限制——那属于你自己的责任范围。',
-    dmca:'对 DMCA 投诉的回复很简单：「We are a transitory network service. We do not store, log or have access to user content.」从我们这里什么也拿不到——这不是花招，而是技术事实。',
+    claims:'对版权方投诉的回复很简单：「我们是一项中转网络服务。我们不存储、不记录，也无法访问用户内容。」从我们这里什么也拿不到——这不是花招，而是技术事实。',
     noPromiseTitle:'我们不承诺什么',
     noPromise: ['VOLYA 是测试项目：因维护或主机问题，服务可能暂时不可用。', '我们不对因服务中断造成的损失负责。', '不保证绕过所有屏蔽——个别网站使用 VPN 无法解决的额外限制（例如银行卡地理位置）。']
   },
@@ -936,7 +936,7 @@ function renderAll(L){
   document.getElementById('legal-p1').innerHTML = rt(L.legal.p1);
   document.getElementById('legal-forUs').innerHTML = rt(L.legal.forUs);
   document.getElementById('legal-forYou').innerHTML = rt(L.legal.forYou);
-  document.getElementById('legal-dmca').innerHTML = rt(L.legal.dmca, '#fff');
+  document.getElementById('legal-claims').innerHTML = rt(L.legal.claims, '#fff');
   document.getElementById('legal-noPromise').innerHTML = L.legal.noPromise.map(n => `<div style="display:flex;gap:9px;font-size:14px;line-height:1.5;color:#6B5B3E"><span style="flex-shrink:0">—</span>${n}</div>`).join('');
 
   // contact
